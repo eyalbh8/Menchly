@@ -9,10 +9,17 @@ function CardGrid({ items, className = '' }) {
     <div className={`page-card-grid ${className}`.trim()}>
       {items.map((item, index) => (
         <article className="page-card" key={item.title}>
-          <span className="card-number">{String(index + 1).padStart(2, '0')}</span>
-          <h3>{item.title}</h3>
-          <p>{item.copy}</p>
-          {item.href && <InternalLink to={item.href}>Explore {item.title}</InternalLink>}
+          {item.image && (
+            <div className="page-card__media">
+              <img src={item.image} alt={item.imageAlt || ''} width="800" height="500" loading="lazy" />
+            </div>
+          )}
+          <div className="page-card__body">
+            <span className="card-number">{String(index + 1).padStart(2, '0')}</span>
+            <h3>{item.title}</h3>
+            <p>{item.copy}</p>
+            {item.href && <InternalLink to={item.href}>Explore {item.title}</InternalLink>}
+          </div>
         </article>
       ))}
     </div>
@@ -27,6 +34,8 @@ export function ServicesPage() {
         title={<>Build the authority to be <em>recommended with confidence.</em></>}
         copy="Alora connects buyer intelligence, reputation strategy and authority activation around one commercial objective: helping the right high-intent buyer understand why your brand belongs on their shortlist."
         breadcrumbs={[{ label: 'Services' }]}
+        image="/images/hero.jpg"
+        imageAlt="Luxury resort architecture at dusk"
       >
         <AssessmentLink placement="services-hero">Discuss your recommendation priorities</AssessmentLink>
       </PageHero>
@@ -78,6 +87,8 @@ export function IndustriesPage() {
         title={<>High-consideration markets where <em>reputation shapes access.</em></>}
         copy="We work where buyers research privately, decisions carry meaningful consequence and a generic mention is no substitute for a credible, context-specific recommendation."
         breadcrumbs={[{ label: 'Industries' }]}
+        image="/images/private-wealth.jpg"
+        imageAlt="Modern financial district skyline"
       />
       <Section tone="paper">
         <div className="split-intro">
@@ -123,6 +134,8 @@ export function IndustryPage() {
         title={<>Be recommended when the <em>right buyer is deciding.</em></>}
         copy={industry.summary}
         breadcrumbs={[{ label: 'Industries', to: '/industries' }, { label: industry.name }]}
+        image={industry.image}
+        imageAlt={industry.imageAlt}
       >
         <AssessmentLink placement={`industry-${industry.slug}-hero`}>Discuss {industry.name.toLowerCase()} visibility</AssessmentLink>
       </PageHero>

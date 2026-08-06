@@ -64,9 +64,14 @@ export function Breadcrumbs({ items = [] }) {
   );
 }
 
-export function PageHero({ eyebrow, title, copy, breadcrumbs = [], children }) {
+export function PageHero({ eyebrow, title, copy, breadcrumbs = [], children, image, imageAlt = '' }) {
   return (
-    <section className="page-hero">
+    <section className={`page-hero${image ? ' page-hero--media' : ''}`}>
+      {image && (
+        <div className="page-hero__media" aria-hidden={imageAlt ? undefined : true}>
+          <img src={image} alt={imageAlt} width="1600" height="1000" fetchPriority="high" />
+        </div>
+      )}
       <div className="shell">
         <Breadcrumbs items={breadcrumbs} />
         <p className="eyebrow">{eyebrow}</p>

@@ -23,12 +23,42 @@ export const footerIndustryItems = [
 export const platforms = ['ChatGPT', 'Claude', 'Gemini', 'Perplexity', 'Copilot'];
 
 export const sectors = [
-  { name: 'Private aviation', detail: 'Acquisition, charter, management and advisory decisions where trust precedes contact.' },
-  { name: 'Yachting', detail: 'Builders, brokers and services competing for a place on an informed buyer’s shortlist.' },
-  { name: 'Fine jewelry & watches', detail: 'Houses whose provenance, expertise and distinction must survive AI summarization.' },
-  { name: 'Prime real estate', detail: 'Developers and advisors serving buyers who research markets before revealing intent.' },
-  { name: 'Private wealth', detail: 'Discreet institutions selected on authority, suitability and reputational confidence.' },
-  { name: 'Luxury hospitality', detail: 'Properties and operators competing to be recommended for a specific occasion or expectation.' }
+  {
+    name: 'Private aviation',
+    detail: 'Acquisition, charter, management and advisory decisions where trust precedes contact.',
+    image: '/images/private-aviation.jpg',
+    imageAlt: 'Private jet on the tarmac at dusk'
+  },
+  {
+    name: 'Yachting',
+    detail: 'Builders, brokers and services competing for a place on an informed buyer’s shortlist.',
+    image: '/images/yachting.jpg',
+    imageAlt: 'Superyacht on open water'
+  },
+  {
+    name: 'Fine jewelry & watches',
+    detail: 'Houses whose provenance, expertise and distinction must survive AI summarization.',
+    image: '/images/jewellery-watches.jpg',
+    imageAlt: 'Fine jewellery and watches on display'
+  },
+  {
+    name: 'Prime real estate',
+    detail: 'Developers and advisors serving buyers who research markets before revealing intent.',
+    image: '/images/luxury-real-estate.jpg',
+    imageAlt: 'Contemporary luxury residence exterior'
+  },
+  {
+    name: 'Private wealth',
+    detail: 'Discreet institutions selected on authority, suitability and reputational confidence.',
+    image: '/images/private-wealth.jpg',
+    imageAlt: 'Modern financial district skyline'
+  },
+  {
+    name: 'Luxury hospitality',
+    detail: 'Properties and operators competing to be recommended for a specific occasion or expectation.',
+    image: '/images/luxury-hospitality.jpg',
+    imageAlt: 'Luxury hotel suite overlooking the sea'
+  }
 ];
 
 export const reputationRisks = [

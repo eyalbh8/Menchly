@@ -15,6 +15,15 @@ import { ArrowLink, AssessmentLink, Section, SectionHeader } from './UI.jsx';
 function Hero() {
   return (
     <section id="top" className="hero">
+      <div className="hero__media" aria-hidden="true">
+        <img
+          src="/images/hero.jpg"
+          alt=""
+          width="2400"
+          height="1600"
+          fetchPriority="high"
+        />
+      </div>
       <div className="hero-orbit" aria-hidden="true">
         <span />
         <span />
@@ -79,9 +88,14 @@ function SectorFocus() {
       <div className="sector-grid">
         {sectors.map((sector, index) => (
           <article className="sector-card" key={sector.name}>
-            <span className="card-number">{String(index + 1).padStart(2, '0')}</span>
-            <h3>{sector.name}</h3>
-            <p>{sector.detail}</p>
+            <div className="sector-card__media">
+              <img src={sector.image} alt={sector.imageAlt} width="800" height="500" loading="lazy" />
+            </div>
+            <div className="sector-card__body">
+              <span className="card-number">{String(index + 1).padStart(2, '0')}</span>
+              <h3>{sector.name}</h3>
+              <p>{sector.detail}</p>
+            </div>
           </article>
         ))}
       </div>
