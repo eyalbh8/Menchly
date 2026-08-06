@@ -1,0 +1,32 @@
+# Alora
+
+Alora presents AI visibility and reputation strategy services for luxury and other high-consideration brands.
+
+## Public pages
+
+- / — overview of Alora's stated approach, service pillars, process, measurement framework and frequently asked questions
+- /services — prompt and market intelligence, authority architecture, recommendation positioning and reputation monitoring
+- /industries — current sector focus and links to sector-specific pages
+- /industries/yachting
+- /industries/private-aviation
+- /industries/luxury-real-estate
+- /industries/jewellery-watches
+- /industries/luxury-hospitality
+- /methodology — the six-stage methodology and four reporting dimensions
+- /about — purpose and working principles
+- /insights — index of Alora Editorial research notes; retained outside primary navigation pending verified expert review
+- /insights/recommendation-gap-known-vs-selected — known versus selected in AI-assisted decisions
+- /insights/high-intent-prompt-intelligence — high-intent prompt intelligence versus prompt or keyword volume
+- /insights/authority-without-overexposure — public authority with confidentiality and disclosure controls
+- /private-ai-visibility-assessment — private assessment request
+- /privacy — publication placeholder pending legal review
+- /terms — publication placeholder pending legal review
+
+## Important limitations stated on the site
+
+- Alora does not claim control over or guarantee independent AI model recommendations.
+- Opportunity statements are strategic aims, not forecasts.
+- Insight notes are attributed to Alora Editorial, identify expert review as pending, provide review dates and visible source links, and make no claim of expert endorsement.
+- Insight frameworks and examples are general, illustrative material, not client results, market-volume statistics or guarantees.
+- The conceptual measurement interface contains no live client results.
+- No case study is published unless required evidence is verified and client, legal and publication gates all pass.

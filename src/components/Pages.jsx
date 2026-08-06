@@ -1,0 +1,447 @@
+import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
+import { industryCards, industryProfiles, methodologyStages, serviceDetails } from '../pageContent.js';
+import { getInsightArticle, insightArticles } from '../content/insights.js';
+import { trackEvent } from '../analytics.js';
+import { AssessmentLink, CtaBand, InternalLink, PageHero, Section, SectionHeader } from './UI.jsx';
+
+function CardGrid({ items, className = '' }) {
+  return (
+    <div className={`page-card-grid ${className}`.trim()}>
+      {items.map((item, index) => (
+        <article className="page-card" key={item.title}>
+          <span className="card-number">{String(index + 1).padStart(2, '0')}</span>
+          <h3>{item.title}</h3>
+          <p>{item.copy}</p>
+          {item.href && <InternalLink to={item.href}>Explore {item.title}</InternalLink>}
+        </article>
+      ))}
+    </div>
+  );
+}
+
+export function ServicesPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Services"
+        title={<>Build the authority to be <em>recommended with confidence.</em></>}
+        copy="Alora connects buyer intelligence, reputation strategy and authority activation around one commercial objective: helping the right high-intent buyer understand why your brand belongs on their shortlist."
+        breadcrumbs={[{ label: 'Services' }]}
+      >
+        <AssessmentLink placement="services-hero">Discuss your recommendation priorities</AssessmentLink>
+      </PageHero>
+      <Section tone="paper">
+        <div className="split-intro">
+          <SectionHeader eyebrow="A connected discipline" title={<>From buyer question to <em>credible answer.</em></>} />
+          <div className="prose">
+            <p>AI visibility has little value if it brings the wrong audience, repeats an undifferentiated description or appears without evidence a sophisticated buyer can trust.</p>
+            <p>Our services begin with decision context. We identify the audiences, questions and criteria closest to commercial intent, then strengthen the information environment that helps assistants interpret the brand accurately.</p>
+          </div>
+        </div>
+      </Section>
+      <Section>
+        <div className="service-detail-list">
+          {serviceDetails.map((service) => (
+            <article className="service-detail" key={service.number}>
+              <div>
+                <span className="card-number">{service.number}</span>
+                <h2>{service.title}</h2>
+              </div>
+              <div>
+                <p>{service.copy}</p>
+                <ul>{service.outputs.map((output) => <li key={output}>{output}</li>)}</ul>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Section>
+      <Section tone="blue">
+        <div className="editorial-block">
+          <SectionHeader eyebrow="Engagement design" title={<>Senior, selective and <em>built around your operating reality.</em></>} />
+          <div className="prose prose--dark">
+            <p>Alora can lead a defined strategic engagement or work as a specialist layer alongside brand, communications, SEO, content and reputation partners.</p>
+            <p>Scope, access and approval controls are agreed at the outset. No responsible agency can guarantee an independent model recommendation; our role is to improve the clarity, credibility and authority on which those recommendations may depend.</p>
+            <InternalLink to="/methodology">Review the methodology</InternalLink>
+          </div>
+        </div>
+      </Section>
+      <CtaBand />
+    </>
+  );
+}
+
+export function IndustriesPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Industries"
+        title={<>High-consideration markets where <em>reputation shapes access.</em></>}
+        copy="We work where buyers research privately, decisions carry meaningful consequence and a generic mention is no substitute for a credible, context-specific recommendation."
+        breadcrumbs={[{ label: 'Industries' }]}
+      />
+      <Section tone="paper">
+        <div className="split-intro">
+          <SectionHeader eyebrow="Sector focus" title={<>Recommendation requires <em>category fluency.</em></>} />
+          <div className="prose">
+            <p>A family office choosing an aviation adviser asks different questions from a collector choosing a specialist or a guest selecting a resort. The signals of authority, fit and trust are category-specific.</p>
+            <p>Alora builds each programme around the language, intermediaries, evidence and reputation dynamics of the market—not a universal prompt template.</p>
+          </div>
+        </div>
+      </Section>
+      <Section>
+        <SectionHeader
+          eyebrow="Current focus"
+          title={<>Explore the buyer questions that <em>shape each shortlist.</em></>}
+          copy="Each sector view outlines illustrative high-intent questions and the authority conditions that influence recommendation."
+        />
+        <CardGrid items={industryCards} />
+      </Section>
+      <CtaBand title="Understand where your category chooses." />
+    </>
+  );
+}
+
+function DetailList({ title, items, ordered = false }) {
+  const Tag = ordered ? 'ol' : 'ul';
+  return (
+    <div className="detail-list">
+      <h2>{title}</h2>
+      <Tag>{items.map((item) => <li key={item}>{item}</li>)}</Tag>
+    </div>
+  );
+}
+
+export function IndustryPage() {
+  const { industrySlug } = useParams();
+  const industry = industryProfiles.find((item) => item.slug === industrySlug);
+  if (!industry) return <Navigate to="/industries" replace />;
+
+  return (
+    <>
+      <PageHero
+        eyebrow={industry.eyebrow}
+        title={<>Be recommended when the <em>right buyer is deciding.</em></>}
+        copy={industry.summary}
+        breadcrumbs={[{ label: 'Industries', to: '/industries' }, { label: industry.name }]}
+      >
+        <AssessmentLink placement={`industry-${industry.slug}-hero`}>Discuss {industry.name.toLowerCase()} visibility</AssessmentLink>
+      </PageHero>
+      <Section tone="paper">
+        <div className="split-intro">
+          <SectionHeader eyebrow="The decision environment" title={<>Earn relevance <em>before intent is visible.</em></>} />
+          <div className="prose"><p>{industry.introduction}</p></div>
+        </div>
+      </Section>
+      <Section>
+        <div className="detail-grid">
+          <DetailList title="Target audience roles" items={industry.audiences} />
+          <DetailList title="Example high-intent questions" items={industry.questions} />
+        </div>
+      </Section>
+      <Section tone="blue">
+        <div className="detail-grid">
+          <DetailList title="Visibility and reputation barriers" items={industry.barriers} />
+          <div className="detail-narrative">
+            <p className="eyebrow">Agency intervention</p>
+            <h2>Make expertise easier to interpret and trust.</h2>
+            <p>{industry.intervention}</p>
+          </div>
+        </div>
+      </Section>
+      <Section tone="paper">
+        <div className="detail-grid">
+          <DetailList title="Relevant authority signals" items={industry.signals} />
+          <div className="detail-narrative detail-narrative--paper">
+            <p className="eyebrow">Qualitative commercial opportunity</p>
+            <h2>Improve the quality of consideration.</h2>
+            <p>{industry.opportunity}</p>
+            <small>This is a strategic opportunity statement, not a performance claim or forecast.</small>
+          </div>
+        </div>
+      </Section>
+      <Section>
+        <div className="next-links">
+          <div><p className="eyebrow">Continue exploring</p><h2>Related industry perspectives</h2></div>
+          <div>
+            {industryProfiles.filter((item) => item.slug !== industry.slug).slice(0, 3).map((item) => (
+              <InternalLink key={item.slug} to={`/industries/${item.slug}`}>{item.name}</InternalLink>
+            ))}
+          </div>
+        </div>
+      </Section>
+      <CtaBand title={`Establish your ${industry.name.toLowerCase()} recommendation baseline.`} />
+    </>
+  );
+}
+
+export function MethodologyPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Methodology"
+        title={<>A disciplined path from model perception to <em>market authority.</em></>}
+        copy="Our methodology turns a fast-moving technology question into an executive-ready programme: grounded in buyer intent, governed by evidence and integrated with the teams already protecting the brand."
+        breadcrumbs={[{ label: 'Methodology' }]}
+      />
+      <Section tone="paper">
+        <div className="split-intro">
+          <SectionHeader eyebrow="Working principle" title={<>Measure what matters <em>to the decision.</em></>} />
+          <div className="prose">
+            <p>We do not treat every prompt, platform or mention as equal. Priority comes from the intersection of high buyer intent, strategic fit and credible authority the brand can substantiate.</p>
+            <p>The approach combines repeatable review with informed judgement. AI outputs are variable, so findings are interpreted as directional evidence—not deterministic rankings or guaranteed outcomes.</p>
+          </div>
+        </div>
+      </Section>
+      <Section>
+        <SectionHeader eyebrow="Six stages" title={<>From executive context to <em>continuous learning.</em></>} />
+        <ol className="method-grid">
+          {methodologyStages.map(([title, copy], index) => (
+            <li key={title}><span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{copy}</p></li>
+          ))}
+        </ol>
+      </Section>
+      <Section tone="blue">
+        <div className="editorial-block">
+          <SectionHeader eyebrow="Decision framework" title={<>Four dimensions keep reporting <em>commercially grounded.</em></>} />
+          <div className="metric-list">
+            {[
+              ['Presence', 'Does the brand enter relevant answers for the agreed question set?'],
+              ['Fit', 'Is it recommended for the buyer, need and context the brand is equipped to serve?'],
+              ['Accuracy', 'Does the answer reflect current facts, approved positioning and meaningful distinction?'],
+              ['Authority', 'Are owned and independent sources credible enough to support confidence?']
+            ].map(([title, copy]) => <div key={title}><h3>{title}</h3><p>{copy}</p></div>)}
+          </div>
+        </div>
+      </Section>
+      <CtaBand title="Start with a clear recommendation baseline." />
+    </>
+  );
+}
+
+export function AboutPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="About Alora"
+        title={<>Reputation strategy for the <em>AI-assisted buyer journey.</em></>}
+        copy="Alora exists to help high-consideration brands navigate a simple but consequential shift: buyers increasingly ask AI who to trust before they approach the market."
+        breadcrumbs={[{ label: 'About' }]}
+      />
+      <Section tone="paper">
+        <div className="split-intro">
+          <SectionHeader eyebrow="Our purpose" title={<>Make genuine authority <em>easier to recognise.</em></>} />
+          <div className="prose">
+            <p>The strongest brand is not always the best understood. Valuable expertise can remain hidden behind confidentiality, fragmented sources, legacy narratives or language too broad to help an assistant distinguish fit.</p>
+            <p>We bring together buyer intelligence, strategic positioning and reputation systems so the right high-intent audiences encounter a clearer, better-supported account of why a brand should be considered.</p>
+          </div>
+        </div>
+      </Section>
+      <Section>
+        <SectionHeader eyebrow="How we work" title={<>Senior judgement. <em>Evidence before claims.</em></>} />
+        <CardGrid items={[
+          { title: 'Selective focus', copy: 'We concentrate on reputation-sensitive categories and review potential conflicts before accepting a mandate.' },
+          { title: 'Executive alignment', copy: 'Commercial priorities, audience fit, confidentiality and governance are agreed before activation begins.' },
+          { title: 'Integrated delivery', copy: 'We complement internal teams and established agencies, clarifying where each intervention should be owned.' },
+          { title: 'Responsible practice', copy: 'We do not fabricate proof, promise model outcomes or publish sensitive information without authorisation.' }
+        ]} />
+      </Section>
+      <Section tone="blue">
+        <div className="editorial-block">
+          <SectionHeader eyebrow="The Alora view" title={<>Recommendation should be earned <em>for a reason.</em></>} />
+          <div className="prose prose--dark">
+            <p>Broad visibility can create attention. High-quality recommendation creates informed consideration. We focus on the latter: the moments when a buyer’s question reveals a real need and the answer must connect the brand to credible evidence of fit.</p>
+            <InternalLink to="/services">Explore our services</InternalLink>
+          </div>
+        </div>
+      </Section>
+      <CtaBand title="Discuss whether Alora is the right fit." />
+    </>
+  );
+}
+
+export function InsightsPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Insights"
+        title={<>Strategic perspectives on <em>AI, authority and choice.</em></>}
+        copy="Research notes for leaders responsible for brand, reputation, growth and digital strategy in high-consideration markets."
+        breadcrumbs={[{ label: 'Insights' }]}
+      />
+      <Section>
+        <div className="insight-list">
+          {insightArticles.map((article, index) => (
+            <article key={article.slug}>
+              <span className="card-number">{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <h2>{article.title}</h2>
+                <p>{article.deck}</p>
+                <small>Research note · Expert review pending · Reviewed {article.lastReviewed}</small>
+                <div className="insight-list__link"><InternalLink to={`/insights/${article.slug}`}>Read research note</InternalLink></div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Section>
+      <CtaBand title="Turn the strategic question into a brand-specific baseline." />
+    </>
+  );
+}
+
+export function InsightArticlePage() {
+  const { slug } = useParams();
+  const article = getInsightArticle(slug);
+  if (!article) return <NotFoundPage />;
+
+  return (
+    <article className="article-page">
+      <PageHero
+        eyebrow="Alora research note"
+        title={article.title}
+        copy={article.deck}
+        breadcrumbs={[{ label: 'Insights', to: '/insights' }, { label: article.title }]}
+      />
+      <Section tone="paper" className="article-summary">
+        <div className="article-meta">
+          <div><span>Purpose</span><p>{article.purpose}</p></div>
+          <div><span>By</span><p>{article.author}</p></div>
+          <div><span>Last reviewed</span><p><time dateTime={article.lastReviewed}>{article.lastReviewed}</time></p></div>
+          <div><span>Expert review</span><p>Pending — no verified expert reviewer supplied</p></div>
+        </div>
+        <div className="article-copy article-copy--summary">
+          <p className="eyebrow">Executive summary</p>
+          {article.executiveSummary.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        </div>
+      </Section>
+      <Section className="article-definitions">
+        <SectionHeader eyebrow="Working definitions" title={<>Language leaders can <em>use precisely.</em></>} />
+        <div className="definition-grid">
+          {article.definitions.map((definition) => (
+            <figure key={definition.term}>
+              <blockquote>“{definition.quote}”</blockquote>
+              <figcaption>{definition.term} — Alora Editorial definition</figcaption>
+            </figure>
+          ))}
+        </div>
+      </Section>
+      {article.sections.map((section, index) => (
+        <Section key={section.heading} tone={index % 2 === 0 ? 'paper' : 'blue'} className="article-section">
+          <div className="article-layout">
+            <header><span className="card-number">{String(index + 1).padStart(2, '0')}</span><h2>{section.heading}</h2></header>
+            <div className="article-copy">
+              {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              <aside className="article-example">
+                <h3>{section.example.title}</h3>
+                <p>{section.example.text}</p>
+              </aside>
+            </div>
+          </div>
+        </Section>
+      ))}
+      <Section className="article-governance">
+        <div className="article-layout">
+          <header><p className="eyebrow">Important limitations</p><h2>Interpret with care.</h2></header>
+          <div>
+            <ul>{article.limitations.map((limitation) => <li key={limitation}>{limitation}</li>)}</ul>
+          </div>
+        </div>
+      </Section>
+      <Section tone="paper" className="article-sources">
+        <div className="article-layout">
+          <header><p className="eyebrow">Sources</p><h2>Further reading and primary references.</h2></header>
+          <ol>
+            {article.sources.map((source) => (
+              <li key={source.url}>
+                <a href={source.url} target="_blank" rel="noreferrer">{source.title}</a>
+                <span>{source.organization}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </Section>
+      <Section className="article-related">
+        <div className="next-links">
+          <div><p className="eyebrow">Continue exploring</p><h2>Related services and perspectives</h2></div>
+          <div>{article.related.map((item) => <InternalLink key={item.href} to={item.href}>{item.label}</InternalLink>)}</div>
+        </div>
+      </Section>
+      <CtaBand title="Turn the strategic question into a brand-specific baseline." placement={`article-${article.slug}`} />
+    </article>
+  );
+}
+
+const legalContent = {
+  privacy: {
+    title: 'Privacy',
+    intro: 'Interim data-use information pending approval of the final privacy notice.',
+    sections: [
+      ['Information collected', 'The private assessment may collect your name, work contact details, company, website, role, industry, markets, objectives, optional message and an approved investment range when configured. It also records consent, landing page, referrer, campaign parameters and a classification of known AI referrers. A hidden anti-spam field is used to reject automated submissions.'],
+      ['How information is used', 'Information submitted with required privacy consent is used to assess strategic fit, review potential category conflicts and respond to the enquiry. Non-identifying first-party journey events are used only when the separate optional analytics choice is enabled. Information should not be sold or used to claim an engagement exists.'],
+      ['Retention and recipients', 'Final retention periods, deletion procedures, lawful bases, controller identity, contact route, hosting location, processors and any international transfers must be confirmed against the selected CRM and hosting configuration before launch. Access should be restricted to authorised people involved in reviewing the enquiry.'],
+      ['Your choices and rights', 'The production notice must explain applicable access, correction, deletion, restriction, objection and withdrawal rights, plus the relevant supervisory authority and an approved privacy contact.'],
+      ['Legal review required', 'This interim wording is not a complete privacy notice and is not legal advice. A qualified adviser must approve the notice, consent language, retention schedule, CRM processing terms and cross-border transfer position before public data collection is enabled.']
+    ]
+  },
+  terms: {
+    title: 'Terms',
+    intro: 'This page is a publication placeholder pending final legal review.',
+    sections: [
+      ['Website information', 'Content on this website is general information about Alora’s strategic services. It is not professional, legal, financial or investment advice.'],
+      ['No performance promise', 'References to opportunity, visibility or recommendation describe strategic aims. Independent AI systems are variable and no specific placement, recommendation or commercial result is guaranteed.'],
+      ['Future updates', 'Complete website terms, intellectual-property provisions, governing law and contact details should be approved before production launch.']
+    ]
+  }
+};
+
+export function LegalPage({ type }) {
+  const content = legalContent[type];
+  return (
+    <>
+      <PageHero eyebrow="Legal" title={content.title} copy={content.intro} breadcrumbs={[{ label: content.title }]} />
+      <Section tone="paper">
+        <div className="legal-copy">
+          {content.sections.map(([title, copy]) => <section key={title}><h2>{title}</h2><p>{copy}</p></section>)}
+        </div>
+      </Section>
+    </>
+  );
+}
+
+export function ThankYouPage() {
+  const location = useLocation();
+  const confirmed = location.state?.assessmentSubmitted === true;
+  const calendarUrl = import.meta.env.VITE_CALENDAR_URL || '';
+  return (
+    <section className="thank-you-page">
+      <div className="shell thank-you-layout">
+        <div>
+          <p className="eyebrow">{confirmed ? 'Request received' : 'Private assessment'}</p>
+          <h1>What happens next.</h1>
+          <p>{confirmed
+            ? 'Your request was securely accepted. A senior member of the team will review strategic fit, category context and any potential conflicts before responding.'
+            : 'This page does not confirm a submission. To begin, complete the private assessment request so the team has the context needed for a considered review.'}</p>
+          <div className="thank-you-actions">
+            {confirmed && calendarUrl && <a className="button button--primary" href={calendarUrl} target="_blank" rel="noreferrer" onClick={() => trackEvent('calendar_handoff', { placement: 'thank-you', page: '/thank-you' })}><span>Arrange a private conversation</span><span aria-hidden="true">↗</span></a>}
+            <Link className="button button--outline" to={confirmed ? '/methodology' : '/private-ai-visibility-assessment'}><span>{confirmed ? 'Review our methodology' : 'Start the assessment'}</span><span aria-hidden="true">→</span></Link>
+          </div>
+        </div>
+        <ol className="next-step-list">
+          <li><span>01</span><div><h2>Fit review</h2><p>We consider sector relevance, the decision context and whether we can add meaningful value.</p></div></li>
+          <li><span>02</span><div><h2>Conflict check</h2><p>Potential category conflicts and appropriate confidentiality boundaries are reviewed before substantive discussion.</p></div></li>
+          <li><span>03</span><div><h2>Senior response</h2><p>If there is a credible fit, we will propose a focused first conversation and the information needed for a baseline.</p></div></li>
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+export function NotFoundPage() {
+  return (
+    <section className="placeholder-page">
+      <div className="shell">
+        <p className="eyebrow">404</p><h1>This page could not be found.</h1>
+        <InternalLink to="/">Return to the homepage</InternalLink>
+      </div>
+    </section>
+  );
+}
