@@ -16,13 +16,17 @@ function Hero() {
   return (
     <section id="top" className="hero">
       <div className="hero__media" aria-hidden="true">
-        <img
-          src="/images/hero.jpg"
-          alt=""
-          width="2400"
-          height="1600"
-          fetchPriority="high"
-        />
+        <video
+          className="hero__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/images/hero.jpg"
+        >
+          <source src="/videos/hero.mp4" type="video/mp4" />
+        </video>
       </div>
       <div className="hero-orbit" aria-hidden="true">
         <span />

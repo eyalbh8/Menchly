@@ -80,7 +80,18 @@ p { text-wrap: pretty; }
 
 .hero { min-height: 900px; height: max(100svh, 760px); display: grid; align-items: center; position: relative; border-bottom: 1px solid var(--line); overflow: hidden; }
 .hero__media { position: absolute; inset: 0; z-index: 0; }
-.hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
+.hero__media img,
+.hero__media video,
+.hero__video { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
+@media (prefers-reduced-motion: reduce) {
+  .hero__video { display: none; }
+  .hero__media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("/images/hero.jpg") center 40% / cover no-repeat;
+  }
+}
 .hero__media::after {
   content: "";
   position: absolute;
