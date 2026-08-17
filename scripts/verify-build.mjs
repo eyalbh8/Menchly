@@ -112,8 +112,9 @@ if (sitemap.includes(`${siteOrigin}/thank-you`)) failures.push('sitemap: /thank-
 const homeHtml = await readFile(join(dist, 'index.html'), 'utf8').catch(() => '');
 const primaryNav = homeHtml.match(/<nav class="nav shell"[\s\S]*?<\/nav>/i)?.[0] || '';
 const footer = homeHtml.match(/<footer class="footer"[\s\S]*?<\/footer>/i)?.[0] || '';
-if (primaryNav.includes('href="/insights"')) failures.push('navigation: Insights must remain outside primary navigation pending expert review');
+if (!primaryNav.includes('href="/insights"')) failures.push('navigation: Insights must appear in primary navigation');
 if (!footer.includes('href="/insights"')) failures.push('footer: Insights must remain accessible');
+if (!footer.includes('href="/about"')) failures.push('footer: About must remain accessible');
 for (const article of insightArticles) {
   if (!sitemap.includes(`<loc>${siteOrigin}/insights/${article.slug}</loc>`)) failures.push(`sitemap: missing insight article ${article.slug}`);
 }

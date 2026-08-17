@@ -1,14 +1,27 @@
 import { Link } from 'react-router-dom';
 import { assessmentHref, footerIndustryItems, footerNavItems } from '../data.js';
 import { trackEvent } from '../analytics.js';
+import { AssessmentLink, BrandMark } from './UI.jsx';
 
 export default function Footer() {
   return (
     <footer className="footer">
+      <div className="footer__cta">
+        <div className="shell">
+          <h2>
+            <span className="final-cta__line">See what AI</span>
+            <span className="final-cta__line final-cta__line--ghost">already says</span>
+          </h2>
+          <AssessmentLink placement="footer-cta">Private assessment</AssessmentLink>
+        </div>
+      </div>
       <div className="shell">
         <div className="footer__main">
           <div className="footer__brand">
-            <Link className="brand" to="/"><span className="brand__name">Alora</span></Link>
+            <Link className="brand" to="/">
+              <BrandMark />
+              <span className="brand__name">Alora</span>
+            </Link>
             <p>AI visibility and reputation strategy for luxury and high-consideration brands.</p>
           </div>
           <div className="footer__links">

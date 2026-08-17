@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { assessmentHref, primaryNavItems } from '../data.js';
 import { trackEvent } from '../analytics.js';
+import { BrandMark } from './UI.jsx';
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -39,8 +40,8 @@ export default function Nav() {
     <header className="site-header">
       <nav className="nav shell" aria-label="Primary navigation">
         <Link className="brand" to="/" aria-label="Alora, home">
+          <BrandMark />
           <span className="brand__name">Alora</span>
-          <span className="brand__descriptor">AI visibility &amp; reputation</span>
         </Link>
         <button
           className="nav-toggle"
@@ -70,7 +71,7 @@ export default function Nav() {
             trackEvent('cta_click', { placement: 'navigation', page: location.pathname });
             setOpen(false);
           }}>
-            Private assessment <span aria-hidden="true">↗</span>
+            Private assessment
           </NavLink>
         </div>
       </nav>

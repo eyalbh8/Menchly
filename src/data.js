@@ -1,15 +1,15 @@
 export const assessmentHref = '/private-ai-visibility-assessment';
 
 export const primaryNavItems = [
+  { label: 'Insights', href: '/insights' },
   { label: 'Services', href: '/services' },
   { label: 'Industries', href: '/industries' },
-  { label: 'Methodology', href: '/methodology' },
-  { label: 'About', href: '/about' }
+  { label: 'Methodology', href: '/methodology' }
 ];
 
 export const footerNavItems = [
   ...primaryNavItems,
-  { label: 'Insights', href: '/insights' }
+  { label: 'About', href: '/about' }
 ];
 
 export const footerIndustryItems = [

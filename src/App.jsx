@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Nav from './components/Nav.jsx';
 import Homepage from './components/Homepage.jsx';
@@ -45,6 +45,26 @@ function RouteScrollManager() {
   return null;
 }
 
+function ScrollProgress() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? window.scrollY / max : 0);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <div className="scroll-progress" aria-hidden="true">
+      <span style={{ height: `${progress * 100}%` }} />
+    </div>
+  );
+}
+
 function RouteAnalytics() {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -59,6 +79,7 @@ export default function App() {
   return (
     <div className="site">
       <a className="skip-link" href="#main-content">Skip to main content</a>
+      <ScrollProgress />
       <RouteScrollManager />
       <RouteAnalytics />
       <SeoManager />

@@ -2,7 +2,7 @@ import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
 import { industryCards, industryProfiles, methodologyStages, serviceDetails } from '../pageContent.js';
 import { getInsightArticle, insightArticles } from '../content/insights.js';
 import { trackEvent } from '../analytics.js';
-import { AssessmentLink, CtaBand, InternalLink, PageHero, Section, SectionHeader } from './UI.jsx';
+import { AssessmentLink, CtaBand, InternalLink, PageHero, ResearchGrid, Section, SectionHeader } from './UI.jsx';
 
 function CardGrid({ items, className = '' }) {
   return (
@@ -11,7 +11,7 @@ function CardGrid({ items, className = '' }) {
         <article className="page-card" key={item.title}>
           {item.image && (
             <div className="page-card__media">
-              <img src={item.image} alt={item.imageAlt || ''} width="800" height="500" loading="lazy" />
+              <img src={item.image} alt={item.imageAlt || ''} width="800" height="500" loading="lazy" onError={(event) => { event.currentTarget.style.display = 'none'; }} />
             </div>
           )}
           <div className="page-card__body">
@@ -34,8 +34,6 @@ export function ServicesPage() {
         title={<>Build the authority to be <em>recommended with confidence.</em></>}
         copy="Alora connects buyer intelligence, reputation strategy and authority activation around one commercial objective: helping the right high-intent buyer understand why your brand belongs on their shortlist."
         breadcrumbs={[{ label: 'Services' }]}
-        image="/images/hero.jpg"
-        imageAlt="Luxury resort architecture at dusk"
       >
         <AssessmentLink placement="services-hero">Discuss your recommendation priorities</AssessmentLink>
       </PageHero>
@@ -53,7 +51,7 @@ export function ServicesPage() {
           {serviceDetails.map((service) => (
             <article className="service-detail" key={service.number}>
               <div>
-                <span className="card-number">{service.number}</span>
+                <span className="card-number">// {service.number}</span>
                 <h2>{service.title}</h2>
               </div>
               <div>
@@ -87,8 +85,6 @@ export function IndustriesPage() {
         title={<>High-consideration markets where <em>reputation shapes access.</em></>}
         copy="We work where buyers research privately, decisions carry meaningful consequence and a generic mention is no substitute for a credible, context-specific recommendation."
         breadcrumbs={[{ label: 'Industries' }]}
-        image="/images/private-wealth.jpg"
-        imageAlt="Modern financial district skyline"
       />
       <Section tone="paper">
         <div className="split-intro">
@@ -134,8 +130,6 @@ export function IndustryPage() {
         title={<>Be recommended when the <em>right buyer is deciding.</em></>}
         copy={industry.summary}
         breadcrumbs={[{ label: 'Industries', to: '/industries' }, { label: industry.name }]}
-        image={industry.image}
-        imageAlt={industry.imageAlt}
       >
         <AssessmentLink placement={`industry-${industry.slug}-hero`}>Discuss {industry.name.toLowerCase()} visibility</AssessmentLink>
       </PageHero>
@@ -282,19 +276,7 @@ export function InsightsPage() {
         breadcrumbs={[{ label: 'Insights' }]}
       />
       <Section>
-        <div className="insight-list">
-          {insightArticles.map((article, index) => (
-            <article key={article.slug}>
-              <span className="card-number">{String(index + 1).padStart(2, '0')}</span>
-              <div>
-                <h2>{article.title}</h2>
-                <p>{article.deck}</p>
-                <small>Research note · Expert review pending · Reviewed {article.lastReviewed}</small>
-                <div className="insight-list__link"><InternalLink to={`/insights/${article.slug}`}>Read research note</InternalLink></div>
-              </div>
-            </article>
-          ))}
-        </div>
+        <ResearchGrid articles={insightArticles} />
       </Section>
       <CtaBand title="Turn the strategic question into a brand-specific baseline." />
     </>
@@ -452,8 +434,14 @@ export function NotFoundPage() {
   return (
     <section className="placeholder-page">
       <div className="shell">
-        <p className="eyebrow">404</p><h1>This page could not be found.</h1>
-        <InternalLink to="/">Return to the homepage</InternalLink>
+        <p className="eyebrow">404 — page not found</p>
+        <h1>This page could not be found.</h1>
+        <p>The link you followed may be broken, or the page may have moved. Try one of these instead:</p>
+        <div className="placeholder-page__actions">
+          <Link className="button button--primary" to="/"><span>Alora homepage</span><span aria-hidden="true">→</span></Link>
+          <InternalLink to="/insights">Read research</InternalLink>
+          <InternalLink to="/private-ai-visibility-assessment">Private assessment</InternalLink>
+        </div>
       </div>
     </section>
   );
