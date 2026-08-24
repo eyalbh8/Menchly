@@ -1,6 +1,6 @@
 # Alora
 
-Alora presents AI visibility and reputation strategy services for luxury and other high-consideration brands.
+Alora builds custom AI Search marketing infrastructure for brands that want to lead the next iteration of the Internet. Data identifies where to act; infrastructure executes faster, learns continuously, and compounds results over time. Alora does not offer cookie-cutter packages or self-serve solutions.
 
 ## Public pages
 

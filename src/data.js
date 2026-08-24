@@ -120,10 +120,10 @@ export const measurementDimensions = [
 ];
 
 export const faqs = [
-  { q: 'Is this SEO?', a: 'It is complementary, but distinct. Search optimization focuses on discoverability in ranked results. We focus on how AI assistants understand, describe and recommend a brand within an answer.' },
+  { q: 'Is this SEO?', a: 'It is complementary, but distinct. Search optimization focuses on discoverability in ranked results. We build AI Search marketing infrastructure: data shows where to act, then we execute, learn and compound how assistants understand, describe and recommend a brand.' },
   { q: 'Can you guarantee a recommendation?', a: 'No credible agency can control or guarantee an independent model’s output. We improve the authority, clarity and evidence environment that influences whether a brand is understood and considered.' },
   { q: 'Which AI assistants do you assess?', a: 'Engagements can include major assistants such as ChatGPT, Claude, Gemini, Perplexity and Copilot, selected according to audience relevance and market behavior.' },
   { q: 'How do you handle confidential information?', a: 'We agree access, review and approval boundaries before work begins. Sensitive material is not published or used in external systems without explicit authorization.' },
-  { q: 'Who is the service designed for?', a: 'Luxury and high-consideration brands where buyers research deeply, reputation affects selection and a poorly framed recommendation has meaningful commercial cost.' },
+  { q: 'Who is the service designed for?', a: 'Brands that want to lead the next iteration of the Internet. We build custom infrastructure around each client rather than cookie-cutter packages or self-serve tools—especially where buyers research deeply and a poorly framed recommendation has meaningful commercial cost.' },
   { q: 'What happens in the private assessment?', a: 'We review your category, priority buyer questions and current concern to assess strategic fit. If the mandate is appropriate, we then agree the scope for a documented model-response baseline and authority review.' }
 ];

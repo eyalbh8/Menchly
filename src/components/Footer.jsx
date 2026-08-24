@@ -9,8 +9,8 @@ export default function Footer() {
       <div className="footer__cta">
         <div className="shell">
           <h2>
-            <span className="final-cta__line">See what AI</span>
-            <span className="final-cta__line final-cta__line--ghost">already says</span>
+            <span className="final-cta__line">See where</span>
+            <span className="final-cta__line final-cta__line--ghost">to act</span>
           </h2>
           <AssessmentLink placement="footer-cta">Private assessment</AssessmentLink>
         </div>
@@ -22,7 +22,7 @@ export default function Footer() {
               <BrandMark />
               <span className="brand__name">Alora</span>
             </Link>
-            <p>AI visibility and reputation strategy for luxury and high-consideration brands.</p>
+            <p>AI Search marketing infrastructure for brands built to lead the next iteration of the Internet.</p>
           </div>
           <div className="footer__links">
             <p>Explore</p>

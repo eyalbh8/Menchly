@@ -80,8 +80,8 @@ export function PageHero({ eyebrow, title, copy, breadcrumbs = [], children }) {
 
 export function CtaBand({
   eyebrow = 'Private AI visibility assessment',
-  title = 'See where your brand belongs in the answer.',
-  copy = 'Establish how selected assistants currently interpret your brand, which high-intent questions matter, and where authority gaps limit recommendation.',
+  title = 'See where data says to act.',
+  copy = 'Establish how assistants interpret your brand today, which questions matter, and where infrastructure can improve speed, learning and compounding results.',
   placement = 'page-band'
 }) {
   return (

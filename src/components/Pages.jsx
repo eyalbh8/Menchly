@@ -31,18 +31,18 @@ export function ServicesPage() {
     <>
       <PageHero
         eyebrow="Services"
-        title={<>Build the authority to be <em>recommended with confidence.</em></>}
-        copy="Alora connects buyer intelligence, reputation strategy and authority activation around one commercial objective: helping the right high-intent buyer understand why your brand belongs on their shortlist."
+        title={<>Custom infrastructure for <em>AI Search growth.</em></>}
+        copy="We don’t sell packages or self-serve tooling. We build the marketing infrastructure that turns AI Search signals into continuous, compounding execution."
         breadcrumbs={[{ label: 'Services' }]}
       >
         <AssessmentLink placement="services-hero">Discuss your recommendation priorities</AssessmentLink>
       </PageHero>
       <Section tone="paper">
         <div className="split-intro">
-          <SectionHeader eyebrow="A connected discipline" title={<>From buyer question to <em>credible answer.</em></>} />
+          <SectionHeader eyebrow="A connected discipline" title={<>From signal to <em>compounding execution.</em></>} />
           <div className="prose">
-            <p>AI visibility has little value if it brings the wrong audience, repeats an undifferentiated description or appears without evidence a sophisticated buyer can trust.</p>
-            <p>Our services begin with decision context. We identify the audiences, questions and criteria closest to commercial intent, then strengthen the information environment that helps assistants interpret the brand accurately.</p>
+            <p>We don’t offer cookie-cutter packages or self-serve solutions. Data tells us where to act; custom infrastructure lets us execute faster, learn continuously, and compound results over time.</p>
+            <p>Our services begin with decision context. We identify the audiences, questions and criteria closest to commercial intent, then build the infrastructure that helps assistants interpret the brand accurately.</p>
           </div>
         </div>
       </Section>
@@ -186,8 +186,8 @@ export function MethodologyPage() {
     <>
       <PageHero
         eyebrow="Methodology"
-        title={<>A disciplined path from model perception to <em>market authority.</em></>}
-        copy="Our methodology turns a fast-moving technology question into an executive-ready programme: grounded in buyer intent, governed by evidence and integrated with the teams already protecting the brand."
+        title={<>A disciplined path from signal to <em>compounding results.</em></>}
+        copy="Data tells us where to act. The methodology turns those signals into infrastructure that executes faster, learns continuously, and compounds over time."
         breadcrumbs={[{ label: 'Methodology' }]}
       />
       <Section tone="paper">
@@ -230,16 +230,16 @@ export function AboutPage() {
     <>
       <PageHero
         eyebrow="About Alora"
-        title={<>Reputation strategy for the <em>AI-assisted buyer journey.</em></>}
-        copy="Alora exists to help high-consideration brands navigate a simple but consequential shift: buyers increasingly ask AI who to trust before they approach the market."
+        title={<>AI Search marketing infrastructure, <em>built around each client.</em></>}
+        copy="Alora is a data-driven AI Search marketing partner. We do not offer cookie-cutter packages or self-serve solutions. We build custom infrastructure around each client, using data to identify where to act, executing at speed, and continuously learning from results."
         breadcrumbs={[{ label: 'About' }]}
       />
       <Section tone="paper">
         <div className="split-intro">
-          <SectionHeader eyebrow="Our purpose" title={<>Make genuine authority <em>easier to recognise.</em></>} />
+          <SectionHeader eyebrow="Our purpose" title={<>Infrastructure built to <em>learn and compound.</em></>} />
           <div className="prose">
             <p>The strongest brand is not always the best understood. Valuable expertise can remain hidden behind confidentiality, fragmented sources, legacy narratives or language too broad to help an assistant distinguish fit.</p>
-            <p>We bring together buyer intelligence, strategic positioning and reputation systems so the right high-intent audiences encounter a clearer, better-supported account of why a brand should be considered.</p>
+            <p>We build custom marketing infrastructure around each client so data can show where to act, execution can move at speed, and results can compound as the system learns.</p>
           </div>
         </div>
       </Section>

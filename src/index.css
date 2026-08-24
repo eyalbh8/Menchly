@@ -170,8 +170,10 @@ p { text-wrap: pretty; }
   margin: 0;
   font: 400 clamp(48px, 8vw, 96px)/.98 var(--display);
   letter-spacing: -.02em;
-  max-width: 16ch;
+  max-width: 22ch;
 }
+.hero__ghost-brand,
+.hero__ghost-rest { display: block; }
 .hero__ghost-brand { color: var(--ink); }
 .hero__ghost-rest { color: var(--ink-ghost); }
 .hero__rule {
@@ -188,6 +190,15 @@ p { text-wrap: pretty; }
 }
 h1 em, h2 em { color: var(--ink); font-style: normal; font-weight: 400; }
 .hero__copy { max-width: 720px; margin: 0; color: var(--muted); font-size: clamp(16px, 1.4vw, 19px); line-height: 1.7; }
+.hero__tagline {
+  margin: 22px 0 0;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
 .hero__actions { display: flex; align-items: center; gap: 30px; margin-top: 36px; }
 .button {
   display: inline-flex;

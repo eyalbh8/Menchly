@@ -5,22 +5,22 @@ import { insightArticles } from './content/insights.js';
 export const SITE_NAME = 'Alora';
 export const SITE_URL_FALLBACK = 'https://example.com';
 
-const baseDescription = 'AI visibility and reputation strategy for luxury and high-consideration brands seeking credible recommendation with the right buyers.';
+const baseDescription = 'AI Search marketing infrastructure for brands built to lead the next iteration of the Internet.';
 
 const staticRoutes = [
   {
     path: '/',
-    title: 'Alora — AI Visibility & Reputation',
+    title: 'Alora — AI Search Marketing Infrastructure',
     description: baseDescription,
-    h1: 'Be the brand AI recommends to the right buyer.'
+    h1: 'AI Search Marketing Infrastructure.'
   },
   {
     path: '/services',
-    title: 'AI Visibility & Reputation Services — Alora',
-    description: 'Explore Alora’s connected services for prompt intelligence, authority architecture, recommendation positioning and reputation monitoring.',
-    h1: 'Build the authority to be recommended with confidence.',
+    title: 'AI Search Marketing Services — Alora',
+    description: 'Explore Alora’s custom AI Search marketing infrastructure: prompt intelligence, authority architecture, recommendation positioning and reputation monitoring.',
+    h1: 'Custom infrastructure for AI Search growth.',
     breadcrumbs: [{ name: 'Services', path: '/services' }],
-    service: 'AI visibility and reputation strategy'
+    service: 'AI Search marketing infrastructure'
   },
   {
     path: '/industries',
@@ -31,17 +31,17 @@ const staticRoutes = [
   },
   {
     path: '/methodology',
-    title: 'AI Reputation Methodology — Alora',
-    description: 'See Alora’s six-stage methodology for assessing model perception, prioritising buyer questions and strengthening credible market authority.',
-    h1: 'A disciplined path from model perception to market authority.',
+    title: 'AI Search Methodology — Alora',
+    description: 'See Alora’s six-stage methodology for identifying where to act, executing through custom infrastructure, and compounding results over time.',
+    h1: 'A disciplined path from signal to compounding results.',
     breadcrumbs: [{ name: 'Methodology', path: '/methodology' }],
-    service: 'AI reputation methodology'
+    service: 'AI Search methodology'
   },
   {
     path: '/about',
-    title: 'About Alora — AI Reputation Strategy',
-    description: 'Learn how Alora helps high-consideration brands make genuine authority easier for AI-assisted buyers to recognise.',
-    h1: 'Reputation strategy for the AI-assisted buyer journey.',
+    title: 'About Alora — AI Search Marketing Infrastructure',
+    description: 'Alora builds custom AI Search marketing infrastructure for brands that want to lead the next iteration of the Internet.',
+    h1: 'AI Search marketing infrastructure, built around each client.',
     breadcrumbs: [{ name: 'About', path: '/about' }]
   },
   {
@@ -84,14 +84,14 @@ const staticRoutes = [
 
 const industryRoutes = industryProfiles.map((industry) => ({
   path: `/industries/${industry.slug}`,
-  title: `${industry.name} AI Visibility & Reputation — Alora`,
+  title: `${industry.name} AI Search Marketing — Alora`,
   description: industry.summary,
   h1: 'Be recommended when the right buyer is deciding.',
   breadcrumbs: [
     { name: 'Industries', path: '/industries' },
     { name: industry.name, path: `/industries/${industry.slug}` }
   ],
-  service: `${industry.name} AI visibility and reputation strategy`
+  service: `${industry.name} AI Search marketing infrastructure`
 }));
 
 const insightRoutes = insightArticles.map((article) => ({

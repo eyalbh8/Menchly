@@ -10,14 +10,14 @@ function Hero() {
     <section id="top" className="hero">
       <div className="shell hero__inner">
         <h1 className="hero__ghost">
-          <span className="hero__ghost-brand">Be the brand AI recommends </span>
-          <span className="hero__ghost-rest">to the right buyer.</span>
+          <span className="hero__ghost-brand">AI Search Marketing</span>
+          <span className="hero__ghost-rest">Infrastructure.</span>
         </h1>
         <hr className="hero__rule" />
         <p className="hero__copy">
-          Alora helps luxury and high-consideration brands earn credible recommendation when a serious buyer asks an AI assistant who to
-          trust, compare or choose.
+          Alora builds custom AI Search marketing infrastructure for brands that want to lead the next iteration of the Internet. Data tells us where to act. Our infrastructure lets us execute faster, learn continuously, and compound results over time.
         </p>
+        <p className="hero__tagline">Built to adapt. Built to compound.</p>
         <div className="hero__actions">
           <AssessmentLink placement="homepage-hero">Private assessment</AssessmentLink>
         </div>
@@ -83,8 +83,8 @@ function Services() {
     <Section id="services">
       <SectionHeader
         eyebrow="Four service pillars"
-        title="A connected system for authority and recommendation."
-        copy="Strategy, activation and monitoring are designed as one continuous discipline."
+        title="Custom infrastructure for AI Search growth."
+        copy="We identify where to act, execute through custom infrastructure, then learn and compound from the results."
       />
       <div className="service-list">
         {servicePillars.map((service) => (
