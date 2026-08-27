@@ -28,7 +28,7 @@ function Hero() {
 
 function PlatformGrid() {
   return (
-    <Section id="context">
+    <Section id="context" tone="paper">
       <div className="platform-grid" aria-label="AI platforms considered in our work">
         {platforms.map((platform) => <span key={platform}>{platform}</span>)}
       </div>
@@ -38,7 +38,7 @@ function PlatformGrid() {
 
 function Research() {
   return (
-    <Section id="research">
+    <Section id="research" tone="blue">
       <div className="section-head">
         <h2>Research</h2>
         <Link className="section-head__link" to="/insights" aria-label="See all research">→</Link>
@@ -51,7 +51,7 @@ function Research() {
 function Industries() {
   const [featured, ...rest] = industryCards;
   return (
-    <Section id="industries">
+    <Section id="industries" tone="paper">
       <div className="section-head">
         <h2>Industries</h2>
         <Link className="section-head__link" to="/industries" aria-label="See all industries">→</Link>
@@ -80,7 +80,7 @@ function Industries() {
 
 function Services() {
   return (
-    <Section id="services">
+    <Section id="services" tone="blue">
       <SectionHeader
         eyebrow="Four service pillars"
         title="Custom infrastructure for AI Search growth."
@@ -89,7 +89,7 @@ function Services() {
       <div className="service-list">
         {servicePillars.map((service) => (
           <article className="service-row" key={service.n}>
-            <span className="card-number">// {service.n}</span>
+            <span className="card-number">→ {service.n}</span>
             <h3>{service.title}</h3>
             <p>{service.text}</p>
           </article>
@@ -103,7 +103,7 @@ function FAQ() {
   const [open, setOpen] = useState(0);
   const id = useId();
   return (
-    <Section id="faq">
+    <Section id="faq" tone="paper">
       <div className="faq-layout">
         <SectionHeader eyebrow="Frequently asked" title="A clear view of the discipline." />
         <div className="accordion">

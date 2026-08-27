@@ -112,29 +112,29 @@ function ResearchChart({ kind }) {
   if (kind === 'high-intent-prompt-intelligence') {
     return (
       <svg viewBox="0 0 280 120" fill="none" aria-hidden="true">
-        <rect x="18" y="78" width="28" height="28" fill="#42ca80" opacity=".28" />
-        <rect x="62" y="54" width="28" height="52" fill="#42ca80" opacity=".45" />
-        <rect x="106" y="22" width="28" height="84" fill="#42ca80" />
-        <rect x="150" y="64" width="28" height="42" fill="#42ca80" opacity=".35" />
-        <rect x="194" y="72" width="28" height="34" fill="#42ca80" opacity=".22" />
-        <rect x="238" y="86" width="28" height="20" fill="#42ca80" opacity=".16" />
+        <rect x="18" y="78" width="28" height="28" fill="currentColor" opacity=".28" />
+        <rect x="62" y="54" width="28" height="52" fill="currentColor" opacity=".45" />
+        <rect x="106" y="22" width="28" height="84" fill="currentColor" />
+        <rect x="150" y="64" width="28" height="42" fill="currentColor" opacity=".35" />
+        <rect x="194" y="72" width="28" height="34" fill="currentColor" opacity=".22" />
+        <rect x="238" y="86" width="28" height="20" fill="currentColor" opacity=".16" />
       </svg>
     );
   }
   if (kind === 'authority-without-overexposure') {
     return (
       <svg viewBox="0 0 280 120" fill="none" aria-hidden="true">
-        <circle cx="96" cy="64" r="38" stroke="#42ca80" strokeWidth="1.5" />
-        <circle cx="168" cy="64" r="58" stroke="#42ca80" strokeWidth="1" opacity=".28" />
-        <path d="M38 88 C78 40, 202 40, 242 88" stroke="#42ca80" strokeWidth="1.5" opacity=".7" />
+        <circle cx="96" cy="64" r="38" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="168" cy="64" r="58" stroke="currentColor" strokeWidth="1" opacity=".28" />
+        <path d="M38 88 C78 40, 202 40, 242 88" stroke="currentColor" strokeWidth="1.5" opacity=".7" />
       </svg>
     );
   }
   return (
     <svg viewBox="0 0 280 120" fill="none" aria-hidden="true">
-      <rect x="36" y="28" width="72" height="72" fill="#42ca80" opacity=".22" />
-      <rect x="132" y="58" width="72" height="42" fill="#42ca80" />
-      <path d="M72 28 V100 M168 58 V100" stroke="#42ca80" strokeWidth="1" opacity=".4" />
+      <rect x="36" y="28" width="72" height="72" fill="currentColor" opacity=".22" />
+      <rect x="132" y="58" width="72" height="42" fill="currentColor" />
+      <path d="M72 28 V100 M168 58 V100" stroke="currentColor" strokeWidth="1" opacity=".4" />
     </svg>
   );
 }

@@ -51,7 +51,7 @@ export function ServicesPage() {
           {serviceDetails.map((service) => (
             <article className="service-detail" key={service.number}>
               <div>
-                <span className="card-number">// {service.number}</span>
+                <span className="card-number">→ {service.number}</span>
                 <h2>{service.title}</h2>
               </div>
               <div>
