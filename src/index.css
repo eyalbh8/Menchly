@@ -103,7 +103,8 @@ p { text-wrap: pretty; }
   outline-offset: 4px;
 }
 
-.site { min-height: 100vh; overflow-x: hidden; }
+/* clip (not hidden) so overflow-y stays visible — hidden forces y to auto and can clip descenders */
+.site { min-height: 100vh; overflow-x: clip; }
 .shell { width: var(--shell); margin-inline: auto; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
 .skip-link {
@@ -223,7 +224,7 @@ p { text-wrap: pretty; }
   display: grid;
   align-content: start;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   background:
     radial-gradient(ellipse 70% 55% at 50% 30%, rgba(111, 143, 216, 0.18), transparent 65%),
     var(--paper-grad);
@@ -235,6 +236,7 @@ p { text-wrap: pretty; }
   flex-direction: column;
   align-items: flex-start;
   max-width: 980px;
+  overflow: visible;
 }
 .eyebrow {
   margin: 0 0 22px;
@@ -245,26 +247,51 @@ p { text-wrap: pretty; }
   letter-spacing: .14em;
   text-transform: uppercase;
 }
-.hero__ghost {
+.hero h1.hero__ghost {
   margin: 0;
-  font: 900 clamp(48px, 8vw, 96px)/.98 var(--display);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1em;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(48px, 8vw, 96px);
+  line-height: 1.35;
   letter-spacing: -.03em;
-  max-width: 22ch;
+  max-width: none;
+  overflow: visible;
 }
 .hero__ghost-brand,
-.hero__ghost-rest { display: block; }
+.hero__ghost-rest {
+  display: block;
+  overflow: visible;
+  line-height: 1.35;
+}
 .hero__ghost-brand {
+  /* Extra pad so background-clip:text can paint Open Sauce descenders */
+  padding: 0.06em 0.04em 0.2em;
+  margin: -0.06em -0.04em -0.08em;
   background-image: var(--grad-ink);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: none;
-  filter: none;
+  -webkit-text-fill-color: transparent;
 }
 @supports not (background-clip: text) {
-  .hero__ghost-brand { color: var(--accent); background: none; filter: none; }
+  .hero__ghost-brand {
+    color: var(--accent);
+    -webkit-text-fill-color: currentColor;
+    background: none;
+    padding: 0;
+    margin: 0;
+  }
 }
-.hero__ghost-rest { color: var(--ink-ghost); }
+.hero__ghost-rest {
+  color: rgba(45, 79, 158, 0.28);
+  -webkit-text-fill-color: currentColor;
+}
 .hero__rule {
   width: 48px;
   height: 2px;
@@ -1079,7 +1106,7 @@ h1 em, h2 em {
 @media (max-width: 599px) {
   :root { --section-space: 82px; }
   .hero { min-height: auto; padding: 120px 0 72px; }
-  .hero__ghost { font-size: clamp(40px, 12vw, 64px); }
+  .hero h1.hero__ghost { font-size: clamp(40px, 12vw, 64px); }
   .hero__actions { width: 100%; flex-direction: column; gap: 22px; }
   .button { width: 100%; }
   .section-header h2 { font-size: 36px; }
