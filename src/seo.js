@@ -2,7 +2,7 @@ import { faqs } from './data.js';
 import { industryProfiles } from './pageContent.js';
 import { insightArticles } from './content/insights.js';
 
-export const SITE_NAME = 'Alora';
+export const SITE_NAME = 'Menchly';
 export const SITE_URL_FALLBACK = 'https://example.com';
 
 const baseDescription = 'AI Search marketing infrastructure for brands built to lead the next iteration of the Internet.';
@@ -10,50 +10,50 @@ const baseDescription = 'AI Search marketing infrastructure for brands built to 
 const staticRoutes = [
   {
     path: '/',
-    title: 'Alora — AI Search Marketing Infrastructure',
+    title: 'Menchly — AI Search Marketing Infrastructure',
     description: baseDescription,
     h1: 'AI Search Marketing Infrastructure.'
   },
   {
     path: '/services',
-    title: 'AI Search Marketing Services — Alora',
-    description: 'Explore Alora’s custom AI Search marketing infrastructure: prompt intelligence, authority architecture, recommendation positioning and reputation monitoring.',
+    title: 'AI Search Marketing Services — Menchly',
+    description: 'Explore Menchly’s custom AI Search marketing infrastructure: prompt intelligence, authority architecture, recommendation positioning and reputation monitoring.',
     h1: 'Custom infrastructure for AI Search growth.',
     breadcrumbs: [{ name: 'Services', path: '/services' }],
     service: 'AI Search marketing infrastructure'
   },
   {
     path: '/industries',
-    title: 'Industries — Alora',
+    title: 'Industries — Menchly',
     description: 'AI recommendation strategy for reputation-sensitive, high-consideration markets including yachting, aviation, prime property, jewellery, watches and hospitality.',
     h1: 'High-consideration markets where reputation shapes access.',
     breadcrumbs: [{ name: 'Industries', path: '/industries' }]
   },
   {
     path: '/methodology',
-    title: 'AI Search Methodology — Alora',
-    description: 'See Alora’s six-stage methodology for identifying where to act, executing through custom infrastructure, and compounding results over time.',
+    title: 'AI Search Methodology — Menchly',
+    description: 'See Menchly’s six-stage methodology for identifying where to act, executing through custom infrastructure, and compounding results over time.',
     h1: 'A disciplined path from signal to compounding results.',
     breadcrumbs: [{ name: 'Methodology', path: '/methodology' }],
     service: 'AI Search methodology'
   },
   {
     path: '/about',
-    title: 'About Alora — AI Search Marketing Infrastructure',
-    description: 'Alora builds custom AI Search marketing infrastructure for brands that want to lead the next iteration of the Internet.',
+    title: 'About Menchly — AI Search Marketing Infrastructure',
+    description: 'Menchly builds custom AI Search marketing infrastructure for brands that want to lead the next iteration of the Internet.',
     h1: 'AI Search marketing infrastructure, built around each client.',
     breadcrumbs: [{ name: 'About', path: '/about' }]
   },
   {
     path: '/insights',
-    title: 'AI Authority Insights — Alora',
+    title: 'AI Authority Insights — Menchly',
     description: 'Strategic perspectives for leaders responsible for brand, reputation, growth and digital strategy in high-consideration markets.',
     h1: 'Strategic perspectives on AI, authority and choice.',
     breadcrumbs: [{ name: 'Insights', path: '/insights' }]
   },
   {
     path: '/private-ai-visibility-assessment',
-    title: 'Private AI Visibility Assessment — Alora',
+    title: 'Private AI Visibility Assessment — Menchly',
     description: 'Request a discreet, qualified review of how your brand is understood across priority buyer questions, AI interpretation and material authority gaps.',
     h1: 'A discreet first look at how your brand is understood.',
     breadcrumbs: [{ name: 'Private AI visibility assessment', path: '/private-ai-visibility-assessment' }],
@@ -61,22 +61,22 @@ const staticRoutes = [
   },
   {
     path: '/privacy',
-    title: 'Privacy — Alora',
-    description: 'Read Alora’s interim data-use information and the legal and operational approvals required before production launch.',
+    title: 'Privacy — Menchly',
+    description: 'Read Menchly’s interim data-use information and the legal and operational approvals required before production launch.',
     h1: 'Privacy',
     breadcrumbs: [{ name: 'Privacy', path: '/privacy' }]
   },
   {
     path: '/terms',
-    title: 'Terms — Alora',
-    description: 'Read the current Alora website terms publication placeholder and important limitations.',
+    title: 'Terms — Menchly',
+    description: 'Read the current Menchly website terms publication placeholder and important limitations.',
     h1: 'Terms',
     breadcrumbs: [{ name: 'Terms', path: '/terms' }]
   },
   {
     path: '/thank-you',
-    title: 'Thank You — Alora',
-    description: 'Confirmation page for Alora enquiries.',
+    title: 'Thank You — Menchly',
+    description: 'Confirmation page for Menchly enquiries.',
     h1: 'What happens next.',
     noindex: true
   }
@@ -84,7 +84,7 @@ const staticRoutes = [
 
 const industryRoutes = industryProfiles.map((industry) => ({
   path: `/industries/${industry.slug}`,
-  title: `${industry.name} AI Search Marketing — Alora`,
+  title: `${industry.name} AI Search Marketing — Menchly`,
   description: industry.summary,
   h1: 'Be recommended when the right buyer is deciding.',
   breadcrumbs: [
@@ -96,7 +96,7 @@ const industryRoutes = industryProfiles.map((industry) => ({
 
 const insightRoutes = insightArticles.map((article) => ({
   path: `/insights/${article.slug}`,
-  title: `${article.title} — Alora`,
+  title: `${article.title} — Menchly`,
   description: article.deck,
   h1: article.title,
   ogType: 'article',
@@ -132,7 +132,7 @@ export function getRouteMeta(pathname, explicitOrigin) {
   if (!route) {
     return {
       path,
-      title: 'Page Not Found — Alora',
+      title: 'Page Not Found — Menchly',
       description: 'The requested page could not be found.',
       h1: 'This page could not be found.',
       noindex: true,

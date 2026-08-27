@@ -1,4 +1,4 @@
-# Arielos / Alora site
+# Arielos / Menchly site
 
 React and Vite marketing site with static prerendering for every public route.
 
@@ -38,7 +38,7 @@ VITE_BUDGET_RANGES=["£25k–£50k","£50k–£100k","£100k+"]
 - `VITE_BUDGET_RANGES` is optional. It accepts a JSON string array or `|`, `;`, or newline-delimited approved labels. With no approved values, no investment field is rendered.
 - The endpoint must implement authentication/abuse controls as appropriate, CORS for the production origin, rate limiting, server-side validation, audit logging, secure storage and the approved CRM mapping. The client honeypot is only a basic friction layer.
 
-The first-party analytics abstraction has no vendor dependency and emits no form values. Events are held in memory until the assessment privacy consent is given, then exposed through `window.aloraAnalytics` and `alora:analytics` browser events for an approved first-party receiver to consume. Events cover CTA placement, form start, validation error, submission outcomes, calendar handoff, and industry/methodology views. No analytics receiver is included.
+The first-party analytics abstraction has no vendor dependency and emits no form values. Events are held in memory until the assessment privacy consent is given, then exposed through `window.menchlyAnalytics` and `menchly:analytics` browser events for an approved first-party receiver to consume. Events cover CTA placement, form start, validation error, submission outcomes, calendar handoff, and industry/methodology views. No analytics receiver is included.
 
 Before production collection is enabled, legal and privacy owners must approve the final privacy notice, consent wording, lawful basis, retention schedule, deletion process, controller/contact details, processors, international transfers and CRM data-processing terms. The current privacy page is explicit interim wording, not a production-ready legal notice.
 
@@ -65,7 +65,7 @@ Self-hosted Instrument Serif and Manrope files are bundled from `@fontsource`; t
 
 ## Editorial content
 
-`src/content/insights.js` is the authority-content registry. Each insight requires a purpose, executive summary, definitions, structured sections, limitations, publication/review dates, organizational attribution, expert-review status, visible sources and related internal links. Article routes are generated from this registry at `/insights/:slug`, included in prerendering and the sitemap, and emit `Article` JSON-LD with Alora's `Organization` as author and publisher. The schema deliberately emits no `Person`.
+`src/content/insights.js` is the authority-content registry. Each insight requires a purpose, executive summary, definitions, structured sections, limitations, publication/review dates, organizational attribution, expert-review status, visible sources and related internal links. Article routes are generated from this registry at `/insights/:slug`, included in prerendering and the sitemap, and emit `Article` JSON-LD with Menchly's `Organization` as author and publisher. The schema deliberately emits no `Person`.
 
 All current insight notes show `Expert review: Pending` because no verified reviewer has been supplied. Under the approved editorial gate, Insights remains absent from primary navigation until verified expert review exists; it remains accessible from the footer and internal links.
 

@@ -66,7 +66,7 @@ export function ServicesPage() {
         <div className="editorial-block">
           <SectionHeader eyebrow="Engagement design" title={<>Senior, selective and <em>built around your operating reality.</em></>} />
           <div className="prose prose--dark">
-            <p>Alora can lead a defined strategic engagement or work as a specialist layer alongside brand, communications, SEO, content and reputation partners.</p>
+            <p>Menchly can lead a defined strategic engagement or work as a specialist layer alongside brand, communications, SEO, content and reputation partners.</p>
             <p>Scope, access and approval controls are agreed at the outset. No responsible agency can guarantee an independent model recommendation; our role is to improve the clarity, credibility and authority on which those recommendations may depend.</p>
             <InternalLink to="/methodology">Review the methodology</InternalLink>
           </div>
@@ -91,7 +91,7 @@ export function IndustriesPage() {
           <SectionHeader eyebrow="Sector focus" title={<>Recommendation requires <em>category fluency.</em></>} />
           <div className="prose">
             <p>A family office choosing an aviation adviser asks different questions from a collector choosing a specialist or a guest selecting a resort. The signals of authority, fit and trust are category-specific.</p>
-            <p>Alora builds each programme around the language, intermediaries, evidence and reputation dynamics of the market—not a universal prompt template.</p>
+            <p>Menchly builds each programme around the language, intermediaries, evidence and reputation dynamics of the market—not a universal prompt template.</p>
           </div>
         </div>
       </Section>
@@ -229,9 +229,9 @@ export function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About Alora"
+        eyebrow="About Menchly"
         title={<>AI Search marketing infrastructure, <em>built around each client.</em></>}
-        copy="Alora is a data-driven AI Search marketing partner. We do not offer cookie-cutter packages or self-serve solutions. We build custom infrastructure around each client, using data to identify where to act, executing at speed, and continuously learning from results."
+        copy="Menchly is a data-driven AI Search marketing partner. We do not offer cookie-cutter packages or self-serve solutions. We build custom infrastructure around each client, using data to identify where to act, executing at speed, and continuously learning from results."
         breadcrumbs={[{ label: 'About' }]}
       />
       <Section tone="paper">
@@ -254,14 +254,14 @@ export function AboutPage() {
       </Section>
       <Section tone="blue">
         <div className="editorial-block">
-          <SectionHeader eyebrow="The Alora view" title={<>Recommendation should be earned <em>for a reason.</em></>} />
+          <SectionHeader eyebrow="The Menchly view" title={<>Recommendation should be earned <em>for a reason.</em></>} />
           <div className="prose prose--dark">
             <p>Broad visibility can create attention. High-quality recommendation creates informed consideration. We focus on the latter: the moments when a buyer’s question reveals a real need and the answer must connect the brand to credible evidence of fit.</p>
             <InternalLink to="/services">Explore our services</InternalLink>
           </div>
         </div>
       </Section>
-      <CtaBand title="Discuss whether Alora is the right fit." />
+      <CtaBand title="Discuss whether Menchly is the right fit." />
     </>
   );
 }
@@ -291,7 +291,7 @@ export function InsightArticlePage() {
   return (
     <article className="article-page">
       <PageHero
-        eyebrow="Alora research note"
+        eyebrow="Menchly research note"
         title={article.title}
         copy={article.deck}
         breadcrumbs={[{ label: 'Insights', to: '/insights' }, { label: article.title }]}
@@ -314,7 +314,7 @@ export function InsightArticlePage() {
           {article.definitions.map((definition) => (
             <figure key={definition.term}>
               <blockquote>“{definition.quote}”</blockquote>
-              <figcaption>{definition.term} — Alora Editorial definition</figcaption>
+              <figcaption>{definition.term} — Menchly Editorial definition</figcaption>
             </figure>
           ))}
         </div>
@@ -381,7 +381,7 @@ const legalContent = {
     title: 'Terms',
     intro: 'This page is a publication placeholder pending final legal review.',
     sections: [
-      ['Website information', 'Content on this website is general information about Alora’s strategic services. It is not professional, legal, financial or investment advice.'],
+      ['Website information', 'Content on this website is general information about Menchly’s strategic services. It is not professional, legal, financial or investment advice.'],
       ['No performance promise', 'References to opportunity, visibility or recommendation describe strategic aims. Independent AI systems are variable and no specific placement, recommendation or commercial result is guaranteed.'],
       ['Future updates', 'Complete website terms, intellectual-property provisions, governing law and contact details should be approved before production launch.']
     ]
@@ -438,7 +438,7 @@ export function NotFoundPage() {
         <h1>This page could not be found.</h1>
         <p>The link you followed may be broken, or the page may have moved. Try one of these instead:</p>
         <div className="placeholder-page__actions">
-          <Link className="button button--primary" to="/"><span>Alora homepage</span><span aria-hidden="true">→</span></Link>
+          <Link className="button button--primary" to="/"><span>Menchly homepage</span><span aria-hidden="true">→</span></Link>
           <InternalLink to="/insights">Read research</InternalLink>
           <InternalLink to="/private-ai-visibility-assessment">Private assessment</InternalLink>
         </div>

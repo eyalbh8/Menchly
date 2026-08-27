@@ -1,4 +1,4 @@
-export const EDITORIAL_ORGANIZATION = 'Alora Editorial';
+export const EDITORIAL_ORGANIZATION = 'Menchly Editorial';
 export const EXPERT_REVIEW_STATUS = 'pending';
 
 const sharedLimitations = [
@@ -79,7 +79,7 @@ export const insightArticles = [
     ],
     related: [
       { label: 'Prompt and market intelligence services', href: '/services' },
-      { label: 'Alora methodology', href: '/methodology' },
+      { label: 'Menchly methodology', href: '/methodology' },
       { label: 'Private aviation decision context', href: '/industries/private-aviation' },
       { label: 'High-intent prompt intelligence', href: '/insights/high-intent-prompt-intelligence' }
     ]
@@ -234,7 +234,7 @@ export const insightArticles = [
     ],
     related: [
       { label: 'Authority architecture services', href: '/services' },
-      { label: 'Alora methodology', href: '/methodology' },
+      { label: 'Menchly methodology', href: '/methodology' },
       { label: 'Jewellery and watches decision context', href: '/industries/jewellery-watches' },
       { label: 'Recommendation gap research note', href: '/insights/recommendation-gap-known-vs-selected' }
     ]

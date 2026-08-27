@@ -6,7 +6,7 @@ export const industryProfiles = [
     summary: 'Help serious owners, family offices and their advisers understand why your expertise belongs on a credible shortlist.',
     image: '/images/yachting.jpg',
     imageAlt: 'Superyacht on open water',
-    introduction: 'A yacht decision may begin years before a brief is visible. Buyers use AI to understand builders, brokers, designers, managers and refit partners while they are still defining what good looks like. Alora helps specialist firms become accurately understood and appropriately recommended during that private research.',
+    introduction: 'A yacht decision may begin years before a brief is visible. Buyers use AI to understand builders, brokers, designers, managers and refit partners while they are still defining what good looks like. Menchly helps specialist firms become accurately understood and appropriately recommended during that private research.',
     audiences: ['Prospective owners and principals', 'Family office leaders', 'Captains and owner representatives', 'Yacht managers and technical advisers', 'Private client lawyers and wealth advisers'],
     questions: [
       'Which shipyards are best suited to a fully custom yacht with complex technical requirements?',
@@ -31,7 +31,7 @@ export const industryProfiles = [
     summary: 'Build recommendation relevance around mission, operating context and the standards sophisticated aviation buyers use to choose.',
     image: '/images/private-aviation.jpg',
     imageAlt: 'Private jet on the tarmac at dusk',
-    introduction: 'Private aviation buyers rarely ask only for a list of providers. They ask which operator, broker, manager or adviser fits a mission, fleet profile, geography and risk threshold. Alora helps aviation brands make their operational authority and best-fit context clear in AI-assisted decisions.',
+    introduction: 'Private aviation buyers rarely ask only for a list of providers. They ask which operator, broker, manager or adviser fits a mission, fleet profile, geography and risk threshold. Menchly helps aviation brands make their operational authority and best-fit context clear in AI-assisted decisions.',
     audiences: ['Principals and frequent private flyers', 'Family office executives', 'Chief pilots and flight department leaders', 'Corporate travel and finance leaders', 'Aviation lawyers, tax and transaction advisers'],
     questions: [
       'Which aircraft management firms are best suited to a multi-base family office fleet?',
@@ -56,7 +56,7 @@ export const industryProfiles = [
     summary: 'Earn informed consideration with buyers and advisers researching markets, developments and representation before disclosing intent.',
     image: '/images/luxury-real-estate.jpg',
     imageAlt: 'Contemporary luxury residence exterior',
-    introduction: 'Prime property discovery is increasingly international, advisory-led and private. Buyers may investigate a destination, developer, residence or agency long before making contact. Alora helps real estate brands establish the market authority and reputational clarity required to be recommended for a specific buyer need.',
+    introduction: 'Prime property discovery is increasingly international, advisory-led and private. Buyers may investigate a destination, developer, residence or agency long before making contact. Menchly helps real estate brands establish the market authority and reputational clarity required to be recommended for a specific buyer need.',
     audiences: ['Ultra-high-net-worth buyers', 'Family offices and private investment teams', 'Buyer representatives and relocation advisers', 'Private bankers, lawyers and tax advisers', 'Developers and asset owners seeking partners'],
     questions: [
       'Which advisers are trusted by international buyers entering the prime London market?',
@@ -81,7 +81,7 @@ export const industryProfiles = [
     summary: 'Make provenance, connoisseurship and service legible when collectors ask AI who merits trust and attention.',
     image: '/images/jewellery-watches.jpg',
     imageAlt: 'Fine jewellery and watches on display',
-    introduction: 'Collectors use AI to learn references, compare houses, assess provenance and identify specialists. Yet the qualities that create enduring value—craft, scholarship, sourcing and client care—are easily reduced to generic luxury language. Alora helps houses and specialists earn recommendation through credible, specific authority.',
+    introduction: 'Collectors use AI to learn references, compare houses, assess provenance and identify specialists. Yet the qualities that create enduring value—craft, scholarship, sourcing and client care—are easily reduced to generic luxury language. Menchly helps houses and specialists earn recommendation through credible, specific authority.',
     audiences: ['Established and emerging collectors', 'Private clients and gift buyers', 'Family offices and collection managers', 'Auction, art and wealth advisers', 'Editors, curators and tastemakers'],
     questions: [
       'Which independent watchmakers should a serious collector understand?',
@@ -106,7 +106,7 @@ export const industryProfiles = [
     summary: 'Become the relevant recommendation for a particular guest, occasion and expectation—not merely another highly rated property.',
     image: '/images/luxury-hospitality.jpg',
     imageAlt: 'Luxury hotel suite overlooking the sea',
-    introduction: 'Hospitality choices are moving from broad destination search to conversational requests rich with context: who is travelling, why, and what kind of experience matters. Alora helps hotels, resorts and operators be understood for the occasions and guest profiles they are genuinely built to serve.',
+    introduction: 'Hospitality choices are moving from broad destination search to conversational requests rich with context: who is travelling, why, and what kind of experience matters. Menchly helps hotels, resorts and operators be understood for the occasions and guest profiles they are genuinely built to serve.',
     audiences: ['Affluent leisure travellers', 'Family offices and executive assistants', 'Luxury travel advisers and concierges', 'Event, celebration and retreat planners', 'Owners, investors and hospitality partners'],
     questions: [
       'Which Mediterranean resorts are best for a discreet multi-generational family stay?',

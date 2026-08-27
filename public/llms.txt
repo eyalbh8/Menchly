@@ -1,10 +1,10 @@
-# Alora
+# Menchly
 
-Alora builds custom AI Search marketing infrastructure for brands that want to lead the next iteration of the Internet. Data identifies where to act; infrastructure executes faster, learns continuously, and compounds results over time. Alora does not offer cookie-cutter packages or self-serve solutions.
+Menchly builds custom AI Search marketing infrastructure for brands that want to lead the next iteration of the Internet. Data identifies where to act; infrastructure executes faster, learns continuously, and compounds results over time. Menchly does not offer cookie-cutter packages or self-serve solutions.
 
 ## Public pages
 
-- / — overview of Alora's stated approach, service pillars, process, measurement framework and frequently asked questions
+- / — overview of Menchly's stated approach, service pillars, process, measurement framework and frequently asked questions
 - /services — prompt and market intelligence, authority architecture, recommendation positioning and reputation monitoring
 - /industries — current sector focus and links to sector-specific pages
 - /industries/yachting
@@ -14,7 +14,7 @@ Alora builds custom AI Search marketing infrastructure for brands that want to l
 - /industries/luxury-hospitality
 - /methodology — the six-stage methodology and four reporting dimensions
 - /about — purpose and working principles
-- /insights — index of Alora Editorial research notes; retained outside primary navigation pending verified expert review
+- /insights — index of Menchly Editorial research notes; retained outside primary navigation pending verified expert review
 - /insights/recommendation-gap-known-vs-selected — known versus selected in AI-assisted decisions
 - /insights/high-intent-prompt-intelligence — high-intent prompt intelligence versus prompt or keyword volume
 - /insights/authority-without-overexposure — public authority with confidentiality and disclosure controls
@@ -24,9 +24,9 @@ Alora builds custom AI Search marketing infrastructure for brands that want to l
 
 ## Important limitations stated on the site
 
-- Alora does not claim control over or guarantee independent AI model recommendations.
+- Menchly does not claim control over or guarantee independent AI model recommendations.
 - Opportunity statements are strategic aims, not forecasts.
-- Insight notes are attributed to Alora Editorial, identify expert review as pending, provide review dates and visible source links, and make no claim of expert endorsement.
+- Insight notes are attributed to Menchly Editorial, identify expert review as pending, provide review dates and visible source links, and make no claim of expert endorsement.
 - Insight frameworks and examples are general, illustrative material, not client results, market-volume statistics or guarantees.
 - The conceptual measurement interface contains no live client results.
 - No case study is published unless required evidence is verified and client, legal and publication gates all pass.

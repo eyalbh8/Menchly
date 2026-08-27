@@ -22,9 +22,9 @@ function cleanMetadata(metadata = {}) {
 
 function emit(event) {
   if (typeof window === 'undefined') return;
-  window.aloraAnalytics = window.aloraAnalytics || [];
-  window.aloraAnalytics.push(event);
-  window.dispatchEvent(new CustomEvent('alora:analytics', { detail: event }));
+  window.menchlyAnalytics = window.menchlyAnalytics || [];
+  window.menchlyAnalytics.push(event);
+  window.dispatchEvent(new CustomEvent('menchly:analytics', { detail: event }));
 }
 
 export function trackEvent(name, metadata = {}) {

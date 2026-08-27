@@ -39,9 +39,9 @@ export default function Nav() {
   return (
     <header className="site-header">
       <nav className="nav shell" aria-label="Primary navigation">
-        <Link className="brand" to="/" aria-label="Alora, home">
+        <Link className="brand" to="/" aria-label="Menchly, home">
           <BrandMark />
-          <span className="brand__name">Alora</span>
+          <span className="brand__name">Menchly</span>
         </Link>
         <button
           className="nav-toggle"

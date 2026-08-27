@@ -67,7 +67,7 @@ export default function AssessmentPage() {
     event.preventDefault();
     if (values.websiteConfirmation) {
       setStatus('error');
-      setStatusMessage('We could not process this request. Please contact Alora through an approved direct channel.');
+      setStatusMessage('We could not process this request. Please contact Menchly through an approved direct channel.');
       return;
     }
     const nextErrors = validateAssessment(values, approvedBudgets);
@@ -90,7 +90,7 @@ export default function AssessmentPage() {
       setStatus('error');
       setStatusMessage(unavailable
         ? 'Online assessment requests are not available yet. Your information has not been sent. Please return once a secure enquiry endpoint has been configured.'
-        : 'We could not securely send your request. Nothing has been confirmed. Please try again later or contact Alora through an approved direct channel.');
+        : 'We could not securely send your request. Nothing has been confirmed. Please try again later or contact Menchly through an approved direct channel.');
       trackEvent('submit_error', { reason: result.reason, page: '/private-ai-visibility-assessment' });
       return;
     }
@@ -154,7 +154,7 @@ export default function AssessmentPage() {
               <div className="form-grid">
                 <Field id="markets" label="Primary markets — required" hint="Countries, regions or buyer markets most relevant to the brief." error={errors.markets} className="form-field--wide">{(details) => <input {...inputProps('markets', details)} />}</Field>
                 <Field id="objective" label="Main objective — required" error={errors.objective} className="form-field--wide">{(details) => <select {...inputProps('objective', details)}><option value="">Select an objective</option>{objectives.map((objective) => <option key={objective}>{objective}</option>)}</select>}</Field>
-                {approvedBudgets.length > 0 && <Field id="budget" label="Approximate investment" hint="Optional. Only approved ranges configured by Alora are shown." error={errors.budget} className="form-field--wide">{(details) => <select {...inputProps('budget', details)}><option value="">Prefer to discuss privately</option>{approvedBudgets.map((range) => <option key={range}>{range}</option>)}</select>}</Field>}
+                {approvedBudgets.length > 0 && <Field id="budget" label="Approximate investment" hint="Optional. Only approved ranges configured by Menchly are shown." error={errors.budget} className="form-field--wide">{(details) => <select {...inputProps('budget', details)}><option value="">Prefer to discuss privately</option>{approvedBudgets.map((range) => <option key={range}>{range}</option>)}</select>}</Field>}
                 <Field id="concern" label="Current concern or optional message" hint="Avoid sensitive, privileged or confidential details at this stage." error={errors.concern} className="form-field--wide">{(details) => <textarea {...inputProps('concern', details)} rows="6" maxLength="2000" />}</Field>
               </div>
             </fieldset>
@@ -168,7 +168,7 @@ export default function AssessmentPage() {
               {(details) => (
                 <div className="consent-control">
                   <input id={details.id} name="privacyConsent" type="checkbox" checked={values.privacyConsent} onChange={update('privacyConsent')} onFocus={onStart} aria-describedby={details.describedBy} aria-invalid={details.invalid} />
-                  <p>I consent to Alora processing the information in this request and its attribution context to assess fit and respond. I understand this site still requires an approved final privacy notice. <Link to="/privacy">Read the current privacy notice.</Link></p>
+                  <p>I consent to Menchly processing the information in this request and its attribution context to assess fit and respond. I understand this site still requires an approved final privacy notice. <Link to="/privacy">Read the current privacy notice.</Link></p>
                 </div>
               )}
             </Field>

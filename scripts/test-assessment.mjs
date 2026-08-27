@@ -28,7 +28,7 @@ const valid = {
 assert.deepEqual(parseBudgetRanges('["£25k–£50k","£50k+"]'), ['£25k–£50k', '£50k+']);
 assert.deepEqual(parseBudgetRanges('Range one|Range two'), ['Range one', 'Range two']);
 assert.deepEqual(parseBudgetRanges(''), []);
-assert.equal(classifyAIReferrer('https://www.perplexity.ai/search?q=alora'), 'perplexity');
+assert.equal(classifyAIReferrer('https://www.perplexity.ai/search?q=menchly'), 'perplexity');
 assert.equal(classifyAIReferrer('https://claude.ai/new'), 'claude');
 assert.equal(classifyAIReferrer('https://example.com'), null);
 

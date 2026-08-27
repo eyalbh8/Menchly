@@ -15,7 +15,7 @@ function Hero() {
         </h1>
         <hr className="hero__rule" />
         <p className="hero__copy">
-          Alora builds custom AI Search marketing infrastructure for brands that want to lead the next iteration of the Internet. Data tells us where to act. Our infrastructure lets us execute faster, learn continuously, and compound results over time.
+          Menchly builds custom AI Search marketing infrastructure for brands that want to lead the next iteration of the Internet. Data tells us where to act. Our infrastructure lets us execute faster, learn continuously, and compound results over time.
         </p>
         <p className="hero__tagline">Built to adapt. Built to compound.</p>
         <div className="hero__actions">

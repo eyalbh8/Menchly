@@ -20,7 +20,7 @@ export default function Footer() {
           <div className="footer__brand">
             <Link className="brand" to="/">
               <BrandMark />
-              <span className="brand__name">Alora</span>
+              <span className="brand__name">Menchly</span>
             </Link>
             <p>AI Search marketing infrastructure for brands built to lead the next iteration of the Internet.</p>
           </div>
@@ -39,7 +39,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer__bottom">
-          <span>© {new Date().getFullYear()} Alora. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Menchly. All rights reserved.</span>
           <div>
             <Link to="/privacy">Privacy</Link>
             <Link to="/terms">Terms</Link>
