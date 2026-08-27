@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { assessmentHref, footerIndustryItems, footerNavItems } from '../data.js';
 import { trackEvent } from '../analytics.js';
 import { AssessmentLink, BrandMark } from './UI.jsx';
+import ContactLead from './ContactLead.jsx';
 
 export default function Footer() {
   return (
@@ -15,6 +16,7 @@ export default function Footer() {
           <AssessmentLink placement="footer-cta">Private assessment</AssessmentLink>
         </div>
       </div>
+      <ContactLead />
       <div className="shell">
         <div className="footer__main">
           <div className="footer__brand">

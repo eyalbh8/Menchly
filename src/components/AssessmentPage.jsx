@@ -9,7 +9,6 @@ import {
   validateAssessment
 } from '../assessment.js';
 import { setAnalyticsConsent, trackEvent } from '../analytics.js';
-import { Breadcrumbs } from './UI.jsx';
 
 const roles = ['Founder / owner', 'Chief executive', 'Marketing / brand leader', 'Communications / reputation leader', 'Digital / growth leader', 'Adviser / agency partner', 'Other'];
 const industries = ['Yachting', 'Private aviation', 'Luxury real estate', 'Jewellery & watches', 'Luxury hospitality', 'Financial / professional services', 'Other high-consideration category'];
@@ -102,7 +101,6 @@ export default function AssessmentPage() {
     <>
       <section className="assessment-hero">
         <div className="shell">
-          <Breadcrumbs items={[{ label: 'Private AI visibility assessment' }]} />
           <div className="assessment-intro">
             <div>
               <p className="eyebrow">Private AI visibility assessment</p>

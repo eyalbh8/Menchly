@@ -64,11 +64,10 @@ export function Breadcrumbs({ items = [] }) {
   );
 }
 
-export function PageHero({ eyebrow, title, copy, breadcrumbs = [], children }) {
+export function PageHero({ eyebrow, title, copy, children }) {
   return (
     <section className="page-hero">
       <div className="shell">
-        <Breadcrumbs items={breadcrumbs} />
         {eyebrow && <p className="eyebrow">{eyebrow}</p>}
         <h1>{title}</h1>
         {copy && <p className="page-hero__copy">{copy}</p>}

@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import Nav from './components/Nav.jsx';
 import Homepage from './components/Homepage.jsx';
 import Footer from './components/Footer.jsx';
+import FloatingCal from './components/FloatingCal.jsx';
 import SeoManager from './components/SeoManager.jsx';
 import AssessmentPage from './components/AssessmentPage.jsx';
 import { trackEvent } from './analytics.js';
@@ -102,6 +103,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <FloatingCal />
     </div>
   );
 }
