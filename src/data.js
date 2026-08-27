@@ -20,7 +20,13 @@ export const footerIndustryItems = [
   { label: 'Luxury hospitality', href: '/industries/luxury-hospitality' }
 ];
 
-export const platforms = ['ChatGPT', 'Claude', 'Gemini', 'Perplexity', 'Copilot'];
+export const platforms = [
+  { name: 'ChatGPT', id: 'chatgpt' },
+  { name: 'Claude', id: 'claude' },
+  { name: 'Gemini', id: 'gemini' },
+  { name: 'Perplexity', id: 'perplexity' },
+  { name: 'Copilot', id: 'copilot' }
+];
 
 export const sectors = [
   {
