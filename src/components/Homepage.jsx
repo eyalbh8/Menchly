@@ -2,7 +2,6 @@ import { useId, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { faqs, platforms, servicePillars } from '../data.js';
 import { insightArticles } from '../content/insights.js';
-import { industryCards } from '../pageContent.js';
 import { AssessmentLink, ResearchGrid, Section, SectionHeader } from './UI.jsx';
 
 function Hero() {
@@ -92,36 +91,6 @@ function Research() {
   );
 }
 
-function Industries() {
-  const [featured, ...rest] = industryCards;
-  return (
-    <Section id="industries" tone="paper">
-      <div className="section-head">
-        <h2>Industries</h2>
-        <Link className="section-head__link" to="/industries" aria-label="See all industries">→</Link>
-      </div>
-      <div className="work-layout">
-        <Link className="work-featured" to={featured.href}>
-          <img src={featured.image} alt={featured.imageAlt} width="1200" height="800" onError={(event) => { event.currentTarget.style.display = 'none'; }} />
-          <div className="work-featured__body">
-            <p className="eyebrow">Industry</p>
-            <h3>{featured.title}</h3>
-            <p>{featured.copy}</p>
-          </div>
-        </Link>
-        <div className="work-list">
-          {rest.map((item) => (
-            <Link key={item.href} to={item.href}>
-              <p className="eyebrow">Industry</p>
-              <h3>{item.title}</h3>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </Section>
-  );
-}
-
 function Services() {
   return (
     <Section id="services" tone="blue">
@@ -188,7 +157,6 @@ export default function Homepage() {
       <Hero />
       <PlatformGrid />
       <Research />
-      <Industries />
       <Services />
       <FAQ />
     </>

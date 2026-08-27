@@ -3,7 +3,6 @@ export const assessmentHref = '/private-ai-visibility-assessment';
 export const primaryNavItems = [
   { label: 'Insights', href: '/insights' },
   { label: 'Services', href: '/services' },
-  { label: 'Industries', href: '/industries' },
   { label: 'Methodology', href: '/methodology' }
 ];
 
