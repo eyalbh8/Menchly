@@ -103,7 +103,7 @@ export const promptIntelligence = [
 
 export const sectorUseCases = [
   { sector: 'Aviation', question: 'Who is credible for this mission, geography and ownership profile?', focus: 'Recommendation fit, operational authority and advisory trust.' },
-  { sector: 'Yachting', question: 'Which builder or broker belongs on a serious shortlist?', focus: 'Provenance, capability, specialist press and category distinction.' },
+  { sector: 'Yachting', question: 'Which builder or broker belongs on a serious shortlist?', focus: 'Provenance, capability, specialist press and category distinction' },
   { sector: 'Private wealth', question: 'Which institution is appropriate for this family’s complexity?', focus: 'Expertise, discretion, jurisdictional relevance and reputational confidence.' },
   { sector: 'Luxury hospitality', question: 'Where should we stay for this precise occasion and standard?', focus: 'Experience signals, editorial authority and suitability - not generic popularity.' }
 ];
@@ -129,7 +129,7 @@ export const productTabs = [
     id: 'overview',
     label: 'Overview',
     title: 'See how the brand shows up across AI',
-    copy: 'Track presence, share of voice, rank and sentiment across the models that matter - then see who owns the narrative in the category.',
+    copy: 'Track presence, share of voice, rank and sentiment across the models that matter - then see who owns the narrative in the category',
     image: '/images/product/overview.png',
     imageAlt: 'Menchly Account Brief showing AI visibility overview, platform breakdown and market position',
     width: 862,
@@ -203,7 +203,7 @@ export const marketStats = [
 export const berkosCase = {
   client: 'Berkos Developer & Properties',
   sector: 'Luxury real estate · Cyprus',
-  headline: 'Brands that show up. Results that speak.',
+  headline: 'Brands that show up Results that speak.',
   copy: 'A live Menchly workspace tracking how AI engines describe, compare and cite a prime property brand across high-intent buyer questions.'
 };
 
@@ -219,10 +219,10 @@ export const productImages = {
 };
 
 export const faqs = [
-  { q: 'Is this SEO?', a: 'It is complementary, but distinct. Search optimization focuses on discoverability in ranked results. We build AI Search marketing infrastructure: data shows where to act, then we execute, learn and compound how assistants understand, describe and recommend a brand.' },
-  { q: 'Can you guarantee a recommendation?', a: 'No credible agency can control or guarantee an independent model’s output. We improve the authority, clarity and evidence environment that influences whether a brand is understood and considered.' },
+  { q: 'Is this SEO?', a: 'It is complementary, but distinct Search optimization focuses on discoverability in ranked results We build AI Search marketing infrastructure: data shows where to act, then we execute, learn and compound how assistants understand, describe and recommend a brand.' },
+  { q: 'Can you guarantee a recommendation?', a: 'No credible agency can control or guarantee an independent model’s output We improve the authority, clarity and evidence environment that influences whether a brand is understood and considered.' },
   { q: 'Which AI assistants do you assess?', a: 'Engagements can include major assistants such as ChatGPT, Claude, Gemini, Perplexity and Copilot, selected according to audience relevance and market behavior.' },
-  { q: 'How do you handle confidential information?', a: 'We agree access, review and approval boundaries before work begins. Sensitive material is not published or used in external systems without explicit authorization.' },
-  { q: 'Who is the service designed for?', a: 'Brands that want to lead the next iteration of the Internet. We build custom infrastructure around each client rather than cookie-cutter packages or self-serve tools - especially where buyers research deeply and a poorly framed recommendation has meaningful commercial cost.' },
-  { q: 'What happens in the private assessment?', a: 'We review your category, priority buyer questions and current concern to assess strategic fit. If the mandate is appropriate, we then agree the scope for a documented model-response baseline and authority review.' }
+  { q: 'How do you handle confidential information?', a: 'We agree access, review and approval boundaries before work begins Sensitive material is not published or used in external systems without explicit authorization.' },
+  { q: 'Who is the service designed for?', a: 'Brands that want to lead the next iteration of the Internet We build custom infrastructure around each client rather than cookie-cutter packages or self-serve tools - especially where buyers research deeply and a poorly framed recommendation has meaningful commercial cost.' },
+  { q: 'What happens in the private assessment?', a: 'We review your category, priority buyer questions and current concern to assess strategic fit If the mandate is appropriate, we then agree the scope for a documented model-response baseline and authority review' }
 ];

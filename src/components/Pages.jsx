@@ -33,7 +33,7 @@ export function ServicesPage() {
       <PageHero
         eyebrow="Services"
         title={<>Custom infrastructure for <em>AI Search growth.</em></>}
-        copy="We don’t sell packages or self-serve tooling. We build the marketing infrastructure that turns AI Search signals into continuous, compounding execution."
+        copy="We don’t sell packages or self-serve tooling We build the marketing infrastructure that turns AI Search signals into continuous, compounding execution"
         breadcrumbs={[{ label: 'Services' }]}
       >
         <AssessmentLink placement="services-hero">Discuss your recommendation priorities</AssessmentLink>
@@ -42,8 +42,8 @@ export function ServicesPage() {
         <div className="split-intro">
           <SectionHeader eyebrow="A connected discipline" title={<>From signal to <em>compounding execution.</em></>} />
           <div className="prose">
-            <p>We don’t offer cookie-cutter packages or self-serve solutions. Data tells us where to act; custom infrastructure lets us execute faster, learn continuously, and compound results over time.</p>
-            <p>Our services begin with decision context. We identify the audiences, questions and criteria closest to commercial intent, then build the infrastructure that helps assistants interpret the brand accurately.</p>
+            <p>We don’t offer cookie-cutter packages or self-serve solutions Data tells us where to act; custom infrastructure lets us execute faster, learn continuously, and compound results over time.</p>
+            <p>Our services begin with decision context We identify the audiences, questions and criteria closest to commercial intent, then build the infrastructure that helps assistants interpret the brand accurately.</p>
           </div>
         </div>
       </Section>
@@ -75,7 +75,7 @@ export function ServicesPage() {
           <SectionHeader eyebrow="Engagement design" title={<>Senior, selective and <em>built around your operating reality.</em></>} />
           <div className="prose prose--dark">
             <p>Menchly can lead a defined strategic engagement or work as a specialist layer alongside brand, communications, SEO, content and reputation partners.</p>
-            <p>Scope, access and approval controls are agreed at the outset. No responsible agency can guarantee an independent model recommendation; our role is to improve the clarity, credibility and authority on which those recommendations may depend.</p>
+            <p>Scope, access and approval controls are agreed at the outset No responsible agency can guarantee an independent model recommendation; our role is to improve the clarity, credibility and authority on which those recommendations may depend.</p>
             <InternalLink to="/methodology">Review the methodology</InternalLink>
           </div>
         </div>
@@ -91,14 +91,14 @@ export function IndustriesPage() {
       <PageHero
         eyebrow="Industries"
         title={<>High-consideration markets where <em>reputation shapes access.</em></>}
-        copy="We work where buyers research privately, decisions carry meaningful consequence and a generic mention is no substitute for a credible, context-specific recommendation."
+        copy="We work where buyers research privately, decisions carry meaningful consequence and a generic mention is no substitute for a credible, context-specific recommendation"
         breadcrumbs={[{ label: 'Industries' }]}
       />
       <Section tone="paper">
         <div className="split-intro">
           <SectionHeader eyebrow="Sector focus" title={<>Recommendation requires <em>category fluency.</em></>} />
           <div className="prose">
-            <p>A family office choosing an aviation adviser asks different questions from a collector choosing a specialist or a guest selecting a resort. The signals of authority, fit and trust are category-specific.</p>
+            <p>A family office choosing an aviation adviser asks different questions from a collector choosing a specialist or a guest selecting a resort The signals of authority, fit and trust are category-specific.</p>
             <p>Menchly builds each programme around the language, intermediaries, evidence and reputation dynamics of the market - not a universal prompt template.</p>
           </div>
         </div>
@@ -107,11 +107,11 @@ export function IndustriesPage() {
         <SectionHeader
           eyebrow="Current focus"
           title={<>Explore the buyer questions that <em>shape each shortlist.</em></>}
-          copy="Each sector view outlines illustrative high-intent questions and the authority conditions that influence recommendation."
+          copy="Each sector view outlines illustrative high-intent questions and the authority conditions that influence recommendation"
         />
         <CardGrid items={industryCards} />
       </Section>
-      <CtaBand title="Understand where your category chooses." />
+      <CtaBand title="Understand where your category chooses" />
     </>
   );
 }
@@ -195,15 +195,15 @@ export function MethodologyPage() {
       <PageHero
         eyebrow="Methodology"
         title={<>A disciplined path from signal to <em>compounding results.</em></>}
-        copy="Data tells us where to act. The methodology turns those signals into infrastructure that executes faster, learns continuously, and compounds over time."
+        copy="Data tells us where to act The methodology turns those signals into infrastructure that executes faster, learns continuously, and compounds over time"
         breadcrumbs={[{ label: 'Methodology' }]}
       />
       <Section tone="paper">
         <div className="split-intro">
           <SectionHeader eyebrow="Working principle" title={<>Measure what matters <em>to the decision.</em></>} />
           <div className="prose">
-            <p>We do not treat every prompt, platform or mention as equal. Priority comes from the intersection of high buyer intent, strategic fit and credible authority the brand can substantiate.</p>
-            <p>The approach combines repeatable review with informed judgement. AI outputs are variable, so findings are interpreted as directional evidence - not deterministic rankings or guaranteed outcomes.</p>
+            <p>We do not treat every prompt, platform or mention as equal Priority comes from the intersection of high buyer intent, strategic fit and credible authority the brand can substantiate.</p>
+            <p>The approach combines repeatable review with informed judgement AI outputs are variable, so findings are interpreted as directional evidence - not deterministic rankings or guaranteed outcomes.</p>
           </div>
         </div>
       </Section>
@@ -234,7 +234,7 @@ export function MethodologyPage() {
           </div>
         </div>
       </Section>
-      <CtaBand title="Start with a clear recommendation baseline." />
+      <CtaBand title="Start with a clear recommendation baseline" />
     </>
   );
 }
@@ -245,20 +245,20 @@ export function AboutPage() {
       <PageHero
         eyebrow="About Menchly"
         title={<>AI Search marketing infrastructure, <em>built around each client.</em></>}
-        copy="Menchly is a data-driven AI Search marketing partner. We do not offer cookie-cutter packages or self-serve solutions. We build custom infrastructure around each client, using data to identify where to act, executing at speed, and continuously learning from results."
+        copy="Menchly is a data-driven AI Search marketing partner We do not offer cookie-cutter packages or self-serve solutions We build custom infrastructure around each client, using data to identify where to act, executing at speed, and continuously learning from results"
         breadcrumbs={[{ label: 'About' }]}
       />
       <Section tone="paper">
         <div className="split-intro">
           <SectionHeader eyebrow="Our purpose" title={<>Infrastructure built to <em>learn and compound.</em></>} />
           <div className="prose">
-            <p>The strongest brand is not always the best understood. Valuable expertise can remain hidden behind confidentiality, fragmented sources, legacy narratives or language too broad to help an assistant distinguish fit.</p>
+            <p>The strongest brand is not always the best understood Valuable expertise can remain hidden behind confidentiality, fragmented sources, legacy narratives or language too broad to help an assistant distinguish fit.</p>
             <p>We build custom marketing infrastructure around each client so data can show where to act, execution can move at speed, and results can compound as the system learns.</p>
           </div>
         </div>
       </Section>
       <Section>
-        <SectionHeader eyebrow="How we work" title={<>Senior judgement. <em>Evidence before claims.</em></>} />
+        <SectionHeader eyebrow="How we work" title={<>Senior judgement <em>Evidence before claims.</em></>} />
         <CardGrid items={[
           { title: 'Selective focus', copy: 'We concentrate on reputation-sensitive categories and review potential conflicts before accepting a mandate.' },
           { title: 'Executive alignment', copy: 'Commercial priorities, audience fit, confidentiality and governance are agreed before activation begins.' },
@@ -270,12 +270,12 @@ export function AboutPage() {
         <div className="editorial-block">
           <SectionHeader eyebrow="The Menchly view" title={<>Recommendation should be earned <em>for a reason.</em></>} />
           <div className="prose prose--dark">
-            <p>Broad visibility can create attention. High-quality recommendation creates informed consideration. We focus on the latter: the moments when a buyer’s question reveals a real need and the answer must connect the brand to credible evidence of fit.</p>
+            <p>Broad visibility can create attention High-quality recommendation creates informed consideration We focus on the latter: the moments when a buyer’s question reveals a real need and the answer must connect the brand to credible evidence of fit.</p>
             <InternalLink to="/services">Explore our services</InternalLink>
           </div>
         </div>
       </Section>
-      <CtaBand title="Discuss whether Menchly is the right fit." />
+      <CtaBand title="Discuss whether Menchly is the right fit" />
     </>
   );
 }
@@ -286,13 +286,13 @@ export function InsightsPage() {
       <PageHero
         eyebrow="Insights"
         title={<>Strategic perspectives on <em>AI, authority and choice.</em></>}
-        copy="Research notes for leaders responsible for brand, reputation, growth and digital strategy in high-consideration markets."
+        copy="Research notes for leaders responsible for brand, reputation, growth and digital strategy in high-consideration markets"
         breadcrumbs={[{ label: 'Insights' }]}
       />
       <Section>
         <ResearchGrid articles={insightArticles} />
       </Section>
-      <CtaBand title="Turn the strategic question into a brand-specific baseline." />
+      <CtaBand title="Turn the strategic question into a brand-specific baseline" />
     </>
   );
 }
@@ -374,7 +374,7 @@ export function InsightArticlePage() {
           <div>{article.related.map((item) => <InternalLink key={item.href} to={item.href}>{item.label}</InternalLink>)}</div>
         </div>
       </Section>
-      <CtaBand title="Turn the strategic question into a brand-specific baseline." placement={`article-${article.slug}`} />
+      <CtaBand title="Turn the strategic question into a brand-specific baseline" placement={`article-${article.slug}`} />
     </article>
   );
 }
@@ -384,19 +384,19 @@ const legalContent = {
     title: 'Privacy',
     intro: 'Interim data-use information pending approval of the final privacy notice.',
     sections: [
-      ['Information collected', 'The private assessment may collect your name, work contact details, company, website, role, industry, markets, objectives, optional message and an approved investment range when configured. It also records consent, landing page, referrer, campaign parameters and a classification of known AI referrers. A hidden anti-spam field is used to reject automated submissions.'],
-      ['How information is used', 'Information submitted with required privacy consent is used to assess strategic fit, review potential category conflicts and respond to the enquiry. Non-identifying first-party journey events are used only when the separate optional analytics choice is enabled. Information should not be sold or used to claim an engagement exists.'],
-      ['Retention and recipients', 'Final retention periods, deletion procedures, lawful bases, controller identity, contact route, hosting location, processors and any international transfers must be confirmed against the selected CRM and hosting configuration before launch. Access should be restricted to authorised people involved in reviewing the enquiry.'],
+      ['Information collected', 'The private assessment may collect your name, work contact details, company, website, role, industry, markets, objectives, optional message and an approved investment range when configured It also records consent, landing page, referrer, campaign parameters and a classification of known AI referrers A hidden anti-spam field is used to reject automated submissions.'],
+      ['How information is used', 'Information submitted with required privacy consent is used to assess strategic fit, review potential category conflicts and respond to the enquiry Non-identifying first-party journey events are used only when the separate optional analytics choice is enabled Information should not be sold or used to claim an engagement exists.'],
+      ['Retention and recipients', 'Final retention periods, deletion procedures, lawful bases, controller identity, contact route, hosting location, processors and any international transfers must be confirmed against the selected CRM and hosting configuration before launch Access should be restricted to authorised people involved in reviewing the enquiry.'],
       ['Your choices and rights', 'The production notice must explain applicable access, correction, deletion, restriction, objection and withdrawal rights, plus the relevant supervisory authority and an approved privacy contact.'],
-      ['Legal review required', 'This interim wording is not a complete privacy notice and is not legal advice. A qualified adviser must approve the notice, consent language, retention schedule, CRM processing terms and cross-border transfer position before public data collection is enabled.']
+      ['Legal review required', 'This interim wording is not a complete privacy notice and is not legal advice A qualified adviser must approve the notice, consent language, retention schedule, CRM processing terms and cross-border transfer position before public data collection is enabled.']
     ]
   },
   terms: {
     title: 'Terms',
     intro: 'This page is a publication placeholder pending final legal review.',
     sections: [
-      ['Website information', 'Content on this website is general information about Menchly’s strategic services. It is not professional, legal, financial or investment advice.'],
-      ['No performance promise', 'References to opportunity, visibility or recommendation describe strategic aims. Independent AI systems are variable and no specific placement, recommendation or commercial result is guaranteed.'],
+      ['Website information', 'Content on this website is general information about Menchly’s strategic services It is not professional, legal, financial or investment advice.'],
+      ['No performance promise', 'References to opportunity, visibility or recommendation describe strategic aims Independent AI systems are variable and no specific placement, recommendation or commercial result is guaranteed.'],
       ['Future updates', 'Complete website terms, intellectual-property provisions, governing law and contact details should be approved before production launch.']
     ]
   }
@@ -427,8 +427,8 @@ export function ThankYouPage() {
           <p className="eyebrow">{confirmed ? 'Request received' : 'Private assessment'}</p>
           <h1>What happens next.</h1>
           <p>{confirmed
-            ? 'Your request was securely accepted. A senior member of the team will review strategic fit, category context and any potential conflicts before responding.'
-            : 'This page does not confirm a submission. To begin, complete the private assessment request so the team has the context needed for a considered review.'}</p>
+            ? 'Your request was securely accepted A senior member of the team will review strategic fit, category context and any potential conflicts before responding.'
+            : 'This page does not confirm a submission To begin, complete the private assessment request so the team has the context needed for a considered review.'}</p>
           <div className="thank-you-actions">
             {confirmed && calendarUrl && <a className="button button--primary" href={calendarUrl} target="_blank" rel="noreferrer" onClick={() => trackEvent('calendar_handoff', { placement: 'thank-you', page: '/thank-you' })}><span>Arrange a private conversation</span><span aria-hidden="true">↗</span></a>}
             <Link className="button button--outline" to={confirmed ? '/methodology' : '/private-ai-visibility-assessment'}><span>{confirmed ? 'Review our methodology' : 'Start the assessment'}</span><span aria-hidden="true">→</span></Link>
@@ -450,7 +450,7 @@ export function NotFoundPage() {
       <div className="shell">
         <p className="eyebrow">404  -  page not found</p>
         <h1>This page could not be found.</h1>
-        <p>The link you followed may be broken, or the page may have moved. Try one of these instead:</p>
+        <p>The link you followed may be broken, or the page may have moved Try one of these instead:</p>
         <div className="placeholder-page__actions">
           <Link className="button button--primary" to="/"><span>Menchly homepage</span><span aria-hidden="true">→</span></Link>
           <InternalLink to="/insights">Read research</InternalLink>

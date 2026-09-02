@@ -30,9 +30,9 @@ function Hero() {
         </h1>
         <hr className="hero__rule" />
         <p className="hero__copy">
-          Menchly builds custom AI Search marketing infrastructure for brands that want to lead the next iteration of the Internet. Data tells us where to act. Our infrastructure lets us execute faster, learn continuously, and compound results over time.
+          Menchly builds custom AI Search marketing infrastructure for brands that want to lead the next iteration of the Internet Data tells us where to act Our infrastructure lets us execute faster, learn continuously, and compound results over time.
         </p>
-        <p className="hero__tagline">Built to adapt. Built to compound.</p>
+        <p className="hero__tagline">Built to adapt Built to compound</p>
         <div className="hero__actions">
           <AssessmentLink placement="homepage-hero">Private assessment</AssessmentLink>
         </div>
@@ -197,8 +197,8 @@ function ProductTheater() {
       <SectionHeader
         align="center"
         eyebrow="The Menchly system"
-        title="See how the brand shows up across AI."
-        copy="Visibility, prompts, AI traffic, mentions and citation authority - built into custom infrastructure around each client."
+        title="See how the brand shows up across AI"
+        copy="Visibility, prompts, AI traffic, mentions and citation authority - built into custom infrastructure around each client"
       />
       <div className="product-tabs" role="tablist" aria-label="Product views">
         {productTabs.map((item, index) => {
@@ -243,7 +243,7 @@ function MarketStats() {
         <SectionHeader
           eyebrow="A quiet decision"
           title={<>Which brand gets <em>mentioned.</em></>}
-          copy="AI isn’t browsing. It’s choosing. The brands that show up in those answers win the consideration that never appears in traditional search reports."
+          copy="AI isn’t browsing It’s choosing The brands that show up in those answers win the consideration that never appears in traditional search reports"
         />
       </div>
       <ul className="market-stats">
@@ -303,7 +303,7 @@ function AITrafficPanel() {
       <SectionHeader
         eyebrow="AI-driven visits"
         title={<>Traffic that starts in <em>AI assistants.</em></>}
-        copy="Direct site visits originating from AI tools. When a user asks ChatGPT, Gemini, or Perplexity a question and clicks through to a website, these analytics capture that journey - showing which models drive discovery and where those visitors are located."
+        copy="Direct site visits originating from AI tools When a user asks ChatGPT, Gemini, or Perplexity a question and clicks through to a website, these analytics capture that journey - showing which models drive discovery and where those visitors are located"
       />
       <div className="ai-traffic-layout">
         <DataPanel 
@@ -346,8 +346,8 @@ function Services() {
     <Section id="services" tone="blue">
       <SectionHeader
         eyebrow="Four service pillars"
-        title="Custom infrastructure for AI Search growth."
-        copy="We identify where to act, execute through custom infrastructure, then learn and compound from the results."
+        title="Custom infrastructure for AI Search growth"
+        copy="We identify where to act, execute through custom infrastructure, then learn and compound from the results"
       />
       <div className="service-list">
         {servicePillars.map((service) => (
@@ -368,7 +368,7 @@ function FAQ() {
   return (
     <Section id="faq" tone="paper">
       <div className="faq-layout">
-        <SectionHeader eyebrow="Frequently asked" title="A clear view of the discipline." />
+        <SectionHeader eyebrow="Frequently asked" title="A clear view of the discipline" />
         <div className="accordion">
           {faqs.map((item, index) => {
             const expanded = open === index;

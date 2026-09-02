@@ -64,8 +64,8 @@ export default function ContactLead() {
     if (!result.ok) {
       setStatus('error');
       setStatusMessage(result.reason === 'unavailable'
-        ? 'Online enquiries are not configured yet. Please use Private assessment or email Menchly directly.'
-        : 'We could not send your details. Please try again.');
+        ? 'Online enquiries are not configured yet Please use Private assessment or email Menchly directly.'
+        : 'We could not send your details Please try again.');
       trackEvent('submit_error', { reason: result.reason, page: window.location.pathname, form: 'contact-lead' });
       return;
     }
@@ -82,7 +82,7 @@ export default function ContactLead() {
         <div>
           <p className="eyebrow">Leave your details</p>
           <h2>Tell us who to reach.</h2>
-          <p>Share a few details and we will follow up. Prefer a full private assessment? <Link to="/private-ai-visibility-assessment">Start here</Link>.</p>
+          <p>Share a few details and we will follow up Prefer a full private assessment? <Link to="/private-ai-visibility-assessment">Start here</Link>.</p>
         </div>
         <form className="contact-lead__form" noValidate onSubmit={onSubmit}>
           <div className="form-grid">
