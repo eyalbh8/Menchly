@@ -50,26 +50,10 @@ export function InternalLink({ to, children, className = '' }) {
   );
 }
 
-export function Breadcrumbs({ items = [] }) {
-  return (
-    <nav className="breadcrumbs" aria-label="Breadcrumb">
-      <ol>
-        <li><Link to="/">Home</Link></li>
-        {items.map((item, index) => (
-          <li key={item.label}>
-            {item.to && index < items.length - 1 ? <Link to={item.to}>{item.label}</Link> : <span aria-current="page">{item.label}</span>}
-          </li>
-        ))}
-      </ol>
-    </nav>
-  );
-}
-
-export function PageHero({ eyebrow, title, copy, breadcrumbs, children }) {
+export function PageHero({ eyebrow, title, copy, children }) {
   return (
     <section className="page-hero">
       <div className="shell">
-        {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
         {eyebrow && <p className="eyebrow">{eyebrow}</p>}
         <h1>{title}</h1>
         {copy && <p className="page-hero__copy">{copy}</p>}

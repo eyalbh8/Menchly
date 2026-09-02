@@ -43,7 +43,6 @@ export function ServicesPage() {
         eyebrow="Services"
         title={<>Custom infrastructure for <em>AI Search growth.</em></>}
         copy="We don’t sell packages or self-serve tooling We build the marketing infrastructure that turns AI Search signals into continuous, compounding execution"
-        breadcrumbs={[{ label: 'Services' }]}
       >
         <AssessmentLink placement="services-hero">Discuss your recommendation priorities</AssessmentLink>
       </PageHero>
@@ -159,7 +158,6 @@ export function IndustriesPage() {
         eyebrow="Industries"
         title={<>High-consideration markets where <em>reputation shapes access.</em></>}
         copy="We work where buyers research privately, decisions carry meaningful consequence and a generic mention is no substitute for a credible, context-specific recommendation"
-        breadcrumbs={[{ label: 'Industries' }]}
       />
       <Section tone="paper">
         <div className="split-intro">
@@ -204,7 +202,6 @@ export function IndustryPage() {
         eyebrow={industry.eyebrow}
         title={<>Be recommended when the <em>right buyer is deciding.</em></>}
         copy={industry.summary}
-        breadcrumbs={[{ label: 'Industries', to: '/industries' }, { label: industry.name }]}
       >
         <AssessmentLink placement={`industry-${industry.slug}-hero`}>Discuss {industry.name.toLowerCase()} visibility</AssessmentLink>
       </PageHero>
@@ -263,7 +260,6 @@ export function MethodologyPage() {
         eyebrow="Methodology"
         title={<>A disciplined path from signal to <em>compounding results.</em></>}
         copy="Data tells us where to act. The methodology turns those signals into infrastructure that executes faster, learns continuously, and compounds over time."
-        breadcrumbs={[{ label: 'Methodology' }]}
       >
         <AssessmentLink placement="methodology-hero">Request a private baseline</AssessmentLink>
       </PageHero>
@@ -390,7 +386,6 @@ export function AboutPage() {
         eyebrow="About Menchly"
         title={<>AI Search marketing infrastructure, <em>built around each client.</em></>}
         copy="Menchly is a data-driven AI Search marketing partner We do not offer cookie-cutter packages or self-serve solutions We build custom infrastructure around each client, using data to identify where to act, executing at speed, and continuously learning from results"
-        breadcrumbs={[{ label: 'About' }]}
       />
       <Section tone="paper">
         <div className="split-intro">
@@ -454,7 +449,6 @@ export function InsightsPage() {
         eyebrow="Insights"
         title={<>Strategic perspectives on <em>AI, authority and choice.</em></>}
         copy="Research notes for leaders responsible for brand, reputation, growth and digital strategy in high-consideration markets"
-        breadcrumbs={[{ label: 'Insights' }]}
       />
       <Section tone="paper">
         <div className="split-intro">
@@ -523,7 +517,6 @@ export function InsightArticlePage() {
         eyebrow="Menchly research note"
         title={article.title}
         copy={article.deck}
-        breadcrumbs={[{ label: 'Insights', to: '/insights' }, { label: article.title }]}
       />
       <Section tone="paper" className="article-summary">
         <div className="article-meta">
@@ -621,7 +614,7 @@ export function LegalPage({ type }) {
   const content = legalContent[type];
   return (
     <>
-      <PageHero eyebrow="Legal" title={content.title} copy={content.intro} breadcrumbs={[{ label: content.title }]} />
+      <PageHero eyebrow="Legal" title={content.title} copy={content.intro} />
       <Section tone="paper">
         <div className="legal-copy">
           {content.sections.map(([title, copy]) => <section key={title}><h2>{title}</h2><p>{copy}</p></section>)}

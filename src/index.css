@@ -1329,7 +1329,12 @@ h1 em, h2 em {
 .next-step-list h2 { margin: 0 0 8px; font: 700 24px var(--display); color: var(--ink); }
 .next-step-list p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
 
-.footer { padding: 0 0 28px; background: var(--bg); color: var(--ink); }
+/* Extra bottom space so Privacy/Terms clear the fixed Book appointment button */
+.footer {
+  padding: 0 0 calc(96px + env(safe-area-inset-bottom, 0px));
+  background: var(--bg);
+  color: var(--ink);
+}
 .footer__cta {
   padding: clamp(40px, 5vw, 64px) 0 48px;
   border-bottom: 1px solid var(--line);
@@ -1582,8 +1587,6 @@ h1 em, h2 em {
   .case-strip__footnote { font-size: 12px; }
   .research-card__axis { font-size: 11px; } /* Keep chart labels at 11px */
 
-  /* Add bottom padding to footer so floating cal doesn't overlap links */
-  .footer { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
 }
 
 /* Data visualization components */
