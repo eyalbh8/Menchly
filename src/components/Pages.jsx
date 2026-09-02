@@ -1,9 +1,18 @@
 import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
-import { industryCards, industryProfiles, methodologyStages, serviceDetails } from '../pageContent.js';
-import { productImages } from '../data.js';
-import { getInsightArticle, insightArticles } from '../content/insights.js';
+import { industryCards, industryProfiles, methodologyStages, measurementDimensions, methodologyFaqs, methodologySources, serviceDetails } from '../pageContent.js';
+import { productImages, serviceFaqs } from '../data.js';
+import { getInsightArticle, insightArticles, EDITORIAL_ORGANIZATION, EXPERT_REVIEW_STATUS } from '../content/insights.js';
 import { trackEvent } from '../analytics.js';
-import { AssessmentLink, CtaBand, InternalLink, PageHero, ProductStage, ResearchGrid, Section, SectionHeader } from './UI.jsx';
+import { AssessmentLink, CtaBand, InternalLink, PageHero, ProductStage, ResearchGrid, Section, SectionHeader, FaqAccordion } from './UI.jsx';
+
+function slugify(text) {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+}
 
 function CardGrid({ items, className = '' }) {
   return (
@@ -70,14 +79,72 @@ export function ServicesPage() {
           ))}
         </div>
       </Section>
+      <Section tone="paper">
+        <div className="split-intro">
+          <SectionHeader eyebrow="Built for your market" title={<>Who this is for.</>} />
+          <div className="prose">
+            <p>Menchly works with reputation-sensitive, high-consideration markets where buyers research deeply, decisions carry meaningful consequence, and a generic mention is no substitute for a credible, context-specific recommendation. Each programme is built around the language, intermediaries, evidence and reputation dynamics of the market rather than a universal prompt template.</p>
+            <p>Current sector focus includes <InternalLink to="/industries/yachting">yachting</InternalLink>, <InternalLink to="/industries/private-aviation">private aviation</InternalLink>, <InternalLink to="/industries/luxury-real-estate">luxury real estate</InternalLink>, <InternalLink to="/industries/jewellery-watches">jewellery & watches</InternalLink>, and <InternalLink to="/industries/luxury-hospitality">luxury hospitality</InternalLink>. Buyers in these markets ask which operator fits a mission, which builder belongs on a shortlist, which adviser can serve a family office, or which property matches a precise need — questions that demand fit, provenance and trust, not volume.</p>
+            <p>The approach applies to any market where <a href="https://arxiv.org/abs/2311.09735" target="_blank" rel="noopener">authority signals and citation quality</a> shape recommendation, where reputation precedes revenue, and where being recommended for the wrong reason carries commercial cost. <InternalLink to="/industries">View all industries</InternalLink></p>
+          </div>
+        </div>
+      </Section>
+      <Section>
+        <SectionHeader eyebrow="How we work" title={<>A disciplined path from signal to compounding results.</>} />
+        <ol className="method-grid">
+          {methodologyStages.map((stage, index) => (
+            <li key={stage.slug}><span>{String(index + 1).padStart(2, '0')}</span><h3>{stage.title}</h3><p>{stage.copy}</p></li>
+          ))}
+        </ol>
+        <div style={{ marginTop: '3rem', textAlign: 'center' }}>
+          <InternalLink to="/methodology">See the full methodology</InternalLink>
+        </div>
+      </Section>
+      <Section tone="blue">
+        <div className="editorial-block">
+          <SectionHeader eyebrow="Foundation" title={<>Evidence-led, not keyword-led.</>} />
+          <div className="prose prose--dark">
+            <p>AI assistants rely on the same foundational web signals as traditional search — content quality, entity relationships, authoritative sources and current facts — but they synthesize those signals into natural language rather than ranking pages. <a href="https://arxiv.org/abs/2311.09735" target="_blank" rel="noopener">Research shows</a> that content with clear structure, cited statistics, quotations from credible sources and direct answers to specific questions can improve visibility by up to 40% in AI-generated responses.</p>
+            <p><a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">Google and other major platforms</a> have stated that no special schema, AI text file or machine-readable markup is required for AI visibility. What matters is the visible content itself: clear answers to real buyer questions, supported by credible evidence. Our work strengthens the owned and earned authority environment that influences whether a brand is understood and considered.</p>
+            <InternalLink to="/insights">Read research perspectives</InternalLink>
+            {' · '}
+            <InternalLink to="/about">About Menchly</InternalLink>
+          </div>
+        </div>
+      </Section>
       <Section tone="blue">
         <div className="editorial-block">
           <SectionHeader eyebrow="Engagement design" title={<>Senior, selective and <em>built around your operating reality.</em></>} />
           <div className="prose prose--dark">
             <p>Menchly can lead a defined strategic engagement or work as a specialist layer alongside brand, communications, SEO, content and reputation partners.</p>
-            <p>Scope, access and approval controls are agreed at the outset No responsible agency can guarantee an independent model recommendation; our role is to improve the clarity, credibility and authority on which those recommendations may depend.</p>
+            <p>Scope, access and approval controls are agreed at the outset. No responsible agency can guarantee an independent model recommendation; our role is to improve the clarity, credibility and authority on which those recommendations may depend.</p>
             <InternalLink to="/methodology">Review the methodology</InternalLink>
           </div>
+        </div>
+      </Section>
+      <Section>
+        <SectionHeader eyebrow="Frequently asked" title="Engagement questions" />
+        <div className="faq-list">
+          {serviceFaqs.map((faq) => (
+            <div key={faq.q} className="faq-item">
+              <h3>{faq.q}</h3>
+              <p>{faq.a}</p>
+              {faq.links && faq.links.length > 0 && (
+                <p>
+                  {faq.links.map((link, i) => (
+                    <span key={i}>
+                      {i > 0 && ' · '}
+                      {link.external ? (
+                        <a href={link.href} target="_blank" rel="noopener">{link.text}</a>
+                      ) : (
+                        <InternalLink to={link.href}>{link.text}</InternalLink>
+                      )}
+                    </span>
+                  ))}
+                </p>
+              )}
+            </div>
+          ))}
         </div>
       </Section>
       <CtaBand />
@@ -195,36 +262,65 @@ export function MethodologyPage() {
       <PageHero
         eyebrow="Methodology"
         title={<>A disciplined path from signal to <em>compounding results.</em></>}
-        copy="Data tells us where to act The methodology turns those signals into infrastructure that executes faster, learns continuously, and compounds over time"
+        copy="Data tells us where to act. The methodology turns those signals into infrastructure that executes faster, learns continuously, and compounds over time."
         breadcrumbs={[{ label: 'Methodology' }]}
-      />
+      >
+        <AssessmentLink placement="methodology-hero">Request a private baseline</AssessmentLink>
+      </PageHero>
       <Section tone="paper">
         <div className="split-intro">
           <SectionHeader eyebrow="Working principle" title={<>Measure what matters <em>to the decision.</em></>} />
           <div className="prose">
-            <p>We do not treat every prompt, platform or mention as equal Priority comes from the intersection of high buyer intent, strategic fit and credible authority the brand can substantiate.</p>
-            <p>The approach combines repeatable review with informed judgement AI outputs are variable, so findings are interpreted as directional evidence - not deterministic rankings or guaranteed outcomes.</p>
+            <p>We do not treat every prompt, platform or mention as equal. Priority comes from the intersection of high buyer intent, strategic fit and credible authority the brand can substantiate.</p>
+            <p>The approach combines repeatable review with informed judgement. AI outputs are variable, so findings are interpreted as directional evidence - not deterministic rankings or guaranteed outcomes.</p>
           </div>
         </div>
       </Section>
       <Section>
         <SectionHeader eyebrow="Six stages" title={<>From executive context to <em>continuous learning.</em></>} />
         <ol className="method-grid">
-          {methodologyStages.map(([title, copy], index) => (
-            <li key={title}><span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{copy}</p></li>
+          {methodologyStages.map((stage, index) => (
+            <li key={stage.slug}><span>{String(index + 1).padStart(2, '0')}</span><h3>{stage.title}</h3><p>{stage.copy}</p></li>
           ))}
         </ol>
       </Section>
+      {methodologyStages.map((stage, index) => (
+        <Section key={stage.slug} tone={index % 2 === 0 ? 'paper' : 'white'}>
+          <div className="detail-grid">
+            <div className="detail-list">
+              <h2>{stage.question}</h2>
+              <p style={{ marginBottom: '28px', color: 'var(--muted)', fontSize: '15px', lineHeight: '1.75' }}>{stage.copy}</p>
+              <h3 style={{ margin: '0 0 16px', fontSize: '13px', fontWeight: '600', letterSpacing: '.06em', textTransform: 'uppercase', color: 'var(--muted-dark)' }}>Inputs</h3>
+              <ul style={{ margin: '0 0 32px', padding: '0', listStyle: 'none' }}>
+                {stage.inputs.map((input) => <li key={input} style={{ padding: '12px 0', borderBottom: '1px solid var(--line)', fontSize: '15px', color: 'var(--ink)' }}>{input}</li>)}
+              </ul>
+              <h3 style={{ margin: '0 0 16px', fontSize: '13px', fontWeight: '600', letterSpacing: '.06em', textTransform: 'uppercase', color: 'var(--muted-dark)' }}>Outputs</h3>
+              <ul style={{ margin: 0, padding: '0', listStyle: 'none' }}>
+                {stage.outputs.map((output) => <li key={output} style={{ padding: '12px 0', borderBottom: '1px solid var(--line)', fontSize: '15px', color: 'var(--ink)' }}>{output}</li>)}
+              </ul>
+            </div>
+            <div className="detail-narrative">
+              <p className="eyebrow">Stage {String(index + 1).padStart(2, '0')}</p>
+              <h2>{stage.title}</h2>
+              {index === 2 && (
+                <p style={{ marginTop: '20px' }}>
+                  <InternalLink to="/insights/high-intent-prompt-intelligence">High-intent prompt intelligence</InternalLink>
+                </p>
+              )}
+              {index === 3 && (
+                <p style={{ marginTop: '20px' }}>
+                  <InternalLink to="/insights/authority-without-overexposure">Authority without overexposure</InternalLink>
+                </p>
+              )}
+            </div>
+          </div>
+        </Section>
+      ))}
       <Section tone="blue">
         <div className="editorial-block">
           <SectionHeader eyebrow="Decision framework" title={<>Four dimensions keep reporting <em>commercially grounded.</em></>} />
           <div className="metric-list">
-            {[
-              ['Presence', 'Does the brand enter relevant answers for the agreed question set?'],
-              ['Fit', 'Is it recommended for the buyer, need and context the brand is equipped to serve?'],
-              ['Accuracy', 'Does the answer reflect current facts, approved positioning and meaningful distinction?'],
-              ['Authority', 'Are owned and independent sources credible enough to support confidence?']
-            ].map(([title, copy]) => <div key={title}><h3>{title}</h3><p>{copy}</p></div>)}
+            {measurementDimensions.map((dimension) => <div key={dimension.term}><h3>{dimension.term}</h3><p>{dimension.definition}</p></div>)}
           </div>
           <div className="methodology-visual">
             <ProductStage
@@ -232,9 +328,57 @@ export function MethodologyPage() {
               alt="Menchly Sentiment view showing score, trend and recent AI responses"
             />
           </div>
+          <p style={{ marginTop: '32px', textAlign: 'center' }}>
+            <InternalLink to="/services">Explore our services</InternalLink>
+          </p>
         </div>
       </Section>
-      <CtaBand title="Start with a clear recommendation baseline" />
+      <Section tone="paper">
+        <div className="split-intro">
+          <SectionHeader title={<>Defined terms</>} />
+          <div style={{ paddingTop: '32px' }}>
+            <dl style={{ margin: 0 }}>
+              {measurementDimensions.map((dimension, index) => (
+                <div key={dimension.term} style={{ paddingTop: index > 0 ? '28px' : 0, borderTop: index > 0 ? '1px solid var(--line)' : 'none' }}>
+                  <dt style={{ margin: '0 0 12px', fontSize: '19px', fontWeight: '700', color: 'var(--ink)' }}>{dimension.term}</dt>
+                  <dd style={{ margin: 0, fontSize: '15px', lineHeight: '1.75', color: 'var(--muted)' }}>{dimension.definition}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </Section>
+      <Section>
+        <div className="faq-layout">
+          <SectionHeader eyebrow="Frequently asked" title="A disciplined view of the practice" />
+          <FaqAccordion items={methodologyFaqs} />
+        </div>
+      </Section>
+      <Section tone="paper" className="article-sources">
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <SectionHeader eyebrow="Sources" title="Further reading and primary references" />
+          <ol>
+            {methodologySources.map((source) => (
+              <li key={source.url}>
+                <a href={source.url} target="_blank" rel="noopener">{source.title}</a>
+                <span>{source.organization}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </Section>
+      <Section>
+        <div className="next-links">
+          <div><p className="eyebrow">Continue exploring</p><h2>Related services and perspectives</h2></div>
+          <div>
+            <InternalLink to="/services">AI Search marketing services</InternalLink>
+            <InternalLink to="/industries">Industry perspectives</InternalLink>
+            <InternalLink to="/insights">Research and insights</InternalLink>
+            <InternalLink to="/about">About Menchly</InternalLink>
+          </div>
+        </div>
+      </Section>
+      <CtaBand title="Start with a clear recommendation baseline" placement="methodology-footer" />
     </>
   );
 }
@@ -281,6 +425,29 @@ export function AboutPage() {
 }
 
 export function InsightsPage() {
+  const allDefinitions = insightArticles.flatMap((article) => 
+    article.definitions.map((def) => ({ ...def, articleSlug: article.slug }))
+  );
+
+  const researchFaqs = [
+    { 
+      q: 'What is a Menchly research note?',
+      a: 'A research note is a strategic perspective on AI Search marketing prepared by Menchly Editorial for leaders responsible for brand, reputation and growth. Each note addresses a decision question, provides working definitions and outlines evidence-led frameworks. Notes are not client work, performance claims or forecasts.'
+    },
+    {
+      q: 'Why is expert review pending?',
+      a: 'Each note is prepared by Menchly Editorial and carries a visible pending-review label until an independent domain expert has reviewed and approved it. Expert review is required before the pending status is removed.'
+    },
+      {
+        q: 'May I cite a Menchly research note?',
+        a: 'Yes. Notes may be cited with attribution to Menchly Editorial and a link to the original. The note\'s publication and review dates are visible on each article page, and all primary sources are listed with links.'
+      },
+    {
+      q: 'How often are notes updated?',
+      a: 'Notes are reviewed periodically for accuracy and relevance. The last-reviewed date is shown on each article page. Material updates will be reflected in the dateModified property and visible change log when appropriate.'
+    }
+  ];
+
   return (
     <>
       <PageHero
@@ -289,8 +456,56 @@ export function InsightsPage() {
         copy="Research notes for leaders responsible for brand, reputation, growth and digital strategy in high-consideration markets"
         breadcrumbs={[{ label: 'Insights' }]}
       />
+      <Section tone="paper">
+        <div className="split-intro">
+          <SectionHeader eyebrow="About research notes" title={<>Decision frameworks, not <em>performance promises.</em></>} />
+          <div className="prose">
+            <p>Menchly research notes address questions that leaders face when responsible brands enter AI-assisted decision environments. Each note provides working definitions, evidence-based frameworks and clear statements about what it does not claim.</p>
+            <p>Notes are attributed to Menchly Editorial, carry visible expert-review status and list all primary sources. They are not client work, case studies or forecasts. <InternalLink to="/services">Explore our services</InternalLink></p>
+          </div>
+        </div>
+      </Section>
       <Section>
         <ResearchGrid articles={insightArticles} />
+      </Section>
+      <Section id="glossary" tone="blue">
+        <SectionHeader eyebrow="Glossary" title={<>Terms leaders can <em>use precisely.</em></>} />
+        <div className="definition-grid">
+          {allDefinitions.map((definition) => (
+            <figure key={`${definition.articleSlug}-${definition.term}`} id={`glossary-${definition.term.toLowerCase().replace(/\s+/g, '-')}`}>
+              <blockquote>"{definition.quote}"</blockquote>
+              <figcaption>{definition.term} - Menchly Editorial definition</figcaption>
+            </figure>
+          ))}
+        </div>
+      </Section>
+      <Section id="editorial-standards" tone="paper">
+        <div className="split-intro">
+          <SectionHeader eyebrow="Editorial standards" title={<>Publication gates and <em>stated limitations.</em></>} />
+          <div className="prose">
+            <p><strong>Attribution:</strong> All research notes are attributed to {EDITORIAL_ORGANIZATION}. No individual author names are published until expert review is complete.</p>
+            <p><strong>Expert review status:</strong> {EXPERT_REVIEW_STATUS}. Each note carries a visible label until an independent domain expert has reviewed and approved it.</p>
+            <p><strong>Required publication gates:</strong> Evidence verified, client approved (where applicable), legal approved, and explicit publication authorization.</p>
+            <p><strong>Stated limitations:</strong></p>
+            <ul>
+              {insightArticles[0].limitations.filter((lim, idx, arr) => arr.indexOf(lim) === idx).map((limitation, index) => (
+                <li key={index}>{limitation}</li>
+              ))}
+            </ul>
+            <p>Research notes are not professional advice. Leaders should evaluate frameworks against their own obligations, jurisdiction and risk appetite. <InternalLink to="/methodology">See our methodology</InternalLink></p>
+          </div>
+        </div>
+      </Section>
+      <Section>
+        <SectionHeader eyebrow="Frequently asked questions" title={<>About the research <em>programme.</em></>} />
+        <div className="faq-list">
+          {researchFaqs.map((faq) => (
+            <div className="faq-item" key={faq.q}>
+              <h3>{faq.q}</h3>
+              <p>{faq.a}</p>
+            </div>
+          ))}
+        </div>
       </Section>
       <CtaBand title="Turn the strategic question into a brand-specific baseline" />
     </>
@@ -336,7 +551,7 @@ export function InsightArticlePage() {
       {article.sections.map((section, index) => (
         <Section key={section.heading} tone={index % 2 === 0 ? 'paper' : 'blue'} className="article-section">
           <div className="article-layout">
-            <header><span className="card-number">{String(index + 1).padStart(2, '0')}</span><h2>{section.heading}</h2></header>
+            <header><span className="card-number">{String(index + 1).padStart(2, '0')}</span><h2 id={slugify(section.heading)}>{section.heading}</h2></header>
             <div className="article-copy">
               {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               <aside className="article-example">
@@ -361,7 +576,7 @@ export function InsightArticlePage() {
           <ol>
             {article.sources.map((source) => (
               <li key={source.url}>
-                <a href={source.url} target="_blank" rel="noreferrer">{source.title}</a>
+                <a href={source.url} target="_blank" rel="noopener">{source.title}</a>
                 <span>{source.organization}</span>
               </li>
             ))}

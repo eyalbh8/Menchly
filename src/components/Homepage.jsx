@@ -9,7 +9,7 @@ import {
   aiTrafficData 
 } from '../data/workspaceData.js';
 import { insightArticles } from '../content/insights.js';
-import { AssessmentLink, ProductStage, ResearchGrid, Section, SectionHeader } from './UI.jsx';
+import { AssessmentLink, ProductStage, ResearchGrid, Section, SectionHeader, InternalLink, ArrowLink, FaqAccordion } from './UI.jsx';
 import { 
   MetricGrid, 
   PlatformBars, 
@@ -25,7 +25,7 @@ function Hero() {
     <section id="top" className="hero">
       <div className="shell hero__inner">
         <h1 className="hero__ghost">
-          <span className="hero__ghost-brand">AI Search Marketing</span>
+          <span className="hero__ghost-brand">AI Search Marketing</span>{' '}
           <span className="hero__ghost-rest">Infrastructure.</span>
         </h1>
         <hr className="hero__rule" />
@@ -251,7 +251,9 @@ function MarketStats() {
           <li key={stat.value + stat.label}>
             <p className="market-stats__value">{stat.value}</p>
             <p className="market-stats__label">{stat.label}</p>
-            <p className="market-stats__source">{stat.source}</p>
+            <p className="market-stats__source">
+              <a href={stat.sourceUrl} target="_blank" rel="noopener">{stat.source}</a>
+            </p>
           </li>
         ))}
       </ul>
@@ -270,7 +272,9 @@ function BerkosCase() {
     <Section id="case" tone="blue" className="case-strip-section">
       <div className="case-strip">
         <div className="case-strip__copy">
-          <p className="eyebrow">{berkosCase.sector}</p>
+          <p className="eyebrow">
+            <Link to="/industries/luxury-real-estate">{berkosCase.sector}</Link>
+          </p>
           <h2>{berkosCase.headline}</h2>
           <p>{berkosCase.copy}</p>
           <AssessmentLink placement="homepage-berkos-case">Discuss your baseline</AssessmentLink>
@@ -334,7 +338,7 @@ function Research() {
     <Section id="research" tone="blue">
       <div className="section-head">
         <h2>Research</h2>
-        <Link className="section-head__link" to="/insights" aria-label="See all research">→</Link>
+        <Link className="section-head__link" to="/insights" aria-label="See all research"><span className="visually-hidden">See all research</span>→</Link>
       </div>
       <ResearchGrid articles={insightArticles} />
     </Section>
@@ -358,44 +362,43 @@ function Services() {
           </article>
         ))}
       </div>
+      <div style={{ marginTop: '3rem', textAlign: 'center' }}>
+        <InternalLink to="/services">Explore our services</InternalLink>
+        {' · '}
+        <InternalLink to="/methodology">See our methodology</InternalLink>
+      </div>
     </Section>
   );
 }
 
 function FAQ() {
-  const [open, setOpen] = useState(0);
-  const id = useId();
   return (
     <Section id="faq" tone="paper">
       <div className="faq-layout">
         <SectionHeader eyebrow="Frequently asked" title="A clear view of the discipline" />
-        <div className="accordion">
-          {faqs.map((item, index) => {
-            const expanded = open === index;
-            return (
-              <div className="accordion__item" key={item.q}>
-                <h3>
-                  <button
-                    id={`${id}-button-${index}`}
-                    aria-expanded={expanded}
-                    aria-controls={`${id}-content-${index}`}
-                    onClick={() => setOpen(expanded ? -1 : index)}
-                  >
-                    <span>{item.q}</span><span aria-hidden="true">{expanded ? '−' : '+'}</span>
-                  </button>
-                </h3>
-                <div
-                  id={`${id}-content-${index}`}
-                  role="region"
-                  aria-labelledby={`${id}-button-${index}`}
-                  hidden={!expanded}
-                >
-                  <p>{item.a}</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <FaqAccordion items={faqs} />
+      </div>
+    </Section>
+  );
+}
+
+function Industries() {
+  return (
+    <Section id="industries-preview" tone="paper">
+      <SectionHeader
+        align="center"
+        title="High-consideration markets"
+        copy="We work with reputation-sensitive brands where buyers research deeply before revealing intent"
+      />
+      <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center', marginTop: '2rem' }}>
+        <InternalLink to="/industries/yachting">Yachting</InternalLink>
+        <InternalLink to="/industries/private-aviation">Private aviation</InternalLink>
+        <InternalLink to="/industries/luxury-real-estate">Luxury real estate</InternalLink>
+        <InternalLink to="/industries/jewellery-watches">Jewellery & watches</InternalLink>
+        <InternalLink to="/industries/luxury-hospitality">Luxury hospitality</InternalLink>
+      </div>
+      <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+        <ArrowLink href="/industries">View all industries</ArrowLink>
       </div>
     </Section>
   );
@@ -408,6 +411,7 @@ export default function Homepage() {
       <PlatformGrid />
       <ProductTheater />
       <MarketStats />
+      <Industries />
       <BerkosCase />
       <AITrafficPanel />
       <Research />

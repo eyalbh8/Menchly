@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="footer__cta">
         <div className="shell">
           <h2>
-            <span className="final-cta__line">See where</span>
+            <span className="final-cta__line">See where</span>{' '}
             <span className="final-cta__line final-cta__line--ghost">to act</span>
           </h2>
           <AssessmentLink placement="footer-cta">Private assessment</AssessmentLink>

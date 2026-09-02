@@ -108,6 +108,21 @@ export const sectorUseCases = [
   { sector: 'Luxury hospitality', question: 'Where should we stay for this precise occasion and standard?', focus: 'Experience signals, editorial authority and suitability - not generic popularity.' }
 ];
 
+export const processSteps = [
+  { n: '01', title: 'Executive discovery', text: 'Align on commercial priorities, audiences, constraints and confidentiality.' },
+  { n: '02', title: 'AI reputation baseline', text: 'Document current answers, source patterns, omissions and narrative risks.' },
+  { n: '03', title: 'Prompt universe', text: 'Build a high-intent question set around real buyer journeys and decision criteria.' },
+  { n: '04', title: 'Authority roadmap', text: 'Prioritize the content, entities, sources and proof needed to improve recommendation fit.' },
+  { n: '05', title: 'Activation', text: 'Coordinate owned content and earned-authority work with the client’s existing teams.' },
+  { n: '06', title: 'Review & refinement', text: 'Monitor changes, evaluate source quality and adapt as assistants and markets evolve.' }
+];
+
+export const measurementDimensions = [
+  { title: 'Recommendation presence', text: 'Whether the brand appears for agreed, high-intent prompts.' },
+  { title: 'Contextual fit', text: 'Whether the recommendation matches the right buyer, need and market.' },
+  { title: 'Narrative accuracy', text: 'Whether descriptions reflect approved positioning and current facts.' },
+  { title: 'Source quality', text: 'Which owned and independent authorities appear to support the answer.' }
+];
 
 export const productTabs = [
   {
@@ -243,44 +258,5 @@ export const faqs = [
     q: 'How long before AI answers change?', 
     a: 'AI assistant outputs can shift within days or weeks as models are updated, new sources are indexed or existing content is re-evaluated There is no guaranteed timeline, and individual model versions vary in how quickly they reflect changes to underlying web content Authority-building work typically compounds over months rather than days, and results depend on the category, the evidence environment and the specific prompts being tracked.',
     links: []
-  }
-];
-
-export const serviceFaqs = [
-  {
-    q: 'What does an AI Search marketing engagement include?',
-    a: 'An engagement includes four integrated services: Prompt and market intelligence maps the high-intent questions that reveal genuine buyer consideration and decision criteria. Authority architecture assesses whether the open web provides a coherent, credible account of the brand\'s expertise and builds a roadmap connecting owned content, entities, executive authority and independent sources. Recommendation positioning translates positioning into defensible reasons for recommendation, making the circumstances in which the brand is an excellent fit specific, consistent and supported. Reputation monitoring reviews how selected assistants describe, compare and qualify the brand against an agreed prompt set, with reporting focused on material movement in presence, fit, accuracy and source quality.',
-    links: []
-  },
-  {
-    q: 'Can Menchly work alongside our existing SEO, PR and content agencies?',
-    a: 'Yes. Menchly can lead a defined strategic engagement or work as a specialist layer alongside brand, communications, SEO, content and reputation partners. Scope, access and approval controls are agreed at the outset, and coordination with existing teams is part of the activation phase.',
-    links: []
-  },
-  {
-    q: 'What deliverables does each service produce?',
-    a: 'Prompt and market intelligence delivers executive and stakeholder discovery, a high-intent prompt universe, buyer-stage and audience mapping, and a competitive recommendation review. Authority architecture delivers entity and source assessment, authority-gap prioritisation, owned-content briefing, and an earned-authority agenda. Recommendation positioning delivers best-fit recommendation territories, decision-criteria narratives, comparison and objection guidance, and cross-channel message alignment. Reputation monitoring delivers a model-response baseline, narrative and accuracy review, source-pattern monitoring, and executive recommendations.',
-    links: []
-  },
-  {
-    q: 'Which industries does Menchly work with?',
-    a: 'Menchly works with reputation-sensitive, high-consideration markets where buyers research deeply before revealing intent. Current sector focus includes yachting, private aviation, luxury real estate, jewellery and watches, and luxury hospitality. Each programme is built around the language, intermediaries, evidence and reputation dynamics of the market rather than a universal prompt template.',
-    links: [
-      { text: 'Yachting', href: '/industries/yachting', external: false },
-      { text: 'Private aviation', href: '/industries/private-aviation', external: false },
-      { text: 'Luxury real estate', href: '/industries/luxury-real-estate', external: false },
-      { text: 'Jewellery & watches', href: '/industries/jewellery-watches', external: false },
-      { text: 'Luxury hospitality', href: '/industries/luxury-hospitality', external: false }
-    ]
-  },
-  {
-    q: 'How is progress reported and measured?',
-    a: 'Reporting focuses on four dimensions that keep findings commercially grounded: Presence measures whether the brand enters relevant answers for the agreed question set. Fit assesses whether it is recommended for the buyer, need and context the brand is equipped to serve. Accuracy evaluates whether the answer reflects current facts, approved positioning and meaningful distinction. Authority reviews whether owned and independent sources are credible enough to support confidence. The approach combines repeatable review with informed judgement, interpreting AI outputs as directional evidence rather than deterministic rankings.',
-    links: [{ text: 'Menchly methodology', href: '/methodology', external: false }]
-  },
-  {
-    q: 'How are engagements scoped and how long do they run?',
-    a: 'Engagements are scoped according to commercial priorities, audience fit, category context and operating constraints. The six-stage methodology moves from discovery and baseline through prioritisation, architecture, activation and continuous learning. Programme length varies by complexity and category maturity. Initial baseline assessments establish current state before activation begins, and monitoring continues as models, sources and markets evolve.',
-    links: [{ text: 'See the methodology', href: '/methodology', external: false }]
   }
 ];

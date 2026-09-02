@@ -16,6 +16,7 @@ export default function SeoManager() {
 
   useEffect(() => {
     const meta = getRouteMeta(pathname);
+    const ogImage = `${meta.origin}/og-image.png`;
     document.title = meta.title;
 
     upsertMeta('meta[name="description"]', { name: 'description', content: meta.description });
@@ -25,6 +26,21 @@ export default function SeoManager() {
     upsertMeta('meta[property="og:url"]', { property: 'og:url', content: meta.canonical });
     upsertMeta('meta[property="og:type"]', { property: 'og:type', content: meta.ogType || 'website' });
     upsertMeta('meta[property="og:site_name"]', { property: 'og:site_name', content: SITE_NAME });
+    upsertMeta('meta[property="og:image"]', { property: 'og:image', content: ogImage });
+    upsertMeta('meta[property="og:image:width"]', { property: 'og:image:width', content: '1200' });
+    upsertMeta('meta[property="og:image:height"]', { property: 'og:image:height', content: '630' });
+    upsertMeta('meta[property="og:image:alt"]', { property: 'og:image:alt', content: 'Menchly - AI Search Marketing Infrastructure' });
+    upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary_large_image' });
+    upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: meta.title });
+    upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: meta.description });
+    upsertMeta('meta[name="twitter:image"]', { name: 'twitter:image', content: ogImage });
+
+    if (meta.ogType === 'article' && meta.article) {
+      upsertMeta('meta[property="article:published_time"]', { property: 'article:published_time', content: meta.article.datePublished });
+      upsertMeta('meta[property="article:modified_time"]', { property: 'article:modified_time', content: meta.article.dateModified });
+      upsertMeta('meta[property="article:author"]', { property: 'article:author', content: meta.article.author });
+      upsertMeta('meta[property="article:section"]', { property: 'article:section', content: 'AI Search Marketing Research' });
+    }
 
     let canonical = document.head.querySelector('link[rel="canonical"]');
     if (!canonical) {

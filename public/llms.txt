@@ -14,13 +14,41 @@ Menchly builds custom AI Search marketing infrastructure for brands that want to
 - /industries/luxury-hospitality
 - /methodology — the six-stage methodology and four reporting dimensions
 - /about — purpose and working principles
-- /insights — index of Menchly Editorial research notes; retained outside primary navigation pending verified expert review
+- /insights — index of Menchly Editorial research notes with glossary and editorial standards
 - /insights/recommendation-gap-known-vs-selected — known versus selected in AI-assisted decisions
 - /insights/high-intent-prompt-intelligence — high-intent prompt intelligence versus prompt or keyword volume
 - /insights/authority-without-overexposure — public authority with confidentiality and disclosure controls
 - /private-ai-visibility-assessment — private assessment request
 - /privacy — publication placeholder pending legal review
 - /terms — publication placeholder pending legal review
+
+## Research note content
+
+**Recommendation gap: known is not selected**
+
+Why awareness can coexist with exclusion from an AI-assisted shortlist—and how leaders can diagnose the difference without claiming control over independent systems.
+
+**High-intent prompt intelligence is not prompt volume**
+
+A practical framework for prioritising the questions closest to consequential decisions when no universal, auditable prompt-volume dataset exists.
+
+**Authority without overexposure**
+
+How reputation-sensitive brands can make expertise legible while preserving confidentiality, security and the right not to publish.
+
+## Glossary definitions
+
+**Recommendation gap** — The recommendation gap is the distance between being recognisable as a category participant and being supportably selected for a defined buyer, need and decision context.
+
+**Selection evidence** — Selection evidence is current, attributable information that helps a buyer distinguish credible fit—not simply proof that a brand exists or is popular.
+
+**High-intent prompt** — A high-intent prompt is a question whose context, constraints or comparison criteria indicate movement toward a consequential decision—not merely curiosity about a category.
+
+**Prompt intelligence** — Prompt intelligence is the governed practice of identifying, grouping and testing decision-relevant questions; it is not a claim to know universal prompt volume.
+
+**Authority architecture** — Authority architecture is the governed arrangement of facts, expertise, entities and independent evidence that makes a brand's credible role understandable.
+
+**Minimum necessary disclosure** — Minimum necessary disclosure means publishing only the evidence required to support an approved claim, at the lowest sensitivity compatible with clarity and trust.
 
 ## Live workspace data
 
@@ -30,7 +58,7 @@ The homepage displays real metrics from two live Menchly client workspaces:
 
 - Anonymized payments client — 90-day period: 7,476 AI traffic entries (+133%), breakdown by platform (ChatGPT 6,909, Gemini 171, Perplexity 143, Claude 128, Copilot 125), top locations United States, Canada, Israel.
 
-Research note cards show live workspace data visualizations (intent distribution, citation mix, rank comparison) sourced from these same workspaces, captioned "Live workspace · 90 days" rather than "illustrative."
+Research note cards show workspace data visualizations: "recommendation-gap" is an illustrative concept, "high-intent-prompt-intelligence" from Berkos workspace (90 days), "authority-without-overexposure" from Berkos workspace (14 days).
 
 Product theater section pairs native data panels with product screenshots for each view (Overview, Prompts, AI Traffic, Mentions, Citations).
 

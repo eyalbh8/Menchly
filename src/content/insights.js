@@ -19,8 +19,8 @@ export const insightArticles = [
     author: EDITORIAL_ORGANIZATION,
     reviewStatus: EXPERT_REVIEW_STATUS,
     executiveSummary: [
+      'A brand can be prominent in its category yet absent when an assistant is asked to choose for a particular buyer, mission or constraint. Awareness answers “what exists?” Selection answers “what fits this decision, and why?” The second question demands specific, current and supportable evidence.',
       'A brand can be prominent in its category yet absent when an assistant is asked to choose for a particular buyer, mission or constraint Awareness answers “what exists?” Selection answers “what fits this decision, and why?” The second question demands specific, current and supportable evidence.',
-      'Executives should therefore assess recommendation presence alongside contextual fit, factual accuracy and source quality The objective is not universal inclusion It is a defensible connection between the situations a brand is equipped to serve and the evidence available to an AI-assisted buyer.'
     ],
     definitions: [
       {
@@ -36,9 +36,9 @@ export const insightArticles = [
       {
         heading: 'Awareness and selection solve different questions',
         paragraphs: [
+          'Awareness signals can establish category membership: a known name, repeated press mentions, a substantial social presence or a long operating history. Those signals may help an assistant recognise an entity. They do not necessarily explain when the entity is suitable, what it is unusually equipped to do, or which constraints should rule it in or out.',
+          'Selection is narrower. A recommendation request normally contains - or implies - a buyer role, intended outcome, geography, risk threshold, budget logic, service expectation and comparison set. If public information does not connect the brand to those criteria, an assistant may default to better-documented alternatives, generic popularity signals or cautious category summaries.',
           'Awareness signals can establish category membership: a known name, repeated press mentions, a substantial social presence or a long operating history Those signals may help an assistant recognise an entity They do not necessarily explain when the entity is suitable, what it is unusually equipped to do, or which constraints should rule it in or out.',
-          'Selection is narrower A recommendation request normally contains - or implies - a buyer role, intended outcome, geography, risk threshold, budget logic, service expectation and comparison set If public information does not connect the brand to those criteria, an assistant may default to better-documented alternatives, generic popularity signals or cautious category summaries.',
-          'This distinction matters at board level because an awareness programme and a recommendation programme have different success conditions The first seeks reach and recall The second seeks accurate consideration for defined circumstances, supported by evidence a sophisticated buyer can inspect.'
         ],
         example: {
           title: 'Illustrative example: private aviation',
@@ -61,9 +61,9 @@ export const insightArticles = [
       {
         heading: 'Build reasons for consideration, not claims of superiority',
         paragraphs: [
+          'A responsible authority programme begins with bounded recommendation territories: the buyer situations in which the brand has a substantiated right to be considered. Teams can then map each territory to approved facts, explanatory owned content, expert credentials, relevant third-party coverage and clear entity relationships.',
+          'The discipline is subtractive as well as additive. Claims that cannot be evidenced should be narrowed or removed. Confidential projects should not be disclosed to fill a content gap. Where proof cannot be made public, the brand can often explain process, standards, governance and anonymised capability boundaries without implying a result it cannot demonstrate.',
           'A responsible authority programme begins with bounded recommendation territories: the buyer situations in which the brand has a substantiated right to be considered Teams can then map each territory to approved facts, explanatory owned content, expert credentials, relevant third-party coverage and clear entity relationships.',
-          'The discipline is subtractive as well as additive Claims that cannot be evidenced should be narrowed or removed Confidential projects should not be disclosed to fill a content gap Where proof cannot be made public, the brand can often explain process, standards, governance and anonymised capability boundaries without implying a result it cannot demonstrate.',
-          'Finally, executives should govern change Models, source access and market language evolve A dated baseline, a controlled prompt set and a record of cited sources make later reviews more informative, while avoiding the false precision of a permanent “AI ranking.”'
         ],
         example: {
           title: 'Illustrative example: prime property',
@@ -95,8 +95,8 @@ export const insightArticles = [
     author: EDITORIAL_ORGANIZATION,
     reviewStatus: EXPERT_REVIEW_STATUS,
     executiveSummary: [
+      'Keyword volume describes aggregate search behaviour within a defined tool and methodology. Prompt intelligence examines decision-rich questions, including audience, context, criteria, alternatives and risk. The two can inform each other, but they are not interchangeable.',
       'Keyword volume describes aggregate search behaviour within a defined tool and methodology Prompt intelligence examines decision-rich questions, including audience, context, criteria, alternatives and risk The two can inform each other, but they are not interchangeable.',
-      'There is no single public dataset that reliably reports all prompts across assistants, private enterprise deployments and changing model interfaces Executive prioritisation should therefore be transparent and evidence-led: combine buyer research, first-party enquiry language, search demand, sales and adviser insight, model observation and commercial judgement - while labelling uncertainty.'
     ],
     definitions: [
       {
@@ -112,9 +112,9 @@ export const insightArticles = [
       {
         heading: 'Why keyword logic is an incomplete proxy',
         paragraphs: [
+          'Search keywords remain useful evidence of language and demand. But conversational prompts can contain several jobs at once: education, comparison, suitability testing, objection handling and validation. They may be long, private and highly specific. A low-frequency question can still matter commercially when it precedes a high-value or high-risk decision.',
+          'Volume can also conceal mixed intent. A broad phrase such as “best luxury hotel” may represent inspiration, editorial research, a school assignment or an imminent booking. A prompt specifying travelling party, occasion, privacy needs, location and service expectation gives a clearer decision context even if no external tool assigns it a large number.',
           'Search keywords remain useful evidence of language and demand But conversational prompts can contain several jobs at once: education, comparison, suitability testing, objection handling and validation They may be long, private and highly specific A low-frequency question can still matter commercially when it precedes a high-value or high-risk decision.',
-          'Volume can also conceal mixed intent A broad phrase such as “best luxury hotel” may represent inspiration, editorial research, a school assignment or an imminent booking A prompt specifying travelling party, occasion, privacy needs, location and service expectation gives a clearer decision context even if no external tool assigns it a large number.',
-          'This does not justify declaring every long prompt valuable Specificity is evidence, not proof Teams need a repeatable prioritisation model and should preserve the source and rationale behind each selected question.'
         ],
         example: {
           title: 'Illustrative example: luxury hospitality',
@@ -124,9 +124,9 @@ export const insightArticles = [
       {
         heading: 'Score decision value before visibility opportunity',
         paragraphs: [
+          'A practical prompt universe can be assessed across five dimensions. Audience relevance asks whether the question comes from a buyer or adviser the brand is equipped to serve. Decision proximity asks whether it supports discovery, comparison, validation or commitment. Commercial materiality considers the value or reputational consequence of the decision without inventing a forecast.',
+          'Strategic fit tests whether the brand has a truthful, differentiated reason to be considered. Evidence feasibility asks whether that reason can be supported through approved facts and credible sources. Only after these dimensions should teams consider observed model presence or competitive whitespace.',
           'A practical prompt universe can be assessed across five dimensions Audience relevance asks whether the question comes from a buyer or adviser the brand is equipped to serve Decision proximity asks whether it supports discovery, comparison, validation or commitment Commercial materiality considers the value or reputational consequence of the decision without inventing a forecast.',
-          'Strategic fit tests whether the brand has a truthful, differentiated reason to be considered Evidence feasibility asks whether that reason can be supported through approved facts and credible sources Only after these dimensions should teams consider observed model presence or competitive whitespace.',
-          'The resulting score is a prioritisation aid, not a market statistic Weighting should be agreed with commercial, reputation and operational leaders Document disagreements: a communications team may see a reputation risk where a sales team sees low near-term demand, and both perspectives can be relevant.'
         ],
         example: {
           title: 'Illustrative example: yachting',
@@ -136,9 +136,9 @@ export const insightArticles = [
       {
         heading: 'Create an evidence stack, not a synthetic volume number',
         paragraphs: [
+          'Use multiple inputs with explicit labels. First-party sources may include anonymised enquiry themes, approved sales notes, site search and client-adviser interviews. External sources may include search trend tools, industry forums, regulatory guidance, specialist media and competitor language. Model observations can show how assistants currently frame a question, but they do not reveal total demand.',
+          'Testing should record assistant, model where available, date, account state, retrieval mode, geography, exact prompt and output. Microsoft’s human-AI interaction guidance recommends communicating system capabilities and supporting efficient correction. Applied here, decision-makers should be shown what the observation can and cannot establish.',
           'Use multiple inputs with explicit labels First-party sources may include anonymised enquiry themes, approved sales notes, site search and client-adviser interviews External sources may include search trend tools, industry forums, regulatory guidance, specialist media and competitor language Model observations can show how assistants currently frame a question, but they do not reveal total demand.',
-          'Testing should record assistant, model where available, date, account state, retrieval mode, geography, exact prompt and output Microsoft’s human-AI interaction guidance recommends communicating system capabilities and supporting efficient correction Applied here, decision-makers should be shown what the observation can and cannot establish.',
-          'Avoid purchasing certainty through opaque dashboards If a provider presents prompt-volume figures, executives should ask which assistants are covered, whether data is observed or modelled, how sampling and privacy work, the time period, geography, duplication controls and confidence limits A useful estimate can still be used - provided its provenance and limitations are visible.'
         ],
         example: {
           title: 'Illustrative example: luxury real estate',
@@ -171,8 +171,8 @@ export const insightArticles = [
     author: EDITORIAL_ORGANIZATION,
     reviewStatus: EXPERT_REVIEW_STATUS,
     executiveSummary: [
+      'Authority does not require publishing every proof point. It requires a coherent, supportable account of what the organisation does, where it is qualified to act, how it governs quality and which independent signals a buyer can responsibly use.',
       'Authority does not require publishing every proof point It requires a coherent, supportable account of what the organisation does, where it is qualified to act, how it governs quality and which independent signals a buyer can responsibly use.',
-      'For reputation-sensitive brands, the right operating principle is minimum necessary disclosure Classify evidence before activation, secure approval from the appropriate owner, and prefer process, standards, credentials and bounded examples when client identities or project details cannot be made public.'
     ],
     definitions: [
       {
@@ -188,9 +188,9 @@ export const insightArticles = [
       {
         heading: 'Visibility is not the governing objective',
         paragraphs: [
+          'A volume-led content programme can conflict with the obligations of a private bank, family office adviser, aviation operator, yacht firm, jeweller or prime property adviser. Client identities, asset details, security arrangements, transaction structures and operating patterns may be confidential, regulated, contractually restricted or simply inappropriate to expose.',
+          'The strategic objective is therefore intelligibility, not maximal visibility. A buyer should be able to understand the entity, current offer, relevant expertise, operating boundaries and basis for trust. They do not need access to sensitive facts that exceed the decision purpose.',
           'A volume-led content programme can conflict with the obligations of a private bank, family office adviser, aviation operator, yacht firm, jeweller or prime property adviser Client identities, asset details, security arrangements, transaction structures and operating patterns may be confidential, regulated, contractually restricted or simply inappropriate to expose.',
-          'The strategic objective is therefore intelligibility, not maximal visibility A buyer should be able to understand the entity, current offer, relevant expertise, operating boundaries and basis for trust They do not need access to sensitive facts that exceed the decision purpose.',
-          'NIST’s Privacy Framework treats data processing as a source of privacy risk that organisations should identify and govern The UK Information Commissioner’s data-minimisation guidance similarly frames personal data as adequate, relevant and limited to what is necessary These are privacy frameworks, not marketing recipes, but they support a useful editorial discipline: do not collect or publish sensitive material merely because it might create content.'
         ],
         example: {
           title: 'Illustrative example: yacht management',
@@ -200,9 +200,9 @@ export const insightArticles = [
       {
         heading: 'Use an evidence classification and approval gate',
         paragraphs: [
+          'Before content production, classify potential evidence. Public evidence is already approved and attributable. Publishable-with-review evidence may be used after legal, client, security or regulatory checks. Derived evidence can describe a pattern without revealing the underlying confidential record. Restricted evidence must remain internal. Unknown evidence is treated as restricted until ownership and permission are established.',
+          'Every material claim should have an owner, source, sensitivity level, permitted channels, expiry or review date and approver. This prevents a true statement from being reused in a context where it becomes misleading, stale or unsafe.',
           'Before content production, classify potential evidence Public evidence is already approved and attributable Publishable-with-review evidence may be used after legal, client, security or regulatory checks Derived evidence can describe a pattern without revealing the underlying confidential record Restricted evidence must remain internal Unknown evidence is treated as restricted until ownership and permission are established.',
-          'Every material claim should have an owner, source, sensitivity level, permitted channels, expiry or review date and approver This prevents a true statement from being reused in a context where it becomes misleading, stale or unsafe.',
-          'Approval is not a one-time release Changes in ownership, personnel, regulation, certification, service scope or client consent can alter whether evidence remains fit for publication A clear withdrawal path matters as much as the initial sign-off.'
         ],
         example: {
           title: 'Illustrative example: private wealth',
@@ -212,9 +212,9 @@ export const insightArticles = [
       {
         heading: 'Build authority from layered, bounded proof',
         paragraphs: [
+          'Start with entity clarity: official name, relationships, locations, leadership and current services. Add process evidence: how decisions are governed, what standards apply and where responsibilities begin and end. Add expertise evidence through attributable organisational authorship, verified credentials and specific explanations rather than personality-led overexposure.',
+          'Independent authority may include regulators, standards bodies, professional institutions, respected specialist publications and clearly disclosed commercial relationships. The source should be relevant to the claim. A general award or directory listing should not be stretched into proof of specialised capability.',
           'Start with entity clarity: official name, relationships, locations, leadership and current services Add process evidence: how decisions are governed, what standards apply and where responsibilities begin and end Add expertise evidence through attributable organisational authorship, verified credentials and specific explanations rather than personality-led overexposure.',
-          'Independent authority may include regulators, standards bodies, professional institutions, respected specialist publications and clearly disclosed commercial relationships The source should be relevant to the claim A general award or directory listing should not be stretched into proof of specialised capability.',
-          'When public proof remains insufficient, the honest answer may be to narrow the claim or accept that a recommendation cannot yet be supported Confidential evidence can inform internal strategy, but its existence should not be hinted at as an unverifiable success story Restraint protects both reputation and the integrity of the information environment.'
         ],
         example: {
           title: 'Illustrative example: high jewellery',
@@ -228,7 +228,7 @@ export const insightArticles = [
     ],
     sources: [
       { title: 'NIST Privacy Framework 1.0', organization: 'National Institute of Standards and Technology', url: 'https://doi.org/10.6028/NIST.CSWP.01162020' },
-      { title: 'Principle (c): Data minimisation', organization: 'UK Information Commissioner’s Office', url: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/the-principles/data-minimisation/' },
+      { title: 'Principle (c): Data minimisation', organization: 'UK Information Commissioner’s Office', url: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/data-minimisation/' },
       { title: 'Cybersecurity Framework 2.0', organization: 'National Institute of Standards and Technology', url: 'https://doi.org/10.6028/NIST.CSWP.29' },
       { title: 'Protecting Personal Information: A Guide for Business', organization: 'US Federal Trade Commission', url: 'https://www.ftc.gov/business-guidance/resources/protecting-personal-information-guide-business' }
     ],

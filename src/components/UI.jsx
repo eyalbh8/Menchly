@@ -65,10 +65,11 @@ export function Breadcrumbs({ items = [] }) {
   );
 }
 
-export function PageHero({ eyebrow, title, copy, children }) {
+export function PageHero({ eyebrow, title, copy, breadcrumbs, children }) {
   return (
     <section className="page-hero">
       <div className="shell">
+        {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
         {eyebrow && <p className="eyebrow">{eyebrow}</p>}
         <h1>{title}</h1>
         {copy && <p className="page-hero__copy">{copy}</p>}
@@ -197,6 +198,19 @@ function ResearchChart({ kind }) {
   );
 }
 
+function getChartAttribution(slug) {
+  if (slug === 'recommendation-gap-known-vs-selected') {
+    return 'Illustrative concept';
+  }
+  if (slug === 'high-intent-prompt-intelligence') {
+    return 'Berkos workspace · 90 days';
+  }
+  if (slug === 'authority-without-overexposure') {
+    return 'Berkos workspace · 14 days';
+  }
+  return 'Live workspace';
+}
+
 export function ResearchCard({ article }) {
   return (
     <Link className="research-card" to={`/insights/${article.slug}`}>
@@ -205,9 +219,10 @@ export function ResearchCard({ article }) {
         <time dateTime={article.datePublished}>{formatInsightDate(article.datePublished)}</time>
       </div>
       <h3>{article.title}</h3>
+      <p className="research-card__deck">{article.deck}</p>
       <div className="research-card__chart">
         <ResearchChart kind={article.slug} />
-        <p className="research-card__axis">Live workspace · 90 days</p>
+        <p className="research-card__axis">{getChartAttribution(article.slug)}</p>
       </div>
       <span className="research-card__read">Read</span>
     </Link>
@@ -218,6 +233,51 @@ export function ResearchGrid({ articles }) {
   return (
     <div className="research-grid">
       {articles.map((article) => <ResearchCard key={article.slug} article={article} />)}
+    </div>
+  );
+}
+
+export function FaqAccordion({ items }) {
+  const [open, setOpen] = React.useState(0);
+  const id = React.useId();
+  return (
+    <div className="accordion">
+      {items.map((item, index) => {
+        const expanded = open === index;
+        return (
+          <div className="accordion__item" key={item.q}>
+            <h3>
+              <button
+                id={`${id}-button-${index}`}
+                aria-expanded={expanded}
+                aria-controls={`${id}-content-${index}`}
+                onClick={() => setOpen(expanded ? -1 : index)}
+              >
+                <span>{item.q}</span><span aria-hidden="true">{expanded ? '−' : '+'}</span>
+              </button>
+            </h3>
+            <div
+              id={`${id}-content-${index}`}
+              role="region"
+              aria-labelledby={`${id}-button-${index}`}
+              hidden={!expanded}
+            >
+              <p>{item.a}</p>
+              {item.links && item.links.length > 0 && (
+                <p className="faq-links">
+                  {item.links.map((link, linkIndex) => (
+                    link.external ? (
+                      <a key={linkIndex} href={link.href} target="_blank" rel="noopener">{link.text}</a>
+                    ) : (
+                      <Link key={linkIndex} to={link.href}>{link.text}</Link>
+                    )
+                  ))}
+                </p>
+              )}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }

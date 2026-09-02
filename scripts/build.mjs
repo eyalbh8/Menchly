@@ -4,6 +4,13 @@ import { dirname, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { getRouteMeta, getStructuredData, indexableRoutes, publicRoutes, resolveSiteOrigin, SITE_NAME } from '../src/seo.js';
 
+// Load .env file if it exists (Node 24.3.0+)
+try {
+  process.loadEnvFile(resolve(import.meta.dirname, '..', '.env'));
+} catch (err) {
+  if (err.code !== 'ENOENT') throw err;
+}
+
 const root = resolve(import.meta.dirname, '..');
 const dist = join(root, 'dist');
 const serverOut = join(root, '.prerender');
@@ -29,7 +36,8 @@ function serializeJsonLd(value) {
 function createHead(path) {
   const meta = getRouteMeta(path, siteOrigin);
   const robots = meta.noindex ? 'noindex, nofollow' : 'index, follow';
-  return [
+  const ogImage = `${siteOrigin}/og-image.png`;
+  const tags = [
     '<!--seo-head-->',
     `<title>${escapeHtml(meta.title)}</title>`,
     `<meta name="description" content="${escapeHtml(meta.description)}" />`,
@@ -40,9 +48,27 @@ function createHead(path) {
     `<meta property="og:url" content="${escapeHtml(meta.canonical)}" />`,
     `<meta property="og:type" content="${meta.ogType || 'website'}" />`,
     `<meta property="og:site_name" content="${SITE_NAME}" />`,
-    `<script id="structured-data" type="application/ld+json">${serializeJsonLd(getStructuredData(path, siteOrigin))}</script>`,
-    '<!--/seo-head-->'
-  ].join('\n    ');
+    `<meta property="og:image" content="${ogImage}" />`,
+    `<meta property="og:image:width" content="1200" />`,
+    `<meta property="og:image:height" content="630" />`,
+    `<meta property="og:image:alt" content="Menchly - AI Search Marketing Infrastructure" />`
+  ];
+  
+  if (meta.ogType === 'article' && meta.article) {
+    tags.push(`<meta property="article:published_time" content="${meta.article.datePublished}" />`);
+    tags.push(`<meta property="article:modified_time" content="${meta.article.dateModified}" />`);
+    tags.push(`<meta property="article:author" content="${meta.article.author}" />`);
+    tags.push(`<meta property="article:section" content="AI Search Marketing Research" />`);
+  }
+  
+  tags.push(`<meta name="twitter:card" content="summary_large_image" />`);
+  tags.push(`<meta name="twitter:title" content="${escapeHtml(meta.title)}" />`);
+  tags.push(`<meta name="twitter:description" content="${escapeHtml(meta.description)}" />`);
+  tags.push(`<meta name="twitter:image" content="${ogImage}" />`);
+  tags.push(`<script id="structured-data" type="application/ld+json">${serializeJsonLd(getStructuredData(path, siteOrigin))}</script>`);
+  tags.push('<!--/seo-head-->');
+  
+  return tags.join('\n    ');
 }
 
 function outputFileForRoute(path) {
@@ -68,7 +94,10 @@ for (const route of publicRoutes) {
 const sitemap = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-  ...indexableRoutes.map((route) => `  <url><loc>${new URL(route.path, `${siteOrigin}/`).href}</loc></url>`),
+  ...indexableRoutes.map((route) => {
+    const lastmod = new Date().toISOString().split('T')[0];
+    return `  <url><loc>${new URL(route.path, `${siteOrigin}/`).href}</loc><lastmod>${lastmod}</lastmod></url>`;
+  }),
   '</urlset>',
   ''
 ].join('\n');
@@ -76,7 +105,36 @@ const sitemap = [
 await writeFile(join(dist, 'sitemap.xml'), sitemap);
 await writeFile(
   join(dist, 'robots.txt'),
-  `User-agent: *\nAllow: /\nDisallow: /thank-you\n\nSitemap: ${siteOrigin}/sitemap.xml\n`
+  `User-agent: *
+Allow: /
+Disallow: /thank-you
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: ${siteOrigin}/sitemap.xml
+`
 );
 await rm(serverOut, { recursive: true, force: true });
 
