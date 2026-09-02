@@ -1,8 +1,24 @@
 import { useId, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { faqs, platforms, servicePillars } from '../data.js';
+import { berkosCase, faqs, marketStats, platforms, productTabs, servicePillars } from '../data.js';
+import { 
+  berkosAccountBrief, 
+  citationsData, 
+  promptsData, 
+  mentionsData, 
+  aiTrafficData 
+} from '../data/workspaceData.js';
 import { insightArticles } from '../content/insights.js';
-import { AssessmentLink, ResearchGrid, Section, SectionHeader } from './UI.jsx';
+import { AssessmentLink, ProductStage, ResearchGrid, Section, SectionHeader } from './UI.jsx';
+import { 
+  MetricGrid, 
+  PlatformBars, 
+  RankTable, 
+  DonutChart, 
+  IntentBar, 
+  SourceTable,
+  DataPanel 
+} from './DataViz.jsx';
 
 function Hero() {
   return (
@@ -74,6 +90,240 @@ function PlatformGrid() {
             <span className="platform-grid__name">{platform.name}</span>
           </span>
         ))}
+      </div>
+    </Section>
+  );
+}
+
+function ProductTheater() {
+  const [active, setActive] = useState(0);
+  const tab = productTabs[active];
+  const id = useId();
+
+  const renderDataPanel = () => {
+    if (tab.id === 'overview') {
+      const metrics = [
+        { value: berkosAccountBrief.metrics.totalMentions.toLocaleString(), label: 'Total AI mentions' },
+        { value: berkosAccountBrief.metrics.shareOfVoice + '%', label: 'Share of voice' },
+        { value: berkosAccountBrief.metrics.sentiment + '/100', label: 'Sentiment score' }
+      ];
+      return (
+        <DataPanel 
+          title="Account brief" 
+          subtitle={`${berkosAccountBrief.client} · ${berkosAccountBrief.period}`}
+        >
+          <MetricGrid metrics={metrics} />
+          <PlatformBars platforms={berkosAccountBrief.byPlatform} />
+          <RankTable data={berkosAccountBrief.marketPosition} />
+        </DataPanel>
+      );
+    }
+    
+    if (tab.id === 'prompts') {
+      return (
+        <DataPanel 
+          title="Prompt intelligence" 
+          subtitle={`${promptsData.client} · ${promptsData.period}`}
+        >
+          <div className="product-data-row">
+            <div>
+              <div className="product-data-stat">{promptsData.total}</div>
+              <div className="product-data-label">Tracked prompts</div>
+            </div>
+            <div>
+              <div className="product-data-stat">{promptsData.topics}</div>
+              <div className="product-data-label">Topics</div>
+            </div>
+          </div>
+          <IntentBar data={promptsData.intentSplit} />
+        </DataPanel>
+      );
+    }
+    
+    if (tab.id === 'ai-traffic') {
+      const metrics = [
+        { value: aiTrafficData.total.toLocaleString(), label: 'Total entries', change: aiTrafficData.change }
+      ];
+      return (
+        <DataPanel 
+          title="AI traffic" 
+          subtitle={`${aiTrafficData.client} · ${aiTrafficData.period}`}
+        >
+          <MetricGrid metrics={metrics} />
+          <PlatformBars platforms={aiTrafficData.byPlatform} />
+        </DataPanel>
+      );
+    }
+    
+    if (tab.id === 'mentions') {
+      return (
+        <DataPanel 
+          title="LLM mentions" 
+          subtitle={`${mentionsData.client} · ${mentionsData.period}`}
+        >
+          <div className="product-data-row">
+            <div>
+              <div className="product-data-stat">{mentionsData.total.toLocaleString()}</div>
+              <div className="product-data-label">Total mentions</div>
+            </div>
+          </div>
+          <PlatformBars platforms={mentionsData.byPlatform} />
+        </DataPanel>
+      );
+    }
+    
+    if (tab.id === 'citations') {
+      const metrics = [
+        { value: citationsData.total.toLocaleString(), label: 'Total citations', change: citationsData.change },
+        { value: citationsData.domains.toLocaleString(), label: 'Unique domains' }
+      ];
+      return (
+        <DataPanel 
+          title="Citation sources" 
+          subtitle={`${citationsData.client} · ${citationsData.period}`}
+        >
+          <MetricGrid metrics={metrics} />
+          <DonutChart data={citationsData.byType} total={citationsData.total} />
+          <SourceTable sources={citationsData.topSources} />
+        </DataPanel>
+      );
+    }
+    
+    return null;
+  };
+
+  return (
+    <Section id="product" tone="paper" className="product-theater-section">
+      <SectionHeader
+        align="center"
+        eyebrow="The Menchly system"
+        title="See how the brand shows up across AI."
+        copy="Visibility, prompts, AI traffic, mentions and citation authority - built into custom infrastructure around each client."
+      />
+      <div className="product-tabs" role="tablist" aria-label="Product views">
+        {productTabs.map((item, index) => {
+          const selected = index === active;
+          return (
+            <button
+              key={item.id}
+              type="button"
+              role="tab"
+              id={`${id}-tab-${item.id}`}
+              aria-selected={selected}
+              aria-controls={`${id}-panel-${item.id}`}
+              className={`product-tabs__btn${selected ? ' is-active' : ''}`}
+              onClick={() => setActive(index)}
+            >
+              {item.label}
+            </button>
+          );
+        })}
+      </div>
+      <div
+        className="product-panel-container"
+        role="tabpanel"
+        id={`${id}-panel-${tab.id}`}
+        aria-labelledby={`${id}-tab-${tab.id}`}
+      >
+        <div className="product-panel__copy">
+          <h3>{tab.title}</h3>
+          <p>{tab.copy}</p>
+          <AssessmentLink placement="homepage-product-theater">Private assessment</AssessmentLink>
+        </div>
+        {renderDataPanel()}
+      </div>
+    </Section>
+  );
+}
+
+function MarketStats() {
+  return (
+    <Section id="market" className="market-stats-section">
+      <div className="market-stats__intro">
+        <SectionHeader
+          eyebrow="A quiet decision"
+          title={<>Which brand gets <em>mentioned.</em></>}
+          copy="AI isn’t browsing. It’s choosing. The brands that show up in those answers win the consideration that never appears in traditional search reports."
+        />
+      </div>
+      <ul className="market-stats">
+        {marketStats.map((stat) => (
+          <li key={stat.value + stat.label}>
+            <p className="market-stats__value">{stat.value}</p>
+            <p className="market-stats__label">{stat.label}</p>
+            <p className="market-stats__source">{stat.source}</p>
+          </li>
+        ))}
+      </ul>
+    </Section>
+  );
+}
+
+function BerkosCase() {
+  const metrics = [
+    { value: berkosAccountBrief.metrics.shareOfVoice + '%', label: 'Share of voice' },
+    { value: berkosAccountBrief.metrics.totalMentions.toLocaleString(), label: 'AI mentions · 90 days' },
+    { value: berkosAccountBrief.metrics.sentiment, label: 'Sentiment score' }
+  ];
+
+  return (
+    <Section id="case" tone="blue" className="case-strip-section">
+      <div className="case-strip">
+        <div className="case-strip__copy">
+          <p className="eyebrow">{berkosCase.sector}</p>
+          <h2>{berkosCase.headline}</h2>
+          <p>{berkosCase.copy}</p>
+          <AssessmentLink placement="homepage-berkos-case">Discuss your baseline</AssessmentLink>
+        </div>
+        <div className="case-strip__card">
+          <p className="case-strip__client">{berkosAccountBrief.client}</p>
+          <MetricGrid metrics={metrics} className="case-strip__metric-grid" />
+          <div className="case-strip__platforms">
+            <p className="case-strip__platforms-label">By platform</p>
+            <PlatformBars platforms={berkosAccountBrief.byPlatform} />
+          </div>
+          <div className="case-strip__rank">
+            <p className="case-strip__rank-label">Market position</p>
+            <RankTable data={berkosAccountBrief.marketPosition.slice(0, 5)} />
+          </div>
+          <p className="case-strip__footnote">{berkosAccountBrief.source}. Outcomes vary by category, prompt set and market.</p>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+function AITrafficPanel() {
+  const metrics = [
+    { value: aiTrafficData.total.toLocaleString(), label: 'AI traffic entries', change: aiTrafficData.change }
+  ];
+
+  return (
+    <Section id="ai-traffic-stats" tone="paper">
+      <SectionHeader
+        eyebrow="AI-driven visits"
+        title={<>Traffic that starts in <em>AI assistants.</em></>}
+        copy="Direct site visits originating from AI tools. When a user asks ChatGPT, Gemini, or Perplexity a question and clicks through to a website, these analytics capture that journey - showing which models drive discovery and where those visitors are located."
+      />
+      <div className="ai-traffic-layout">
+        <DataPanel 
+          title="AI traffic data" 
+          className="ai-traffic-panel"
+        >
+          <MetricGrid metrics={metrics} />
+          <PlatformBars platforms={aiTrafficData.byPlatform} />
+          <div className="ai-traffic-locations">
+            <p className="ai-traffic-locations__label">Top locations</p>
+            <div className="ai-traffic-locations__list">
+              {aiTrafficData.topLocations.map((loc) => (
+                <div key={loc.country} className="ai-traffic-location">
+                  <span className="ai-traffic-location__country">{loc.country}</span>
+                  <span className="ai-traffic-location__entries">{loc.entries.toLocaleString()}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </DataPanel>
       </div>
     </Section>
   );
@@ -156,6 +406,10 @@ export default function Homepage() {
     <>
       <Hero />
       <PlatformGrid />
+      <ProductTheater />
+      <MarketStats />
+      <BerkosCase />
+      <AITrafficPanel />
       <Research />
       <Services />
       <FAQ />

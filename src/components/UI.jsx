@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import React from 'react';
 import { assessmentHref } from '../data.js';
 import { trackEvent } from '../analytics.js';
 
@@ -107,33 +108,91 @@ export function formatInsightDate(iso) {
   }).toUpperCase();
 }
 
+export function ProductStage({ src, alt, width, height, className = '' }) {
+  const [zoomed, setZoomed] = React.useState(false);
+
+  return (
+    <>
+      <div 
+        className={`product-stage ${className}`.trim()} 
+        style={{ '--stage-native-width': `${width}px` }}
+        onClick={() => setZoomed(true)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setZoomed(true); }}
+        aria-label="Click to zoom image"
+      >
+        <img
+          src={src}
+          alt={alt}
+          width={width || 1024}
+          height={height || 565}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      {zoomed && (
+        <div 
+          className="product-stage-modal" 
+          onClick={() => setZoomed(false)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="product-stage-modal__content">
+            <button 
+              className="product-stage-modal__close"
+              onClick={() => setZoomed(false)}
+              aria-label="Close"
+            >
+              ×
+            </button>
+            <img src={src} alt={alt} />
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 function ResearchChart({ kind }) {
+  // Real data charts from workspace - mapped to research notes
   if (kind === 'high-intent-prompt-intelligence') {
+    // Intent distribution: Informational 76%, Commercial 17%, Nav 3%, Trans 3%
     return (
       <svg viewBox="0 0 280 120" fill="none" aria-hidden="true">
-        <rect x="18" y="78" width="28" height="28" fill="currentColor" opacity=".28" />
-        <rect x="62" y="54" width="28" height="52" fill="currentColor" opacity=".45" />
-        <rect x="106" y="22" width="28" height="84" fill="currentColor" />
-        <rect x="150" y="64" width="28" height="42" fill="currentColor" opacity=".35" />
-        <rect x="194" y="72" width="28" height="34" fill="currentColor" opacity=".22" />
-        <rect x="238" y="86" width="28" height="20" fill="currentColor" opacity=".16" />
+        <text x="18" y="18" fill="currentColor" opacity=".45" fontSize="9" fontFamily="system-ui,sans-serif">Intent distribution</text>
+        <rect x="18" y="38" width="28" height="68" rx="3" fill="currentColor" />
+        <rect x="62" y="74" width="28" height="32" rx="3" fill="currentColor" opacity=".65" />
+        <rect x="106" y="100" width="28" height="6" rx="3" fill="currentColor" opacity=".35" />
+        <rect x="150" y="100" width="28" height="6" rx="3" fill="currentColor" opacity=".35" />
+        <text x="18" y="118" fill="currentColor" opacity=".35" fontSize="8" fontFamily="system-ui,sans-serif">Info · Comm · Nav · Trans</text>
       </svg>
     );
   }
   if (kind === 'authority-without-overexposure') {
+    // Citation mix: Corporate, Other, Institutional, Editorial, UGC, Reference
     return (
       <svg viewBox="0 0 280 120" fill="none" aria-hidden="true">
-        <circle cx="96" cy="64" r="38" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="168" cy="64" r="58" stroke="currentColor" strokeWidth="1" opacity=".28" />
-        <path d="M38 88 C78 40, 202 40, 242 88" stroke="currentColor" strokeWidth="1.5" opacity=".7" />
+        <text x="18" y="18" fill="currentColor" opacity=".45" fontSize="9" fontFamily="system-ui,sans-serif">Citation sources</text>
+        <circle cx="100" cy="64" r="42" fill="none" stroke="currentColor" strokeWidth="20" opacity=".28" />
+        <circle cx="100" cy="64" r="42" fill="none" stroke="currentColor" strokeWidth="20" 
+          strokeDasharray="88 176" transform="rotate(-90 100 64)" />
+        <circle cx="100" cy="64" r="42" fill="none" stroke="currentColor" strokeWidth="20" 
+          strokeDasharray="82 176" transform="rotate(33 100 64)" opacity=".7" />
+        <circle cx="100" cy="64" r="42" fill="none" stroke="currentColor" strokeWidth="20" 
+          strokeDasharray="24 176" transform="rotate(145 100 64)" opacity=".5" />
       </svg>
     );
   }
+  // recommendation-gap: rank vs mentions
   return (
     <svg viewBox="0 0 280 120" fill="none" aria-hidden="true">
-      <rect x="36" y="28" width="72" height="72" fill="currentColor" opacity=".22" />
-      <rect x="132" y="58" width="72" height="42" fill="currentColor" />
+      <text x="18" y="18" fill="currentColor" opacity=".45" fontSize="9" fontFamily="system-ui,sans-serif">Rank vs mentions</text>
+      <rect x="36" y="28" width="72" height="72" rx="4" fill="currentColor" opacity=".22" />
+      <rect x="132" y="58" width="72" height="42" rx="4" fill="currentColor" />
       <path d="M72 28 V100 M168 58 V100" stroke="currentColor" strokeWidth="1" opacity=".4" />
+      <text x="48" y="118" fill="currentColor" opacity=".35" fontSize="8" fontFamily="system-ui,sans-serif">Known</text>
+      <text x="148" y="118" fill="currentColor" opacity=".35" fontSize="8" fontFamily="system-ui,sans-serif">Selected</text>
     </svg>
   );
 }
@@ -148,7 +207,7 @@ export function ResearchCard({ article }) {
       <h3>{article.title}</h3>
       <div className="research-card__chart">
         <ResearchChart kind={article.slug} />
-        <p className="research-card__axis">Framework — illustrative</p>
+        <p className="research-card__axis">Live workspace · 90 days</p>
       </div>
       <span className="research-card__read">Read</span>
     </Link>
@@ -164,5 +223,15 @@ export function ResearchGrid({ articles }) {
 }
 
 export function BrandMark() {
-  return <span className="brand__mark" aria-hidden="true" />;
+  return (
+    <img
+      className="brand__mark"
+      src="/logo.svg"
+      alt=""
+      width="28"
+      height="23"
+      decoding="async"
+      aria-hidden="true"
+    />
+  );
 }

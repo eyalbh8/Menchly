@@ -76,7 +76,7 @@ export const reputationRisks = [
 export const servicePillars = [
   { n: '01', title: 'Prompt & market intelligence', text: 'Map the questions, criteria and decision moments that reveal genuine purchase intent.' },
   { n: '02', title: 'Authority architecture', text: 'Strengthen the owned and earned signals assistants use to understand expertise and trust.' },
-  { n: '03', title: 'Recommendation positioning', text: 'Clarify where the brand is a credible best fit—and make that distinction legible across the open web.' },
+  { n: '03', title: 'Recommendation positioning', text: 'Clarify where the brand is a credible best fit - and make that distinction legible across the open web.' },
   { n: '04', title: 'Reputation monitoring', text: 'Review how major assistants describe, compare and qualify the brand over time.' }
 ];
 
@@ -85,7 +85,7 @@ export const promptIntelligence = [
     label: 'Discovery',
     title: 'Find the category-defining questions',
     prompt: '“Which private aviation firms are best suited to a multi-market family office?”',
-    insight: 'Reveals the buyer, operating context and trust criteria—not simply a category keyword.'
+    insight: 'Reveals the buyer, operating context and trust criteria - not simply a category keyword.'
   },
   {
     label: 'Comparison',
@@ -105,7 +105,7 @@ export const sectorUseCases = [
   { sector: 'Aviation', question: 'Who is credible for this mission, geography and ownership profile?', focus: 'Recommendation fit, operational authority and advisory trust.' },
   { sector: 'Yachting', question: 'Which builder or broker belongs on a serious shortlist?', focus: 'Provenance, capability, specialist press and category distinction.' },
   { sector: 'Private wealth', question: 'Which institution is appropriate for this family’s complexity?', focus: 'Expertise, discretion, jurisdictional relevance and reputational confidence.' },
-  { sector: 'Luxury hospitality', question: 'Where should we stay for this precise occasion and standard?', focus: 'Experience signals, editorial authority and suitability—not generic popularity.' }
+  { sector: 'Luxury hospitality', question: 'Where should we stay for this precise occasion and standard?', focus: 'Experience signals, editorial authority and suitability - not generic popularity.' }
 ];
 
 export const processSteps = [
@@ -124,11 +124,105 @@ export const measurementDimensions = [
   { title: 'Source quality', text: 'Which owned and independent authorities appear to support the answer.' }
 ];
 
+export const productTabs = [
+  {
+    id: 'overview',
+    label: 'Overview',
+    title: 'See how the brand shows up across AI',
+    copy: 'Track presence, share of voice, rank and sentiment across the models that matter - then see who owns the narrative in the category.',
+    image: '/images/product/overview.png',
+    imageAlt: 'Menchly Account Brief showing AI visibility overview, platform breakdown and market position',
+    width: 862,
+    height: 560
+  },
+  {
+    id: 'prompts',
+    label: 'Prompts',
+    title: 'Build and track the prompt universe',
+    copy: 'Map topics, intent and buyer questions so you appear in the conversations that reveal genuine purchase intent - not vanity keywords.',
+    image: '/images/product/prompts.png',
+    imageAlt: 'Menchly Prompts view with topic pills, intent distribution and tracked prompt library',
+    width: 862,
+    height: 560
+  },
+  {
+    id: 'ai-traffic',
+    label: 'AI Traffic',
+    title: 'Measure visits that start in AI',
+    copy: 'See which assistants send traffic to the site, how that demand moves over time, and which sources, pages and locations convert AI discovery into visits.',
+    image: '/images/product/ai-traffic.png',
+    imageAlt: 'Menchly AI Traffic view with provider entry cards and LLM visit trends chart',
+    width: 862,
+    height: 645
+  },
+  {
+    id: 'mentions',
+    label: 'Mentions',
+    title: 'Watch how engines choose and describe you',
+    copy: 'Follow mention volume by model over time, and read the recent answers that shape how buyers encounter the brand.',
+    image: '/images/product/mentions.png',
+    imageAlt: 'Menchly Mentions view with LLM totals, trend chart and recent AI responses',
+    width: 862,
+    height: 560
+  },
+  {
+    id: 'citations',
+    label: 'Citations',
+    title: 'See which sources AI trusts',
+    copy: 'Understand the corporate, institutional and editorial domains that back AI answers - and where authority is thin or outdated.',
+    image: '/images/product/citations.png',
+    imageAlt: 'Menchly Citations view with source-type donut, usage trend and domain table',
+    width: 862,
+    height: 560
+  }
+];
+
+export const marketStats = [
+  {
+    value: '80%',
+    label: 'use AI for nearly half their searches',
+    source: 'Bain & Company'
+  },
+  {
+    value: '42%',
+    label: 'use ChatGPT to decide what to buy',
+    source: 'Salesforce'
+  },
+  {
+    value: '25%',
+    label: 'drop in organic traffic due to AI answers',
+    source: 'Bain & Company'
+  },
+  {
+    value: '3–5×',
+    label: 'higher conversion when AI chooses vs search alone',
+    source: 'Industry studies'
+  }
+];
+
+export const berkosCase = {
+  client: 'Berkos Developer & Properties',
+  sector: 'Luxury real estate · Cyprus',
+  headline: 'Brands that show up. Results that speak.',
+  copy: 'A live Menchly workspace tracking how AI engines describe, compare and cite a prime property brand across high-intent buyer questions.'
+};
+
+export const productImages = {
+  overview: '/images/product/overview.png',
+  prompts: '/images/product/prompts.png',
+  mentions: '/images/product/mentions.png',
+  citations: '/images/product/citations.png',
+  competitors: '/images/product/competitors.png',
+  sentiment: '/images/product/sentiment.png',
+  aiTraffic: '/images/product/ai-traffic.png',
+  aiCrawlers: '/images/product/ai-crawlers.png'
+};
+
 export const faqs = [
   { q: 'Is this SEO?', a: 'It is complementary, but distinct. Search optimization focuses on discoverability in ranked results. We build AI Search marketing infrastructure: data shows where to act, then we execute, learn and compound how assistants understand, describe and recommend a brand.' },
   { q: 'Can you guarantee a recommendation?', a: 'No credible agency can control or guarantee an independent model’s output. We improve the authority, clarity and evidence environment that influences whether a brand is understood and considered.' },
   { q: 'Which AI assistants do you assess?', a: 'Engagements can include major assistants such as ChatGPT, Claude, Gemini, Perplexity and Copilot, selected according to audience relevance and market behavior.' },
   { q: 'How do you handle confidential information?', a: 'We agree access, review and approval boundaries before work begins. Sensitive material is not published or used in external systems without explicit authorization.' },
-  { q: 'Who is the service designed for?', a: 'Brands that want to lead the next iteration of the Internet. We build custom infrastructure around each client rather than cookie-cutter packages or self-serve tools—especially where buyers research deeply and a poorly framed recommendation has meaningful commercial cost.' },
+  { q: 'Who is the service designed for?', a: 'Brands that want to lead the next iteration of the Internet. We build custom infrastructure around each client rather than cookie-cutter packages or self-serve tools - especially where buyers research deeply and a poorly framed recommendation has meaningful commercial cost.' },
   { q: 'What happens in the private assessment?', a: 'We review your category, priority buyer questions and current concern to assess strategic fit. If the mandate is appropriate, we then agree the scope for a documented model-response baseline and authority review.' }
 ];

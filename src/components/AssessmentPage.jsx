@@ -138,20 +138,20 @@ export default function AssessmentPage() {
               <legend>About you and your organisation</legend>
               <p className="fieldset-intro">Fields marked “required” are needed to assess and respond to your request.</p>
               <div className="form-grid">
-                <Field id="name" label="Name — required" error={errors.name}>{(details) => <input {...inputProps('name', details)} autoComplete="name" />}</Field>
-                <Field id="email" label="Work email — required" hint="Use an address where you are authorised to discuss this enquiry." error={errors.email}>{(details) => <input {...inputProps('email', details)} type="email" autoComplete="email" />}</Field>
-                <Field id="company" label="Company — required" error={errors.company}>{(details) => <input {...inputProps('company', details)} autoComplete="organization" />}</Field>
-                <Field id="website" label="Company website — required" hint="For example, example.com" error={errors.website}>{(details) => <input {...inputProps('website', details)} type="url" inputMode="url" autoComplete="url" />}</Field>
-                <Field id="role" label="Your role — required" error={errors.role}>{(details) => <select {...inputProps('role', details)}><option value="">Select a role</option>{roles.map((role) => <option key={role}>{role}</option>)}</select>}</Field>
-                <Field id="industry" label="Industry — required" error={errors.industry}>{(details) => <select {...inputProps('industry', details)}><option value="">Select an industry</option>{industries.map((industry) => <option key={industry}>{industry}</option>)}</select>}</Field>
+                <Field id="name" label="Name  -  required" error={errors.name}>{(details) => <input {...inputProps('name', details)} autoComplete="name" />}</Field>
+                <Field id="email" label="Work email  -  required" hint="Use an address where you are authorised to discuss this enquiry." error={errors.email}>{(details) => <input {...inputProps('email', details)} type="email" autoComplete="email" />}</Field>
+                <Field id="company" label="Company  -  required" error={errors.company}>{(details) => <input {...inputProps('company', details)} autoComplete="organization" />}</Field>
+                <Field id="website" label="Company website  -  required" hint="For example, example.com" error={errors.website}>{(details) => <input {...inputProps('website', details)} type="url" inputMode="url" autoComplete="url" />}</Field>
+                <Field id="role" label="Your role  -  required" error={errors.role}>{(details) => <select {...inputProps('role', details)}><option value="">Select a role</option>{roles.map((role) => <option key={role}>{role}</option>)}</select>}</Field>
+                <Field id="industry" label="Industry  -  required" error={errors.industry}>{(details) => <select {...inputProps('industry', details)}><option value="">Select an industry</option>{industries.map((industry) => <option key={industry}>{industry}</option>)}</select>}</Field>
               </div>
             </fieldset>
 
             <fieldset>
               <legend>Your priorities</legend>
               <div className="form-grid">
-                <Field id="markets" label="Primary markets — required" hint="Countries, regions or buyer markets most relevant to the brief." error={errors.markets} className="form-field--wide">{(details) => <input {...inputProps('markets', details)} />}</Field>
-                <Field id="objective" label="Main objective — required" error={errors.objective} className="form-field--wide">{(details) => <select {...inputProps('objective', details)}><option value="">Select an objective</option>{objectives.map((objective) => <option key={objective}>{objective}</option>)}</select>}</Field>
+                <Field id="markets" label="Primary markets  -  required" hint="Countries, regions or buyer markets most relevant to the brief." error={errors.markets} className="form-field--wide">{(details) => <input {...inputProps('markets', details)} />}</Field>
+                <Field id="objective" label="Main objective  -  required" error={errors.objective} className="form-field--wide">{(details) => <select {...inputProps('objective', details)}><option value="">Select an objective</option>{objectives.map((objective) => <option key={objective}>{objective}</option>)}</select>}</Field>
                 {approvedBudgets.length > 0 && <Field id="budget" label="Approximate investment" hint="Optional. Only approved ranges configured by Menchly are shown." error={errors.budget} className="form-field--wide">{(details) => <select {...inputProps('budget', details)}><option value="">Prefer to discuss privately</option>{approvedBudgets.map((range) => <option key={range}>{range}</option>)}</select>}</Field>}
                 <Field id="concern" label="Current concern or optional message" hint="Avoid sensitive, privileged or confidential details at this stage." error={errors.concern} className="form-field--wide">{(details) => <textarea {...inputProps('concern', details)} rows="6" maxLength="2000" />}</Field>
               </div>
@@ -162,7 +162,7 @@ export default function AssessmentPage() {
               <input id="websiteConfirmation" name="websiteConfirmation" value={values.websiteConfirmation} onChange={update('websiteConfirmation')} tabIndex="-1" autoComplete="off" />
             </div>
 
-            <Field id="privacyConsent" label="Privacy consent — required" error={errors.privacyConsent} className="consent-field">
+            <Field id="privacyConsent" label="Privacy consent  -  required" error={errors.privacyConsent} className="consent-field">
               {(details) => (
                 <div className="consent-control">
                   <input id={details.id} name="privacyConsent" type="checkbox" checked={values.privacyConsent} onChange={update('privacyConsent')} onFocus={onStart} aria-describedby={details.describedBy} aria-invalid={details.invalid} />
@@ -170,7 +170,7 @@ export default function AssessmentPage() {
                 </div>
               )}
             </Field>
-            <Field id="analyticsConsent" label="Anonymous journey measurement — optional" className="consent-field">
+            <Field id="analyticsConsent" label="Anonymous journey measurement  -  optional" className="consent-field">
               {(details) => (
                 <div className="consent-control">
                   <input

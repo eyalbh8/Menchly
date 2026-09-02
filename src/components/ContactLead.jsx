@@ -71,7 +71,7 @@ export default function ContactLead() {
     }
 
     setStatus('success');
-    setStatusMessage('Thanks — we have your details and will be in touch.');
+    setStatusMessage('Thanks  -  we have your details and will be in touch.');
     setValues(initialValues);
     trackEvent('submit_success', { page: window.location.pathname, form: 'contact-lead' });
   };

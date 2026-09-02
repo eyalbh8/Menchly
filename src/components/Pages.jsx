@@ -1,8 +1,9 @@
 import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
 import { industryCards, industryProfiles, methodologyStages, serviceDetails } from '../pageContent.js';
+import { productImages } from '../data.js';
 import { getInsightArticle, insightArticles } from '../content/insights.js';
 import { trackEvent } from '../analytics.js';
-import { AssessmentLink, CtaBand, InternalLink, PageHero, ResearchGrid, Section, SectionHeader } from './UI.jsx';
+import { AssessmentLink, CtaBand, InternalLink, PageHero, ProductStage, ResearchGrid, Section, SectionHeader } from './UI.jsx';
 
 function CardGrid({ items, className = '' }) {
   return (
@@ -53,6 +54,13 @@ export function ServicesPage() {
               <div>
                 <span className="card-number">→ {service.number}</span>
                 <h2>{service.title}</h2>
+                {service.image && (
+                  <ProductStage
+                    className="product-stage--compact"
+                    src={service.image}
+                    alt={service.imageAlt || ''}
+                  />
+                )}
               </div>
               <div>
                 <p>{service.copy}</p>
@@ -91,7 +99,7 @@ export function IndustriesPage() {
           <SectionHeader eyebrow="Sector focus" title={<>Recommendation requires <em>category fluency.</em></>} />
           <div className="prose">
             <p>A family office choosing an aviation adviser asks different questions from a collector choosing a specialist or a guest selecting a resort. The signals of authority, fit and trust are category-specific.</p>
-            <p>Menchly builds each programme around the language, intermediaries, evidence and reputation dynamics of the market—not a universal prompt template.</p>
+            <p>Menchly builds each programme around the language, intermediaries, evidence and reputation dynamics of the market - not a universal prompt template.</p>
           </div>
         </div>
       </Section>
@@ -195,7 +203,7 @@ export function MethodologyPage() {
           <SectionHeader eyebrow="Working principle" title={<>Measure what matters <em>to the decision.</em></>} />
           <div className="prose">
             <p>We do not treat every prompt, platform or mention as equal. Priority comes from the intersection of high buyer intent, strategic fit and credible authority the brand can substantiate.</p>
-            <p>The approach combines repeatable review with informed judgement. AI outputs are variable, so findings are interpreted as directional evidence—not deterministic rankings or guaranteed outcomes.</p>
+            <p>The approach combines repeatable review with informed judgement. AI outputs are variable, so findings are interpreted as directional evidence - not deterministic rankings or guaranteed outcomes.</p>
           </div>
         </div>
       </Section>
@@ -217,6 +225,12 @@ export function MethodologyPage() {
               ['Accuracy', 'Does the answer reflect current facts, approved positioning and meaningful distinction?'],
               ['Authority', 'Are owned and independent sources credible enough to support confidence?']
             ].map(([title, copy]) => <div key={title}><h3>{title}</h3><p>{copy}</p></div>)}
+          </div>
+          <div className="methodology-visual">
+            <ProductStage
+              src={productImages.sentiment}
+              alt="Menchly Sentiment view showing score, trend and recent AI responses"
+            />
           </div>
         </div>
       </Section>
@@ -301,7 +315,7 @@ export function InsightArticlePage() {
           <div><span>Purpose</span><p>{article.purpose}</p></div>
           <div><span>By</span><p>{article.author}</p></div>
           <div><span>Last reviewed</span><p><time dateTime={article.lastReviewed}>{article.lastReviewed}</time></p></div>
-          <div><span>Expert review</span><p>Pending — no verified expert reviewer supplied</p></div>
+          <div><span>Expert review</span><p>Pending  -  no verified expert reviewer supplied</p></div>
         </div>
         <div className="article-copy article-copy--summary">
           <p className="eyebrow">Executive summary</p>
@@ -314,7 +328,7 @@ export function InsightArticlePage() {
           {article.definitions.map((definition) => (
             <figure key={definition.term}>
               <blockquote>“{definition.quote}”</blockquote>
-              <figcaption>{definition.term} — Menchly Editorial definition</figcaption>
+              <figcaption>{definition.term}  -  Menchly Editorial definition</figcaption>
             </figure>
           ))}
         </div>
@@ -434,7 +448,7 @@ export function NotFoundPage() {
   return (
     <section className="placeholder-page">
       <div className="shell">
-        <p className="eyebrow">404 — page not found</p>
+        <p className="eyebrow">404  -  page not found</p>
         <h1>This page could not be found.</h1>
         <p>The link you followed may be broken, or the page may have moved. Try one of these instead:</p>
         <div className="placeholder-page__actions">

@@ -11,7 +11,7 @@ export const insightArticles = [
   {
     slug: 'recommendation-gap-known-vs-selected',
     title: 'The recommendation gap: known is not selected',
-    deck: 'Why awareness can coexist with exclusion from an AI-assisted shortlist—and how leaders can diagnose the difference without claiming control over independent systems.',
+    deck: 'Why awareness can coexist with exclusion from an AI-assisted shortlist - and how leaders can diagnose the difference without claiming control over independent systems.',
     purpose: 'Give executive teams a decision framework for separating broad brand recognition from context-specific recommendation fit.',
     datePublished: '2026-08-06',
     dateModified: '2026-08-06',
@@ -29,7 +29,7 @@ export const insightArticles = [
       },
       {
         term: 'Selection evidence',
-        quote: 'Selection evidence is current, attributable information that helps a buyer distinguish credible fit—not simply proof that a brand exists or is popular.'
+        quote: 'Selection evidence is current, attributable information that helps a buyer distinguish credible fit - not simply proof that a brand exists or is popular.'
       }
     ],
     sections: [
@@ -37,7 +37,7 @@ export const insightArticles = [
         heading: 'Awareness and selection solve different questions',
         paragraphs: [
           'Awareness signals can establish category membership: a known name, repeated press mentions, a substantial social presence or a long operating history. Those signals may help an assistant recognise an entity. They do not necessarily explain when the entity is suitable, what it is unusually equipped to do, or which constraints should rule it in or out.',
-          'Selection is narrower. A recommendation request normally contains—or implies—a buyer role, intended outcome, geography, risk threshold, budget logic, service expectation and comparison set. If public information does not connect the brand to those criteria, an assistant may default to better-documented alternatives, generic popularity signals or cautious category summaries.',
+          'Selection is narrower. A recommendation request normally contains - or implies - a buyer role, intended outcome, geography, risk threshold, budget logic, service expectation and comparison set. If public information does not connect the brand to those criteria, an assistant may default to better-documented alternatives, generic popularity signals or cautious category summaries.',
           'This distinction matters at board level because an awareness programme and a recommendation programme have different success conditions. The first seeks reach and recall. The second seeks accurate consideration for defined circumstances, supported by evidence a sophisticated buyer can inspect.'
         ],
         example: {
@@ -51,7 +51,7 @@ export const insightArticles = [
           'First, presence: does the brand enter answers for a deliberately selected set of material questions? A single appearance is not a stable ranking, and absence from one response is not proof of broad invisibility. Use repeated, documented observation as directional evidence.',
           'Second, fit: when the brand appears, is the stated reason aligned with the clients, missions and markets it can genuinely serve? An irrelevant recommendation can create reputational and operational cost even when it appears positive.',
           'Third, accuracy: are entity details, capabilities, locations, ownership relationships and limitations current? A polished answer built on stale facts is not a successful outcome.',
-          'Fourth, authority: can material claims be traced to reliable owned records or credible independent sources? NIST’s AI Risk Management Framework emphasises validity, reliability, transparency and ongoing measurement as characteristics of trustworthy AI risk management. For a brand team, the practical implication is to treat model output as evidence to evaluate—not as an unquestionable verdict.'
+          'Fourth, authority: can material claims be traced to reliable owned records or credible independent sources? NIST’s AI Risk Management Framework emphasises validity, reliability, transparency and ongoing measurement as characteristics of trustworthy AI risk management. For a brand team, the practical implication is to treat model output as evidence to evaluate - not as an unquestionable verdict.'
         ],
         example: {
           title: 'Illustrative example: high jewellery',
@@ -96,12 +96,12 @@ export const insightArticles = [
     reviewStatus: EXPERT_REVIEW_STATUS,
     executiveSummary: [
       'Keyword volume describes aggregate search behaviour within a defined tool and methodology. Prompt intelligence examines decision-rich questions, including audience, context, criteria, alternatives and risk. The two can inform each other, but they are not interchangeable.',
-      'There is no single public dataset that reliably reports all prompts across assistants, private enterprise deployments and changing model interfaces. Executive prioritisation should therefore be transparent and evidence-led: combine buyer research, first-party enquiry language, search demand, sales and adviser insight, model observation and commercial judgement—while labelling uncertainty.'
+      'There is no single public dataset that reliably reports all prompts across assistants, private enterprise deployments and changing model interfaces. Executive prioritisation should therefore be transparent and evidence-led: combine buyer research, first-party enquiry language, search demand, sales and adviser insight, model observation and commercial judgement - while labelling uncertainty.'
     ],
     definitions: [
       {
         term: 'High-intent prompt',
-        quote: 'A high-intent prompt is a question whose context, constraints or comparison criteria indicate movement toward a consequential decision—not merely curiosity about a category.'
+        quote: 'A high-intent prompt is a question whose context, constraints or comparison criteria indicate movement toward a consequential decision - not merely curiosity about a category.'
       },
       {
         term: 'Prompt intelligence',
@@ -138,7 +138,7 @@ export const insightArticles = [
         paragraphs: [
           'Use multiple inputs with explicit labels. First-party sources may include anonymised enquiry themes, approved sales notes, site search and client-adviser interviews. External sources may include search trend tools, industry forums, regulatory guidance, specialist media and competitor language. Model observations can show how assistants currently frame a question, but they do not reveal total demand.',
           'Testing should record assistant, model where available, date, account state, retrieval mode, geography, exact prompt and output. Microsoft’s human-AI interaction guidance recommends communicating system capabilities and supporting efficient correction. Applied here, decision-makers should be shown what the observation can and cannot establish.',
-          'Avoid purchasing certainty through opaque dashboards. If a provider presents prompt-volume figures, executives should ask which assistants are covered, whether data is observed or modelled, how sampling and privacy work, the time period, geography, duplication controls and confidence limits. A useful estimate can still be used—provided its provenance and limitations are visible.'
+          'Avoid purchasing certainty through opaque dashboards. If a provider presents prompt-volume figures, executives should ask which assistants are covered, whether data is observed or modelled, how sampling and privacy work, the time period, geography, duplication controls and confidence limits. A useful estimate can still be used - provided its provenance and limitations are visible.'
         ],
         example: {
           title: 'Illustrative example: luxury real estate',

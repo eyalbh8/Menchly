@@ -81,7 +81,7 @@ export const industryProfiles = [
     summary: 'Make provenance, connoisseurship and service legible when collectors ask AI who merits trust and attention.',
     image: '/images/jewellery-watches.jpg',
     imageAlt: 'Fine jewellery and watches on display',
-    introduction: 'Collectors use AI to learn references, compare houses, assess provenance and identify specialists. Yet the qualities that create enduring value—craft, scholarship, sourcing and client care—are easily reduced to generic luxury language. Menchly helps houses and specialists earn recommendation through credible, specific authority.',
+    introduction: 'Collectors use AI to learn references, compare houses, assess provenance and identify specialists. Yet the qualities that create enduring value - craft, scholarship, sourcing and client care - are easily reduced to generic luxury language. Menchly helps houses and specialists earn recommendation through credible, specific authority.',
     audiences: ['Established and emerging collectors', 'Private clients and gift buyers', 'Family offices and collection managers', 'Auction, art and wealth advisers', 'Editors, curators and tastemakers'],
     questions: [
       'Which independent watchmakers should a serious collector understand?',
@@ -103,7 +103,7 @@ export const industryProfiles = [
     slug: 'luxury-hospitality',
     name: 'Luxury hospitality',
     eyebrow: 'Luxury hospitality intelligence',
-    summary: 'Become the relevant recommendation for a particular guest, occasion and expectation—not merely another highly rated property.',
+    summary: 'Become the relevant recommendation for a particular guest, occasion and expectation - not merely another highly rated property.',
     image: '/images/luxury-hospitality.jpg',
     imageAlt: 'Luxury hotel suite overlooking the sea',
     introduction: 'Hospitality choices are moving from broad destination search to conversational requests rich with context: who is travelling, why, and what kind of experience matters. Menchly helps hotels, resorts and operators be understood for the occasions and guest profiles they are genuinely built to serve.',
@@ -131,25 +131,33 @@ export const serviceDetails = [
     number: '01',
     title: 'Prompt and market intelligence',
     copy: 'We define the questions that reveal real consideration: who is asking, what they are trying to decide, which alternatives they compare and what evidence changes confidence. This creates a commercially useful prompt universe rather than a generic keyword list.',
-    outputs: ['Executive and stakeholder discovery', 'High-intent prompt universe', 'Buyer-stage and audience mapping', 'Competitive recommendation review']
+    outputs: ['Executive and stakeholder discovery', 'High-intent prompt universe', 'Buyer-stage and audience mapping', 'Competitive recommendation review'],
+    image: '/images/product/prompts.png',
+    imageAlt: 'Menchly Prompts view with topics, intent distribution and tracked prompts'
   },
   {
     number: '02',
     title: 'Authority architecture',
     copy: 'We examine whether the open web provides a coherent, credible account of the brand’s expertise. The roadmap connects owned content, entities, executive authority and independent sources so assistants have better evidence from which to form an answer.',
-    outputs: ['Entity and source assessment', 'Authority-gap prioritisation', 'Owned-content briefing', 'Earned-authority agenda']
+    outputs: ['Entity and source assessment', 'Authority-gap prioritisation', 'Owned-content briefing', 'Earned-authority agenda'],
+    image: '/images/product/citations.png',
+    imageAlt: 'Menchly Citations view showing source types and domain usage'
   },
   {
     number: '03',
     title: 'Recommendation positioning',
     copy: 'We translate positioning into defensible reasons for recommendation. The goal is not to claim universal superiority, but to make the circumstances in which the brand is an excellent fit specific, consistent and supported.',
-    outputs: ['Best-fit recommendation territories', 'Decision-criteria narratives', 'Comparison and objection guidance', 'Cross-channel message alignment']
+    outputs: ['Best-fit recommendation territories', 'Decision-criteria narratives', 'Comparison and objection guidance', 'Cross-channel message alignment'],
+    image: '/images/product/competitors.png',
+    imageAlt: 'Menchly Competitors view with share of voice and brand visibility trends'
   },
   {
     number: '04',
     title: 'Reputation monitoring',
-    copy: 'We review how selected assistants describe, compare and qualify the brand against an agreed prompt set. Reporting focuses on material movement in presence, fit, accuracy and source quality—not vanity mention counts.',
-    outputs: ['Model-response baseline', 'Narrative and accuracy review', 'Source-pattern monitoring', 'Executive recommendations']
+    copy: 'We review how selected assistants describe, compare and qualify the brand against an agreed prompt set. Reporting focuses on material movement in presence, fit, accuracy and source quality - not vanity mention counts.',
+    outputs: ['Model-response baseline', 'Narrative and accuracy review', 'Source-pattern monitoring', 'Executive recommendations'],
+    image: '/images/product/ai-crawlers.png',
+    imageAlt: 'Menchly AI Crawlers view with crawler volume and bot activity'
   }
 ];
 
