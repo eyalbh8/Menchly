@@ -36,9 +36,29 @@ export default function Nav() {
     };
   }, [open]);
 
+  const [overHero, setOverHero] = useState(false);
+
+  useEffect(() => {
+    const hero = location.pathname === '/' ? document.getElementById('top') : null;
+    if (!hero) {
+      setOverHero(false);
+      return undefined;
+    }
+    const update = () => setOverHero(hero.getBoundingClientRect().bottom > 72);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, [location.pathname]);
+
+  const isHomeTop = overHero && !open;
+
   return (
     <>
-    <header className="site-header">
+    <header className={`site-header${isHomeTop ? ' site-header--on-dark' : ''}`}>
       <nav className="nav shell" aria-label="Primary navigation">
         <Link className="brand" to="/" aria-label="Menchly, home">
           <BrandMark />

@@ -21,65 +21,30 @@ import {
   DataPanel 
 } from './DataViz.jsx';
 
-function HeroIllustration() {
-  return (
-    <svg className="hero__illustration" viewBox="0 0 560 560" fill="none" aria-hidden="true">
-      <g stroke="url(#hero-line-grad)" strokeWidth="1.4" opacity="0.55">
-        <path className="hero__illustration-path" d="M120 420 L230 300 L360 340 L470 190" />
-        <path className="hero__illustration-path" d="M230 300 L280 150" />
-        <path className="hero__illustration-path" d="M360 340 L420 440" />
-        <path className="hero__illustration-path" d="M470 190 L420 80" />
-        <path className="hero__illustration-path" d="M120 420 L90 300" />
-      </g>
-      <g fill="url(#hero-node-grad)">
-        <circle className="hero__illustration-node" cx="120" cy="420" r="7" style={{ animationDelay: '0s' }} />
-        <circle className="hero__illustration-node" cx="230" cy="300" r="9" style={{ animationDelay: '.3s' }} />
-        <circle className="hero__illustration-node" cx="360" cy="340" r="6" style={{ animationDelay: '.6s' }} />
-        <circle className="hero__illustration-node" cx="470" cy="190" r="10" style={{ animationDelay: '.9s' }} />
-        <circle className="hero__illustration-node" cx="280" cy="150" r="6" style={{ animationDelay: '1.2s' }} />
-        <circle className="hero__illustration-node" cx="420" cy="440" r="5" style={{ animationDelay: '1.5s' }} />
-        <circle className="hero__illustration-node" cx="420" cy="80" r="5" style={{ animationDelay: '1.8s' }} />
-        <circle className="hero__illustration-node" cx="90" cy="300" r="5" style={{ animationDelay: '2.1s' }} />
-      </g>
-      <defs>
-        <linearGradient id="hero-line-grad" x1="0" y1="0" x2="560" y2="560" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#2d4f9e" />
-          <stop offset="1" stopColor="#8ca6e0" />
-        </linearGradient>
-        <radialGradient id="hero-node-grad">
-          <stop offset="0" stopColor="#6f8fd8" />
-          <stop offset="1" stopColor="#2d4f9e" />
-        </radialGradient>
-      </defs>
-    </svg>
-  );
-}
+const calendarUrl = import.meta.env.VITE_CALENDAR_URL || '';
 
 function Hero() {
   return (
     <section id="top" className="hero">
-      <HeroIllustration />
+      <div className="hero__aurora" aria-hidden="true" />
       <div className="shell hero__inner">
-        <h1 className="hero__ghost">
-          <span className="hero__ghost-brand hero__in" style={{ animationDelay: '.05s' }}>AI Search Marketing</span>{' '}
-          <span className="hero__ghost-rest hero__in" style={{ animationDelay: '.18s' }}>Infrastructure.</span>
+        <span className="hero__badge hero__in" style={{ animationDelay: '.05s' }}>Built to adapt · Built to compound</span>
+        <h1 className="hero__headline hero__in" style={{ animationDelay: '.16s' }}>
+          AI Search Marketing<br />Infrastructure.
         </h1>
-        <hr className="hero__rule hero__in" style={{ animationDelay: '.3s' }} />
-        <p className="hero__copy hero__in" style={{ animationDelay: '.38s' }}>
-          Menchly builds custom AI Search marketing infrastructure for brands that want to lead the next iteration of the Internet Data tells us where to act Our infrastructure lets us execute faster, learn continuously, and compound results over time.
+        <p className="hero__copy hero__in" style={{ animationDelay: '.3s' }}>
+          Menchly builds custom AI Search marketing infrastructure for brands that want to lead the next iteration of the Internet. Data tells us where to act — our infrastructure lets us execute faster, learn continuously, and compound results over time.
         </p>
-        <p className="hero__tagline hero__in" style={{ animationDelay: '.46s' }}>Built to adapt Built to compound</p>
-        <div className="hero__actions hero__in" style={{ animationDelay: '.54s' }}>
-          <Link
-            className="button button--primary hero__cta"
-            to="#contact"
-            onClick={() => trackEvent('cta_click', { placement: 'homepage-hero', page: window.location.pathname })}
-          >
-            <span>Leave your details</span>
-            <span aria-hidden="true">→</span>
-          </Link>
-          <span className="hero__cta-hint">Takes under a minute · no commitment</span>
-        </div>
+        <a
+          className="button button--primary hero__cta hero__in"
+          style={{ animationDelay: '.42s' }}
+          href={calendarUrl || '#contact'}
+          {...(calendarUrl ? { target: '_blank', rel: 'noreferrer' } : {})}
+          onClick={() => trackEvent('calendar_handoff', { placement: 'homepage-hero', page: window.location.pathname, mode: calendarUrl ? 'calendar' : 'contact' })}
+        >
+          <span>Book a meeting</span>
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
     </section>
   );
