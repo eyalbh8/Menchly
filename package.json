@@ -8,8 +8,9 @@
     "build": "node scripts/build.mjs",
     "verify": "node scripts/verify-build.mjs",
     "check-links": "node scripts/check-links.mjs",
-    "test": "node scripts/test-assessment.mjs",
-    "preview": "vite preview"
+    "test": "node scripts/test-assessment.mjs && node scripts/test-enquiry.mjs",
+    "preview": "vite preview",
+    "telegram-chat-id": "node scripts/telegram-chat-id.mjs"
   },
   "dependencies": {
     "@fontsource/instrument-serif": "^5.3.0",

@@ -2,7 +2,8 @@ import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
 import { industryCards, industryProfiles, methodologyStages, measurementDimensions, methodologyFaqs, methodologySources, serviceDetails } from '../pageContent.js';
 import { productImages, serviceFaqs } from '../data.js';
 import { getInsightArticle, insightArticles, EDITORIAL_ORGANIZATION, EXPERT_REVIEW_STATUS } from '../content/insights.js';
-import { trackEvent } from '../analytics.js';
+import { calendarUrl } from '../cal.js';
+import BookMeeting from './BookMeeting.jsx';
 import { AssessmentLink, CtaBand, InternalLink, PageHero, ProductStage, ResearchGrid, Section, SectionHeader, FaqAccordion } from './UI.jsx';
 
 function slugify(text) {
@@ -627,7 +628,6 @@ export function LegalPage({ type }) {
 export function ThankYouPage() {
   const location = useLocation();
   const confirmed = location.state?.assessmentSubmitted === true;
-  const calendarUrl = import.meta.env.VITE_CALENDAR_URL || '';
   return (
     <section className="thank-you-page">
       <div className="shell thank-you-layout">
@@ -638,7 +638,12 @@ export function ThankYouPage() {
             ? 'Your request was securely accepted A senior member of the team will review strategic fit, category context and any potential conflicts before responding.'
             : 'This page does not confirm a submission To begin, complete the private assessment request so the team has the context needed for a considered review.'}</p>
           <div className="thank-you-actions">
-            {confirmed && calendarUrl && <a className="button button--primary" href={calendarUrl} target="_blank" rel="noreferrer" onClick={() => trackEvent('calendar_handoff', { placement: 'thank-you', page: '/thank-you' })}><span>Arrange a private conversation</span><span aria-hidden="true">↗</span></a>}
+            {confirmed && calendarUrl && (
+              <BookMeeting placement="thank-you">
+                <span>Arrange a private conversation</span>
+                <span aria-hidden="true">→</span>
+              </BookMeeting>
+            )}
             <Link className="button button--outline" to={confirmed ? '/methodology' : '/private-ai-visibility-assessment'}><span>{confirmed ? 'Review our methodology' : 'Start the assessment'}</span><span aria-hidden="true">→</span></Link>
           </div>
         </div>

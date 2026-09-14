@@ -1,23 +1,8 @@
-import { trackEvent } from '../analytics.js';
-
-const calendarUrl = import.meta.env.VITE_CALENDAR_URL || '';
+import BookMeeting from './BookMeeting.jsx';
 
 export default function FloatingCal() {
-  const href = calendarUrl || '#contact';
-  const external = Boolean(calendarUrl);
-
   return (
-    <a
-      className="floating-cal"
-      href={href}
-      aria-label="Book appointment"
-      {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
-      onClick={() => trackEvent('calendar_handoff', {
-        placement: 'floating',
-        page: window.location.pathname,
-        mode: external ? 'calendar' : 'contact'
-      })}
-    >
+    <BookMeeting className="floating-cal" placement="floating" aria-label="Book appointment">
       <span className="floating-cal__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
           <rect x="3" y="5" width="18" height="16" rx="3" />
@@ -25,6 +10,6 @@ export default function FloatingCal() {
         </svg>
       </span>
       <span className="floating-cal__label">Book appointment</span>
-    </a>
+    </BookMeeting>
   );
 }

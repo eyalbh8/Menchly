@@ -14,7 +14,10 @@ import '@fontsource/poppins/latin-700.css';
 import '@fontsource/instrument-serif/latin-400.css';
 import '@fontsource/instrument-serif/latin-400-italic.css';
 import App from './App.jsx';
+import { initCal } from './cal.js';
 import './index.css';
+
+initCal();
 
 const root = document.getElementById('root');
 const app = (

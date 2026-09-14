@@ -145,7 +145,10 @@ export async function submitAssessment(endpoint, payload, { timeoutMs = 12000, f
       body: JSON.stringify(payload),
       signal: controller.signal
     });
-    if (!response.ok) return { ok: false, reason: 'rejected', status: response.status };
+    if (!response.ok) {
+      if (response.status === 503) return { ok: false, reason: 'unavailable', status: 503 };
+      return { ok: false, reason: 'rejected', status: response.status };
+    }
     return { ok: true };
   } catch (error) {
     return { ok: false, reason: error?.name === 'AbortError' ? 'timeout' : 'network' };

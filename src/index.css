@@ -613,6 +613,7 @@ h1 em, h2 em {
   font-weight: 600;
   letter-spacing: .02em;
   text-transform: none;
+  cursor: pointer;
   transition: background .2s, color .2s, border-color .2s, box-shadow .2s;
 }
 .button--primary { color: var(--button-ink); background: var(--button); box-shadow: 0 8px 24px rgba(45, 79, 158, 0.35); }
@@ -2171,6 +2172,7 @@ h1 em, h2 em {
   align-items: center;
   gap: 10px;
   padding: 14px 18px;
+  border: 0;
   border-radius: var(--r-pill);
   background: var(--accent);
   color: #fff;
@@ -2178,6 +2180,7 @@ h1 em, h2 em {
   font-family: var(--label);
   font-size: 13px;
   font-weight: 600;
+  cursor: pointer;
   box-shadow: 0 12px 40px rgba(45, 79, 158, 0.45);
   transition: background .2s, transform .2s;
 }

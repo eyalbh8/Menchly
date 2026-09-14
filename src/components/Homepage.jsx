@@ -1,6 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { trackEvent } from '../analytics.js';
 import { berkosCase, faqs, marketStats, platforms, productTabs, servicePillars } from '../data.js';
 import { 
   berkosAccountBrief, 
@@ -10,6 +9,7 @@ import {
   aiTrafficData 
 } from '../data/workspaceData.js';
 import { insightArticles } from '../content/insights.js';
+import BookMeeting from './BookMeeting.jsx';
 import { AssessmentLink, ProductStage, ResearchGrid, Section, SectionHeader, InternalLink, ArrowLink, FaqAccordion, AnimatedNumber, reducedMotion, useInView } from './UI.jsx';
 import { 
   MetricGrid, 
@@ -20,8 +20,6 @@ import {
   SourceTable,
   DataPanel 
 } from './DataViz.jsx';
-
-const calendarUrl = import.meta.env.VITE_CALENDAR_URL || '';
 
 const heroOrbit = ['chatgpt', 'claude', 'gemini', 'perplexity', 'copilot'];
 
@@ -132,16 +130,10 @@ function Hero() {
         <p className="hero__copy hero__in" style={{ animationDelay: '.3s' }}>
           Menchly builds custom AI Search marketing infrastructure for brands that want to lead the next iteration of the Internet. Data tells us where to act — our infrastructure lets us execute faster, learn continuously, and compound results over time.
         </p>
-        <a
-          className="button button--primary hero__cta hero__in"
-          style={{ animationDelay: '.42s' }}
-          href={calendarUrl || '#contact'}
-          {...(calendarUrl ? { target: '_blank', rel: 'noreferrer' } : {})}
-          onClick={() => trackEvent('calendar_handoff', { placement: 'homepage-hero', page: window.location.pathname, mode: calendarUrl ? 'calendar' : 'contact' })}
-        >
+        <BookMeeting className="button button--primary hero__cta hero__in" style={{ animationDelay: '.42s' }} placement="homepage-hero">
           <span>Book a meeting</span>
           <span aria-hidden="true">→</span>
-        </a>
+        </BookMeeting>
       </div>
     </section>
   );

@@ -66,7 +66,11 @@ assert.equal(getSanitizedAnalyticsEvent('unapproved_event', { page: '/' }), null
 assert.deepEqual(await submitAssessment('', payload), { ok: false, reason: 'unavailable' });
 assert.deepEqual(
   await submitAssessment('https://example.com/assessment', payload, { fetchImpl: async () => ({ ok: false, status: 503 }) }),
-  { ok: false, reason: 'rejected', status: 503 }
+  { ok: false, reason: 'unavailable', status: 503 }
+);
+assert.deepEqual(
+  await submitAssessment('https://example.com/assessment', payload, { fetchImpl: async () => ({ ok: false, status: 400 }) }),
+  { ok: false, reason: 'rejected', status: 400 }
 );
 assert.deepEqual(
   await submitAssessment('https://example.com/assessment', payload, { fetchImpl: async () => ({ ok: true, status: 202 }) }),
