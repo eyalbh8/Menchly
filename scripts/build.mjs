@@ -14,11 +14,11 @@ try {
 const root = resolve(import.meta.dirname, '..');
 const dist = join(root, 'dist');
 const serverOut = join(root, '.prerender');
-const vite = join(root, 'node_modules', '.bin', 'vite');
+const vite = join(root, 'node_modules', '.bin', process.platform === 'win32' ? 'vite.cmd' : 'vite');
 const siteOrigin = resolveSiteOrigin(process.env.VITE_SITE_URL);
 
 function run(args) {
-  execFileSync(vite, args, { cwd: root, env: process.env, stdio: 'inherit' });
+  execFileSync(vite, args, { cwd: root, env: process.env, stdio: 'inherit', shell: process.platform === 'win32' });
 }
 
 function escapeHtml(value) {

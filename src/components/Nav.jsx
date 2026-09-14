@@ -37,6 +37,7 @@ export default function Nav() {
   }, [open]);
 
   return (
+    <>
     <header className="site-header">
       <nav className="nav shell" aria-label="Primary navigation">
         <Link className="brand" to="/" aria-label="Menchly, home">
@@ -83,7 +84,8 @@ export default function Nav() {
           </NavLink>
         </div>
       </nav>
-      {open && <button className="nav-scrim" aria-label="Close navigation" onClick={() => setOpen(false)} />}
     </header>
+      {open && <button className="nav-scrim" aria-label="Close navigation" onClick={() => setOpen(false)} />}
+    </>
   );
 }

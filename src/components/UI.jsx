@@ -146,9 +146,13 @@ function ResearchChart({ kind }) {
     return (
       <svg viewBox="0 0 280 120" fill="none" aria-hidden="true">
         <text x="18" y="18" fill="currentColor" opacity=".45" fontSize="9" fontFamily="system-ui,sans-serif">Intent distribution</text>
+        <text x="32" y="32" textAnchor="middle" fill="currentColor" opacity=".85" fontSize="10" fontWeight="700" fontFamily="system-ui,sans-serif">76%</text>
         <rect x="18" y="38" width="28" height="68" rx="3" fill="currentColor" />
+        <text x="76" y="68" textAnchor="middle" fill="currentColor" opacity=".7" fontSize="10" fontWeight="700" fontFamily="system-ui,sans-serif">17%</text>
         <rect x="62" y="74" width="28" height="32" rx="3" fill="currentColor" opacity=".65" />
+        <text x="120" y="94" textAnchor="middle" fill="currentColor" opacity=".55" fontSize="9" fontFamily="system-ui,sans-serif">3%</text>
         <rect x="106" y="100" width="28" height="6" rx="3" fill="currentColor" opacity=".35" />
+        <text x="164" y="94" textAnchor="middle" fill="currentColor" opacity=".55" fontSize="9" fontFamily="system-ui,sans-serif">3%</text>
         <rect x="150" y="100" width="28" height="6" rx="3" fill="currentColor" opacity=".35" />
         <text x="18" y="118" fill="currentColor" opacity=".35" fontSize="8" fontFamily="system-ui,sans-serif">Info · Comm · Nav · Trans</text>
       </svg>
@@ -200,7 +204,6 @@ export function ResearchCard({ article }) {
     <Link className="research-card" to={`/insights/${article.slug}`}>
       <div className="research-card__meta">
         <span>Research</span>
-        <time dateTime={article.datePublished}>{formatInsightDate(article.datePublished)}</time>
       </div>
       <h3>{article.title}</h3>
       <p className="research-card__deck">{article.deck}</p>
@@ -221,12 +224,15 @@ export function ResearchGrid({ articles }) {
   );
 }
 
-export function FaqAccordion({ items }) {
+export function FaqAccordion({ items, initialCount = 6 }) {
   const [open, setOpen] = React.useState(0);
+  const [showAll, setShowAll] = React.useState(false);
   const id = React.useId();
+  const visibleItems = showAll ? items : items.slice(0, initialCount);
+  const hiddenCount = items.length - initialCount;
   return (
     <div className="accordion">
-      {items.map((item, index) => {
+      {visibleItems.map((item, index) => {
         const expanded = open === index;
         return (
           <div className="accordion__item" key={item.q}>
@@ -262,6 +268,12 @@ export function FaqAccordion({ items }) {
           </div>
         );
       })}
+      {!showAll && hiddenCount > 0 && (
+        <button type="button" className="accordion__show-more" onClick={() => setShowAll(true)}>
+          Show {hiddenCount} more question{hiddenCount === 1 ? '' : 's'}
+          <span aria-hidden="true">↓</span>
+        </button>
+      )}
     </div>
   );
 }

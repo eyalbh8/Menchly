@@ -1,5 +1,6 @@
 import { useId, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { trackEvent } from '../analytics.js';
 import { berkosCase, faqs, marketStats, platforms, productTabs, servicePillars } from '../data.js';
 import { 
   berkosAccountBrief, 
@@ -20,21 +21,64 @@ import {
   DataPanel 
 } from './DataViz.jsx';
 
+function HeroIllustration() {
+  return (
+    <svg className="hero__illustration" viewBox="0 0 560 560" fill="none" aria-hidden="true">
+      <g stroke="url(#hero-line-grad)" strokeWidth="1.4" opacity="0.55">
+        <path className="hero__illustration-path" d="M120 420 L230 300 L360 340 L470 190" />
+        <path className="hero__illustration-path" d="M230 300 L280 150" />
+        <path className="hero__illustration-path" d="M360 340 L420 440" />
+        <path className="hero__illustration-path" d="M470 190 L420 80" />
+        <path className="hero__illustration-path" d="M120 420 L90 300" />
+      </g>
+      <g fill="url(#hero-node-grad)">
+        <circle className="hero__illustration-node" cx="120" cy="420" r="7" style={{ animationDelay: '0s' }} />
+        <circle className="hero__illustration-node" cx="230" cy="300" r="9" style={{ animationDelay: '.3s' }} />
+        <circle className="hero__illustration-node" cx="360" cy="340" r="6" style={{ animationDelay: '.6s' }} />
+        <circle className="hero__illustration-node" cx="470" cy="190" r="10" style={{ animationDelay: '.9s' }} />
+        <circle className="hero__illustration-node" cx="280" cy="150" r="6" style={{ animationDelay: '1.2s' }} />
+        <circle className="hero__illustration-node" cx="420" cy="440" r="5" style={{ animationDelay: '1.5s' }} />
+        <circle className="hero__illustration-node" cx="420" cy="80" r="5" style={{ animationDelay: '1.8s' }} />
+        <circle className="hero__illustration-node" cx="90" cy="300" r="5" style={{ animationDelay: '2.1s' }} />
+      </g>
+      <defs>
+        <linearGradient id="hero-line-grad" x1="0" y1="0" x2="560" y2="560" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#2d4f9e" />
+          <stop offset="1" stopColor="#8ca6e0" />
+        </linearGradient>
+        <radialGradient id="hero-node-grad">
+          <stop offset="0" stopColor="#6f8fd8" />
+          <stop offset="1" stopColor="#2d4f9e" />
+        </radialGradient>
+      </defs>
+    </svg>
+  );
+}
+
 function Hero() {
   return (
     <section id="top" className="hero">
+      <HeroIllustration />
       <div className="shell hero__inner">
         <h1 className="hero__ghost">
-          <span className="hero__ghost-brand">AI Search Marketing</span>{' '}
-          <span className="hero__ghost-rest">Infrastructure.</span>
+          <span className="hero__ghost-brand hero__in" style={{ animationDelay: '.05s' }}>AI Search Marketing</span>{' '}
+          <span className="hero__ghost-rest hero__in" style={{ animationDelay: '.18s' }}>Infrastructure.</span>
         </h1>
-        <hr className="hero__rule" />
-        <p className="hero__copy">
+        <hr className="hero__rule hero__in" style={{ animationDelay: '.3s' }} />
+        <p className="hero__copy hero__in" style={{ animationDelay: '.38s' }}>
           Menchly builds custom AI Search marketing infrastructure for brands that want to lead the next iteration of the Internet Data tells us where to act Our infrastructure lets us execute faster, learn continuously, and compound results over time.
         </p>
-        <p className="hero__tagline">Built to adapt Built to compound</p>
-        <div className="hero__actions">
-          <AssessmentLink placement="homepage-hero">Private assessment</AssessmentLink>
+        <p className="hero__tagline hero__in" style={{ animationDelay: '.46s' }}>Built to adapt Built to compound</p>
+        <div className="hero__actions hero__in" style={{ animationDelay: '.54s' }}>
+          <Link
+            className="button button--primary hero__cta"
+            to="#contact"
+            onClick={() => trackEvent('cta_click', { placement: 'homepage-hero', page: window.location.pathname })}
+          >
+            <span>Leave your details</span>
+            <span aria-hidden="true">→</span>
+          </Link>
+          <span className="hero__cta-hint">Takes under a minute · no commitment</span>
         </div>
       </div>
     </section>
@@ -79,17 +123,20 @@ function PlatformIcon({ id }) {
 }
 
 function PlatformGrid() {
+  const loop = [...platforms, ...platforms];
   return (
     <Section id="context" tone="paper">
-      <div className="platform-grid" aria-label="AI platforms considered in our work">
-        {platforms.map((platform) => (
-          <span key={platform.id} className="platform-grid__item">
-            <span className="platform-grid__icon">
-              <PlatformIcon id={platform.id} />
+      <div className="platform-marquee" aria-label="AI platforms considered in our work">
+        <div className="platform-marquee__track">
+          {loop.map((platform, i) => (
+            <span key={`${platform.id}-${i}`} className="platform-marquee__item" aria-hidden={i >= platforms.length}>
+              <span className="platform-marquee__icon">
+                <PlatformIcon id={platform.id} />
+              </span>
+              <span className="platform-marquee__name">{platform.name}</span>
             </span>
-            <span className="platform-grid__name">{platform.name}</span>
-          </span>
-        ))}
+          ))}
+        </div>
       </div>
     </Section>
   );
@@ -242,7 +289,7 @@ function MarketStats() {
       <div className="market-stats__intro">
         <SectionHeader
           eyebrow="A quiet decision"
-          title={<>Which brand gets <em>mentioned.</em></>}
+          title={<>Which brand gets <em className="shine-text">mentioned.</em></>}
           copy="AI isn’t browsing It’s choosing The brands that show up in those answers win the consideration that never appears in traditional search reports"
         />
       </div>
@@ -345,6 +392,42 @@ function Research() {
   );
 }
 
+function ServiceIcon({ id }) {
+  const common = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true };
+  if (id === 'search') {
+    return (
+      <svg {...common}>
+        <circle cx="10.5" cy="10.5" r="6.5" />
+        <line x1="20" y1="20" x2="15.4" y2="15.4" />
+      </svg>
+    );
+  }
+  if (id === 'shield') {
+    return (
+      <svg {...common}>
+        <path d="M12 3.5 19 6.2v5.4c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6.2Z" />
+        <path d="m9 12 2.2 2.2L15.5 10" />
+      </svg>
+    );
+  }
+  if (id === 'target') {
+    return (
+      <svg {...common}>
+        <circle cx="12" cy="12" r="8" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="12" cy="12" r="0.6" fill="currentColor" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...common}>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 12 18 7" />
+      <circle cx="12" cy="12" r="1.2" fill="currentColor" />
+    </svg>
+  );
+}
+
 function Services() {
   return (
     <Section id="services" tone="blue">
@@ -356,7 +439,10 @@ function Services() {
       <div className="service-list">
         {servicePillars.map((service) => (
           <article className="service-row" key={service.n}>
-            <span className="card-number">→ {service.n}</span>
+            <span className="service-row__badge">
+              <ServiceIcon id={service.icon} />
+              <span className="card-number">{service.n}</span>
+            </span>
             <h3>{service.title}</h3>
             <p>{service.text}</p>
           </article>
@@ -382,6 +468,59 @@ function FAQ() {
   );
 }
 
+const industryPreview = [
+  { to: '/industries/yachting', label: 'Yachting', icon: 'yachting' },
+  { to: '/industries/private-aviation', label: 'Private aviation', icon: 'aviation' },
+  { to: '/industries/luxury-real-estate', label: 'Luxury real estate', icon: 'real-estate' },
+  { to: '/industries/jewellery-watches', label: 'Jewellery & watches', icon: 'jewellery' },
+  { to: '/industries/luxury-hospitality', label: 'Luxury hospitality', icon: 'hospitality' }
+];
+
+function IndustryIcon({ id }) {
+  const common = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true };
+  if (id === 'yachting') {
+    return (
+      <svg {...common}>
+        <path d="M3 16h18l-2.2 4.2a2 2 0 0 1-1.78 1.08H6.98a2 2 0 0 1-1.78-1.08Z" />
+        <path d="M6 16V8.5L12 5l6 3.5V16" />
+        <path d="M12 5v11" />
+      </svg>
+    );
+  }
+  if (id === 'aviation') {
+    return (
+      <svg {...common}>
+        <path d="M2.5 16.5 21 10a1.8 1.8 0 0 0 0-3.4 1.8 1.8 0 0 0-1.2 0L14 9 6 6.2 4 7l5 4.4-3.2 2.3-2.6-.6-1.2 1Z" />
+      </svg>
+    );
+  }
+  if (id === 'real-estate') {
+    return (
+      <svg {...common}>
+        <path d="M4 11 12 4l8 7" />
+        <path d="M6 10v10h12V10" />
+        <path d="M10 20v-6h4v6" />
+      </svg>
+    );
+  }
+  if (id === 'jewellery') {
+    return (
+      <svg {...common}>
+        <path d="M7 4h10l4 5-11 11L2.5 9Z" />
+        <path d="M2.5 9h19M9.5 4 7 9l5 11 5-11-2.5-5" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...common}>
+      <path d="M4 21V10l8-6 8 6v11" />
+      <path d="M4 21h16" />
+      <path d="M10 21v-6h4v6" />
+      <path d="M9 12h.01M15 12h.01" />
+    </svg>
+  );
+}
+
 function Industries() {
   return (
     <Section id="industries-preview" tone="paper">
@@ -390,12 +529,14 @@ function Industries() {
         title="High-consideration markets"
         copy="We work with reputation-sensitive brands where buyers research deeply before revealing intent"
       />
-      <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center', marginTop: '2rem' }}>
-        <InternalLink to="/industries/yachting">Yachting</InternalLink>
-        <InternalLink to="/industries/private-aviation">Private aviation</InternalLink>
-        <InternalLink to="/industries/luxury-real-estate">Luxury real estate</InternalLink>
-        <InternalLink to="/industries/jewellery-watches">Jewellery & watches</InternalLink>
-        <InternalLink to="/industries/luxury-hospitality">Luxury hospitality</InternalLink>
+      <div className="industry-grid">
+        {industryPreview.map((industry) => (
+          <Link className="industry-card" to={industry.to} key={industry.to}>
+            <span className="industry-card__icon"><IndustryIcon id={industry.icon} /></span>
+            <span className="industry-card__label">{industry.label}</span>
+            <span className="industry-card__arrow" aria-hidden="true">→</span>
+          </Link>
+        ))}
       </div>
       <div style={{ marginTop: '2rem', textAlign: 'center' }}>
         <ArrowLink href="/industries">View all industries</ArrowLink>

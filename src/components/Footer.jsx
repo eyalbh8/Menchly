@@ -1,8 +1,29 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { assessmentHref, footerIndustryItems, footerNavItems } from '../data.js';
 import { trackEvent } from '../analytics.js';
 import { AssessmentLink, BrandMark } from './UI.jsx';
 import ContactLead from './ContactLead.jsx';
+
+function FooterLinkGroup({ title, children }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="footer__links">
+      <button
+        type="button"
+        className="footer__links-toggle"
+        aria-expanded={open}
+        onClick={() => setOpen((value) => !value)}
+      >
+        <span>{title}</span>
+        <span className="footer__links-chevron" aria-hidden="true">{open ? '−' : '+'}</span>
+      </button>
+      <div className={`footer__links-content ${open ? 'is-open' : ''}`}>
+        {children}
+      </div>
+    </div>
+  );
+}
 
 export default function Footer() {
   return (
@@ -26,19 +47,16 @@ export default function Footer() {
             </Link>
             <p>AI Search marketing infrastructure for brands built to lead the next iteration of the Internet.</p>
           </div>
-          <div className="footer__links">
-            <p>Explore</p>
+          <FooterLinkGroup title="Explore">
             {footerNavItems.map((item) => <Link key={item.href} to={item.href}>{item.label}</Link>)}
-          </div>
-          <div className="footer__links">
-            <p>Industries</p>
+          </FooterLinkGroup>
+          <FooterLinkGroup title="Industries">
             {footerIndustryItems.map((item) => <Link key={item.href} to={item.href}>{item.label}</Link>)}
-          </div>
-          <div className="footer__links">
-            <p>Enquiries</p>
+          </FooterLinkGroup>
+          <FooterLinkGroup title="Enquiries">
             <Link to={assessmentHref} onClick={() => trackEvent('cta_click', { placement: 'footer', page: window.location.pathname })}>Private assessment</Link>
             <span>Engagements are reviewed for fit and category conflict.</span>
-          </div>
+          </FooterLinkGroup>
         </div>
         <div className="footer__bottom">
           <span>© {new Date().getFullYear()} Menchly. All rights reserved.</span>

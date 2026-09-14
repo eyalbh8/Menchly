@@ -84,7 +84,7 @@ export default function ContactLead() {
           <h2>Tell us who to reach.</h2>
           <p>Share a few details and we will follow up Prefer a full private assessment? <Link to="/private-ai-visibility-assessment">Start here</Link>.</p>
         </div>
-        <form className="contact-lead__form" noValidate onSubmit={onSubmit}>
+        <form className="contact-lead__form contact-lead__card" noValidate onSubmit={onSubmit}>
           <div className="form-grid">
             <div className="form-field">
               <label htmlFor="lead-name">Name</label>

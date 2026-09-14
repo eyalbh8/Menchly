@@ -10,6 +10,7 @@ export default function FloatingCal() {
     <a
       className="floating-cal"
       href={href}
+      aria-label="Book appointment"
       {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
       onClick={() => trackEvent('calendar_handoff', {
         placement: 'floating',
@@ -23,7 +24,7 @@ export default function FloatingCal() {
           <path d="M3 9h18M8 3v4M16 3v4" />
         </svg>
       </span>
-      <span>Book appointment</span>
+      <span className="floating-cal__label">Book appointment</span>
     </a>
   );
 }

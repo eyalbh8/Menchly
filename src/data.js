@@ -74,10 +74,10 @@ export const reputationRisks = [
 ];
 
 export const servicePillars = [
-  { n: '01', title: 'Prompt & market intelligence', text: 'Map the questions, criteria and decision moments that reveal genuine purchase intent.' },
-  { n: '02', title: 'Authority architecture', text: 'Strengthen the owned and earned signals assistants use to understand expertise and trust.' },
-  { n: '03', title: 'Recommendation positioning', text: 'Clarify where the brand is a credible best fit - and make that distinction legible across the open web.' },
-  { n: '04', title: 'Reputation monitoring', text: 'Review how major assistants describe, compare and qualify the brand over time.' }
+  { n: '01', icon: 'search', title: 'Prompt & market intelligence', text: 'Map the questions, criteria and decision moments that reveal genuine purchase intent.' },
+  { n: '02', icon: 'shield', title: 'Authority architecture', text: 'Strengthen the owned and earned signals assistants use to understand expertise and trust.' },
+  { n: '03', icon: 'target', title: 'Recommendation positioning', text: 'Clarify where the brand is a credible best fit - and make that distinction legible across the open web.' },
+  { n: '04', icon: 'radar', title: 'Reputation monitoring', text: 'Review how major assistants describe, compare and qualify the brand over time.' }
 ];
 
 export const promptIntelligence = [
