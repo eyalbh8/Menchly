@@ -315,6 +315,181 @@ p { text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) {
   .hero::before, .hero__aurora::before, .hero__aurora::after { animation: none; }
 }
+
+.hero-field {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse 34% 30% at 50% 52%, transparent 45%, #000 100%);
+  mask-image: radial-gradient(ellipse 34% 30% at 50% 52%, transparent 45%, #000 100%);
+}
+.hero-field.is-paused *,
+.hero-field.is-paused *::before,
+.hero-field.is-paused *::after { animation-play-state: paused !important; }
+
+.hero-field__lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero-field__ring { fill: none; stroke: rgba(140, 166, 224, 0.14); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.hero-field__ring--inner { stroke-dasharray: 2 8; stroke: rgba(140, 166, 224, 0.12); }
+.hero-field__flow {
+  fill: none;
+  stroke: rgba(120, 160, 255, 0.45);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 14;
+  vector-effect: non-scaling-stroke;
+  animation: hero-flow 2.4s linear infinite;
+}
+@keyframes hero-flow { to { stroke-dashoffset: -34; } }
+
+.hero-orbit,
+.hero-orbit__y { position: absolute; inset: 0; display: grid; place-items: center; }
+.hero-orbit { animation: hero-orbit-x 35s ease-in-out infinite alternate; }
+.hero-orbit__y { animation: hero-orbit-y 35s ease-in-out infinite alternate; }
+@keyframes hero-orbit-x { from { transform: translateX(-45%); } to { transform: translateX(45%); } }
+@keyframes hero-orbit-y { from { transform: translateY(-43%); } to { transform: translateY(43%); } }
+.hero-orbit__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  background: rgba(14, 24, 58, 0.7);
+  box-shadow: 0 0 0 6px rgba(72, 116, 255, 0.06), 0 10px 30px rgba(0, 0, 0, 0.35);
+  color: rgba(255, 255, 255, 0.85);
+}
+.hero-orbit__icon svg { width: 20px; height: 20px; }
+
+.hero-word {
+  position: absolute;
+  color: rgba(170, 190, 240, 0.5);
+  font-family: var(--serif);
+  font-size: clamp(16px, 1.3vw, 24px);
+  font-style: italic;
+  white-space: nowrap;
+  opacity: 0;
+  animation: hero-word 13.6s ease-in-out infinite;
+}
+@keyframes hero-word {
+  0%, 100% { opacity: 0; transform: translateY(10px); }
+  30%, 60% { opacity: .55; }
+  90% { opacity: 0; transform: translateY(-10px); }
+}
+
+.hero-float {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.88);
+  text-align: left;
+  opacity: 0;
+  animation-name: hero-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes hero-float {
+  0% { opacity: 0; transform: translateY(26px) scale(.96); }
+  10% { opacity: 1; transform: translateY(0) scale(1); }
+  72% { opacity: 1; transform: translateY(-16px) scale(1); }
+  84%, 100% { opacity: 0; transform: translateY(-28px) scale(.98); }
+}
+.hero-prompt,
+.hero-source,
+.hero-metric {
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: linear-gradient(180deg, rgba(20, 32, 72, 0.72), rgba(10, 16, 40, 0.72));
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.hero-prompt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px 7px 7px;
+  border-radius: var(--r-pill);
+  font-size: clamp(12px, .8vw, 14px);
+}
+.hero-prompt__icon { display: grid; flex: none; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: rgba(255, 255, 255, 0.1); }
+.hero-prompt__icon svg { width: 13px; height: 13px; }
+.hero-prompt__text {
+  white-space: nowrap;
+  animation: hero-type var(--cycle) steps(24) var(--delay) infinite;
+}
+@keyframes hero-type {
+  0%, 8% { clip-path: inset(0 100% 0 0); }
+  34%, 100% { clip-path: inset(0 0 0 0); }
+}
+
+.hero-source {
+  display: grid;
+  gap: 7px;
+  width: clamp(200px, 15vw, 260px);
+  padding: 14px;
+  border-radius: 14px;
+}
+.hero-source__kind { color: rgba(140, 170, 240, 0.9); font-family: var(--label); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.hero-source__title { font-family: var(--serif); font-size: clamp(15px, 1.05vw, 19px); line-height: 1.2; }
+.hero-source__lines { display: grid; gap: 5px; }
+.hero-source__lines i { height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.1); }
+.hero-source__lines i:last-child { width: 62%; }
+.hero-source__badge {
+  justify-self: start;
+  padding: 3px 9px;
+  border-radius: var(--r-pill);
+  background: rgba(72, 116, 255, 0.9);
+  color: #fff;
+  font-family: var(--label);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  animation: hero-badge var(--cycle) cubic-bezier(.34, 1.56, .64, 1) var(--delay) infinite;
+}
+@keyframes hero-badge {
+  0%, 28% { opacity: 0; transform: scale(.4); }
+  34% { opacity: 1; transform: scale(1.12); }
+  38%, 100% { opacity: 1; transform: scale(1); }
+}
+
+.hero-metric {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+.hero-metric__text { display: grid; gap: 2px; }
+.hero-metric__text span { color: rgba(255, 255, 255, 0.55); font-family: var(--label); font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.hero-metric__text strong { font: 700 17px/1.1 var(--display); font-variant-numeric: tabular-nums; }
+.hero-metric__spark { width: 60px; height: 22px; overflow: visible; }
+.hero-metric__spark path {
+  fill: none;
+  stroke: #7ea2ff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 70;
+  animation: hero-spark var(--cycle) ease-out var(--delay) infinite;
+}
+@keyframes hero-spark {
+  0%, 10% { stroke-dashoffset: 70; }
+  40%, 100% { stroke-dashoffset: 0; }
+}
+
+@media (max-width: 1399px), (max-height: 839px) {
+  .hero-float { display: none; }
+}
+@media (max-width: 1100px) {
+  .hero-field__flow { display: none; }
+}
+@media (max-width: 760px) {
+  .hero-orbit, .hero-word { display: none; }
+}
+@media (max-width: 760px) and (min-height: 800px) {
+  .hero-field .hero-float.is-mobile { display: flex; left: 50% !important; right: auto !important; translate: -50% 0; }
+  .hero-field .hero-prompt.is-mobile { top: 104px !important; }
+  .hero-field .hero-metric.is-mobile { top: auto !important; bottom: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-field { display: none; }
+}
 .hero__inner {
   position: relative;
   z-index: 2;

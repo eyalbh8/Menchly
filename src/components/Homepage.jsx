@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { trackEvent } from '../analytics.js';
 import { berkosCase, faqs, marketStats, platforms, productTabs, servicePillars } from '../data.js';
@@ -23,10 +23,107 @@ import {
 
 const calendarUrl = import.meta.env.VITE_CALENDAR_URL || '';
 
+const heroOrbit = ['chatgpt', 'claude', 'gemini', 'perplexity', 'copilot'];
+
+const heroPrompts = [
+  { icon: 'chatgpt', text: 'Best private bank in Zurich?', side: 'left', y: 22, delay: 0, duration: 15, mobile: true },
+  { icon: 'perplexity', text: 'Top villa developers, Limassol', side: 'left', y: 75, delay: -7, duration: 16 },
+  { icon: 'claude', text: 'Most trusted wealth manager?', side: 'right', y: 77, delay: -3, duration: 14 },
+  { icon: 'gemini', text: 'Safest private jet charter', side: 'left', y: 58, delay: -10, duration: 17 }
+];
+
+const heroSources = [
+  { kind: 'Editorial', title: 'The developers redefining coastal living', engine: 'ChatGPT', side: 'left', y: 38, delay: -4, duration: 16 },
+  { kind: 'Industry report', title: 'Where private wealth is relocating next', engine: 'Perplexity', side: 'right', y: 30, delay: -11, duration: 17 }
+];
+
+const heroMetrics = [
+  { label: 'Share of voice', value: '▲ 33.2%', side: 'left', y: 88, delay: -2, duration: 15, mobile: true },
+  { label: 'AI mentions · 90d', value: '2,424', side: 'right', y: 17, delay: -8, duration: 16 }
+];
+
+const heroWords = [
+  { word: 'Citations', x: 18, y: 12 }, { word: 'Entities', x: 80, y: 44 }, { word: 'Retrieval', x: 12, y: 50 },
+  { word: 'Share of voice', x: 74, y: 94 }, { word: 'Grounding', x: 30, y: 94 }, { word: 'Sentiment', x: 88, y: 70 },
+  { word: 'Structured data', x: 8, y: 94 }, { word: 'Recommendations', x: 70, y: 8 }
+];
+
+function heroPlacement(item) {
+  return {
+    [item.side]: 'clamp(16px, 2.6vw, 56px)',
+    top: `${item.y}%`,
+    animationDuration: `${item.duration}s`,
+    animationDelay: `${item.delay}s`,
+    '--cycle': `${item.duration}s`,
+    '--delay': `${item.delay}s`
+  };
+}
+
+function HeroField() {
+  const ref = useRef(null);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) return undefined;
+    const observer = new IntersectionObserver(([entry]) => setPaused(!entry.isIntersecting));
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className={`hero-field ${paused ? 'is-paused' : ''}`.trim()} ref={ref} aria-hidden="true">
+      <svg className="hero-field__lines" viewBox="0 0 1600 900" preserveAspectRatio="none">
+        <ellipse className="hero-field__ring" cx="800" cy="450" rx="720" ry="390" />
+        <ellipse className="hero-field__ring hero-field__ring--inner" cx="800" cy="450" rx="560" ry="300" />
+        <path className="hero-field__flow" d="M300 250 C 520 250 620 430 800 450" />
+        <path className="hero-field__flow" d="M300 640 C 520 640 620 470 800 450" style={{ animationDelay: '-1.2s' }} />
+        <path className="hero-field__flow" d="M1300 330 C 1080 330 980 430 800 450" style={{ animationDelay: '-.6s' }} />
+        <path className="hero-field__flow" d="M1300 700 C 1080 700 980 470 800 450" style={{ animationDelay: '-1.8s' }} />
+      </svg>
+
+      {heroOrbit.map((icon, i) => (
+        <span className="hero-orbit" style={{ animationDelay: `${-i * 14}s` }} key={icon}>
+          <span className="hero-orbit__y" style={{ animationDelay: `${-i * 14 - 17.5}s` }}>
+            <span className="hero-orbit__icon"><PlatformIcon id={icon} /></span>
+          </span>
+        </span>
+      ))}
+
+      {heroWords.map((w, i) => (
+        <span className="hero-word" style={{ left: `${w.x}%`, top: `${w.y}%`, animationDelay: `${-i * 1.7}s` }} key={w.word}>{w.word}</span>
+      ))}
+
+      {heroPrompts.map((p) => (
+        <div className={`hero-float hero-prompt ${p.mobile ? 'is-mobile' : ''}`.trim()} style={heroPlacement(p)} key={p.text}>
+          <span className="hero-prompt__icon"><PlatformIcon id={p.icon} /></span>
+          <span className="hero-prompt__text">{p.text}</span>
+        </div>
+      ))}
+
+      {heroSources.map((s) => (
+        <div className="hero-float hero-source" style={heroPlacement(s)} key={s.title}>
+          <span className="hero-source__kind">{s.kind}</span>
+          <span className="hero-source__title">{s.title}</span>
+          <span className="hero-source__lines"><i /><i /></span>
+          <span className="hero-source__badge">Cited · {s.engine}</span>
+        </div>
+      ))}
+
+      {heroMetrics.map((m) => (
+        <div className={`hero-float hero-metric ${m.mobile ? 'is-mobile' : ''}`.trim()} style={heroPlacement(m)} key={m.label}>
+          <span className="hero-metric__text"><span>{m.label}</span><strong>{m.value}</strong></span>
+          <svg className="hero-metric__spark" viewBox="0 0 60 22"><path d="M2 18 L12 15 L20 16 L30 10 L38 12 L48 5 L58 3" /></svg>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function Hero() {
   return (
     <section id="top" className="hero">
       <div className="hero__aurora" aria-hidden="true" />
+      <HeroField />
       <div className="shell hero__inner">
         <span className="hero__badge hero__in" style={{ animationDelay: '.05s' }}>Built to adapt · Built to compound</span>
         <h1 className="hero__headline hero__in" style={{ animationDelay: '.16s' }}>
