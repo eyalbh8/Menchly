@@ -2,6 +2,43 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 import { assessmentHref } from '../data.js';
 import { trackEvent } from '../analytics.js';
+import { citationsData, promptsData } from '../data/workspaceData.js';
+
+export const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+export function useInView() {
+  const ref = React.useRef(null);
+  const [inView, setInView] = React.useState(false);
+  React.useEffect(() => {
+    if (!('IntersectionObserver' in window)) { setInView(true); return undefined; }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setInView(true); observer.disconnect(); }
+    }, { threshold: 0.35 });
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+  return [ref, inView];
+}
+
+export function AnimatedNumber({ value, decimals = 0 }) {
+  const [shown, setShown] = React.useState(value);
+  const from = React.useRef(value);
+  React.useEffect(() => {
+    if (reducedMotion()) { from.current = value; setShown(value); return undefined; }
+    const start = performance.now();
+    const origin = from.current;
+    let frame;
+    const tick = (now) => {
+      const t = Math.min((now - start) / 900, 1);
+      from.current = origin + (value - origin) * (1 - (1 - t) ** 3);
+      setShown(from.current);
+      if (t < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [value]);
+  return shown.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+}
 
 export function Section({ id, tone = '', className = '', children, ...props }) {
   return (
@@ -139,51 +176,139 @@ export function ProductStage({ src, alt, width, height, className = '' }) {
   );
 }
 
-function ResearchChart({ kind }) {
-  // Real data charts from workspace - mapped to research notes
-  if (kind === 'high-intent-prompt-intelligence') {
-    // Intent distribution: Informational 76%, Commercial 17%, Nav 3%, Trans 3%
-    return (
-      <svg viewBox="0 0 280 120" fill="none" aria-hidden="true">
-        <text x="18" y="18" fill="currentColor" opacity=".45" fontSize="9" fontFamily="system-ui,sans-serif">Intent distribution</text>
-        <text x="32" y="32" textAnchor="middle" fill="currentColor" opacity=".85" fontSize="10" fontWeight="700" fontFamily="system-ui,sans-serif">76%</text>
-        <rect x="18" y="38" width="28" height="68" rx="3" fill="currentColor" />
-        <text x="76" y="68" textAnchor="middle" fill="currentColor" opacity=".7" fontSize="10" fontWeight="700" fontFamily="system-ui,sans-serif">17%</text>
-        <rect x="62" y="74" width="28" height="32" rx="3" fill="currentColor" opacity=".65" />
-        <text x="120" y="94" textAnchor="middle" fill="currentColor" opacity=".55" fontSize="9" fontFamily="system-ui,sans-serif">3%</text>
-        <rect x="106" y="100" width="28" height="6" rx="3" fill="currentColor" opacity=".35" />
-        <text x="164" y="94" textAnchor="middle" fill="currentColor" opacity=".55" fontSize="9" fontFamily="system-ui,sans-serif">3%</text>
-        <rect x="150" y="100" width="28" height="6" rx="3" fill="currentColor" opacity=".35" />
-        <text x="18" y="118" fill="currentColor" opacity=".35" fontSize="8" fontFamily="system-ui,sans-serif">Info · Comm · Nav · Trans</text>
-      </svg>
-    );
-  }
-  if (kind === 'authority-without-overexposure') {
-    // Citation mix: Corporate, Other, Institutional, Editorial, UGC, Reference
-    return (
-      <svg viewBox="0 0 280 120" fill="none" aria-hidden="true">
-        <text x="18" y="18" fill="currentColor" opacity=".45" fontSize="9" fontFamily="system-ui,sans-serif">Citation sources</text>
-        <circle cx="100" cy="64" r="42" fill="none" stroke="currentColor" strokeWidth="20" opacity=".28" />
-        <circle cx="100" cy="64" r="42" fill="none" stroke="currentColor" strokeWidth="20" 
-          strokeDasharray="88 176" transform="rotate(-90 100 64)" />
-        <circle cx="100" cy="64" r="42" fill="none" stroke="currentColor" strokeWidth="20" 
-          strokeDasharray="82 176" transform="rotate(33 100 64)" opacity=".7" />
-        <circle cx="100" cy="64" r="42" fill="none" stroke="currentColor" strokeWidth="20" 
-          strokeDasharray="24 176" transform="rotate(145 100 64)" opacity=".5" />
-      </svg>
-    );
-  }
-  // recommendation-gap: rank vs mentions
+function useTicker(running, ms) {
+  const [tick, setTick] = React.useState(0);
+  React.useEffect(() => {
+    if (!running) return undefined;
+    const timer = setInterval(() => setTick((n) => n + 1), ms);
+    return () => clearInterval(timer);
+  }, [running, ms]);
+  return tick;
+}
+
+const gapRows = [
+  { label: 'Known', brands: 8, you: true },
+  { label: 'Shortlisted', brands: 3 },
+  { label: 'Selected', brands: 1 }
+];
+
+function GapChart({ running }) {
+  const cycle = useTicker(running, 7000);
   return (
-    <svg viewBox="0 0 280 120" fill="none" aria-hidden="true">
-      <text x="18" y="18" fill="currentColor" opacity=".45" fontSize="9" fontFamily="system-ui,sans-serif">Rank vs mentions</text>
-      <rect x="36" y="28" width="72" height="72" rx="4" fill="currentColor" opacity=".22" />
-      <rect x="132" y="58" width="72" height="42" rx="4" fill="currentColor" />
-      <path d="M72 28 V100 M168 58 V100" stroke="currentColor" strokeWidth="1" opacity=".4" />
-      <text x="48" y="118" fill="currentColor" opacity=".35" fontSize="8" fontFamily="system-ui,sans-serif">Known</text>
-      <text x="148" y="118" fill="currentColor" opacity=".35" fontSize="8" fontFamily="system-ui,sans-serif">Selected</text>
-    </svg>
+    <div className="gap-chart" key={cycle}>
+      {gapRows.map((row, r) => (
+        <div className="gap-chart__row" style={{ '--row': r }} key={row.label}>
+          <span className="gap-chart__label">{row.label}</span>
+          <span className="gap-chart__dots">
+            {Array.from({ length: row.brands }, (_, i) => (
+              <React.Fragment key={i}>
+                {row.you && i === 4 && <span className="gap-chart__dot gap-chart__dot--you" style={{ '--i': i }}><em>You</em></span>}
+                <span className="gap-chart__dot" style={{ '--i': i + (row.you && i >= 4 ? 1 : 0) }} />
+              </React.Fragment>
+            ))}
+            {!row.you && <span className="gap-chart__dot gap-chart__dot--missing" />}
+          </span>
+          <span className="gap-chart__count">{row.brands + (row.you ? 1 : 0)}</span>
+        </div>
+      ))}
+      <p className="gap-chart__verdict">Known, not selected</p>
+    </div>
   );
+}
+
+const intentPrompts = [
+  { text: 'What is Limassol known for?', intent: 'Informational' },
+  { text: 'Best developer for sea-view apartments in Limassol', intent: 'Commercial' },
+  { text: 'How do property taxes work in Cyprus?', intent: 'Informational' },
+  { text: 'History of Paphos old town', intent: 'Informational' },
+  { text: 'Book a villa viewing in Protaras this week', intent: 'Transactional' },
+  { text: 'Is Cyprus a good place to retire?', intent: 'Informational' },
+  { text: 'Compare off-plan developers in Larnaca', intent: 'Commercial' },
+  { text: 'Weather in Ayia Napa in March', intent: 'Informational' }
+];
+
+function IntentFeed({ running }) {
+  const tick = useTicker(running, 1800) + 3;
+  const split = promptsData.intentSplit;
+  const highIntent = split.filter((s) => s.intent === 'Commercial' || s.intent === 'Transactional').reduce((sum, s) => sum + s.percent, 0);
+  const count = intentPrompts.length;
+  return (
+    <div className="intent-feed">
+      <div className="intent-feed__list">
+        {[0, 1, 2, 3].map((pos) => {
+          const n = tick - pos;
+          const prompt = intentPrompts[n % count];
+          const high = prompt.intent !== 'Informational';
+          return (
+            <div className="intent-feed__slot" key={n} style={{ transform: `translateY(${pos * 100}%)`, opacity: pos === 3 ? 0 : 1 }}>
+              <div className={`intent-feed__item ${high ? 'is-high' : ''}`.trim()}>
+                <span className="intent-feed__text">{prompt.text}</span>
+                <span className="intent-feed__tag">{high ? 'High intent' : 'Info'}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div className="intent-bar">
+        {split.map((s, i) => <span key={s.intent} style={{ width: `${s.percent}%`, background: s.color, '--i': i }} title={`${s.intent} ${s.percent}%`} />)}
+      </div>
+      <p className="intent-bar__legend">
+        <strong><AnimatedNumber value={running ? highIntent : 0} />%</strong> high intent · {split[0].percent}% informational
+      </p>
+    </div>
+  );
+}
+
+function CitationDonut({ running }) {
+  const { byType, total } = citationsData;
+  const active = useTicker(running, 2400) % byType.length;
+  let offset = 0;
+  const segments = byType.map((s) => {
+    const pct = (s.count / total) * 100;
+    const segment = { ...s, pct, offset };
+    offset += pct;
+    return segment;
+  });
+  return (
+    <div className={`donut ${running ? 'is-cycling' : ''}`.trim()}>
+      <div className="donut__figure">
+        <svg className="donut__svg" viewBox="0 0 120 120" aria-hidden="true">
+          {segments.map((s, i) => {
+            const len = Math.max(s.pct - 0.8, 0.4);
+            return (
+              <circle
+                key={s.type}
+                className={`donut__seg ${i === active ? 'is-active' : ''}`.trim()}
+                cx="60" cy="60" r="46" fill="none" pathLength="100"
+                stroke={s.color}
+                strokeDasharray={`${len} ${100 - len}`}
+                strokeDashoffset={-s.offset}
+                transform="rotate(-90 60 60)"
+                style={{ '--i': i, strokeWidth: running && i === active ? 17 : 12 }}
+              />
+            );
+          })}
+        </svg>
+        <div className="donut__center">
+          <strong><AnimatedNumber value={running ? total : 0} /></strong>
+          <span>citations</span>
+        </div>
+      </div>
+      <ul className="donut__legend">
+        {segments.map((s, i) => (
+          <li className={running && i === active ? 'is-active' : ''} key={s.type}>
+            <i style={{ background: s.color }} />{s.type}<b>{s.pct.toFixed(1)}%</b>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function ResearchChart({ kind, running }) {
+  if (kind === 'high-intent-prompt-intelligence') return <IntentFeed running={running} />;
+  if (kind === 'authority-without-overexposure') return <CitationDonut running={running} />;
+  return <GapChart running={running} />;
 }
 
 function getChartAttribution(slug) {
@@ -200,15 +325,17 @@ function getChartAttribution(slug) {
 }
 
 export function ResearchCard({ article }) {
+  const [ref, inView] = useInView();
+  const running = inView && !reducedMotion();
   return (
-    <Link className="research-card" to={`/insights/${article.slug}`}>
+    <Link className="research-card" to={`/insights/${article.slug}`} ref={ref}>
       <div className="research-card__meta">
         <span>Research</span>
       </div>
       <h3>{article.title}</h3>
       <p className="research-card__deck">{article.deck}</p>
-      <div className="research-card__chart">
-        <ResearchChart kind={article.slug} />
+      <div className={`research-card__chart ${running ? 'is-running' : ''}`.trim()} aria-hidden="true">
+        <ResearchChart kind={article.slug} running={running} />
         <p className="research-card__axis">{getChartAttribution(article.slug)}</p>
       </div>
       <span className="research-card__read">Read</span>

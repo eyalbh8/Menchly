@@ -1,4 +1,4 @@
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { trackEvent } from '../analytics.js';
 import { berkosCase, faqs, marketStats, platforms, productTabs, servicePillars } from '../data.js';
@@ -10,7 +10,7 @@ import {
   aiTrafficData 
 } from '../data/workspaceData.js';
 import { insightArticles } from '../content/insights.js';
-import { AssessmentLink, ProductStage, ResearchGrid, Section, SectionHeader, InternalLink, ArrowLink, FaqAccordion } from './UI.jsx';
+import { AssessmentLink, ProductStage, ResearchGrid, Section, SectionHeader, InternalLink, ArrowLink, FaqAccordion, AnimatedNumber, reducedMotion, useInView } from './UI.jsx';
 import { 
   MetricGrid, 
   PlatformBars, 
@@ -268,7 +268,12 @@ function MarketStats() {
           src="/images/generated/market-ask-ai.jpg"
           alt="A person asking an AI assistant for a recommendation at night"
         >
-          <GlassPrompt icon="claude" text="“Which agency should handle a discreet off-market sale?”" />
+          <GlassPrompt prompts={[
+            { icon: 'claude', text: 'Which agency should handle a discreet off-market sale?' },
+            { icon: 'chatgpt', text: 'Best private clinic for an executive health check?' },
+            { icon: 'perplexity', text: 'Which law firm handles cross-border M&A in Cyprus?' },
+            { icon: 'gemini', text: 'Most trusted wealth manager for relocating families' }
+          ]} />
         </ServicePhoto>
       </div>
       <ul className="market-stats">
@@ -406,39 +411,141 @@ function ServiceIcon({ id }) {
   );
 }
 
-function GlassPrompt({ icon, text }) {
+function SendIcon() {
   return (
-    <div className="glass-card glass-card--prompt">
-      <span className="glass-card__icon"><PlatformIcon id={icon} /></span>
-      <p>{text}</p>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" />
+    </svg>
+  );
+}
+
+function GlassPrompt({ prompts }) {
+  const [ref, inView] = useInView();
+  const [index, setIndex] = useState(0);
+  const [chars, setChars] = useState(prompts[0].text.length);
+  const [deleting, setDeleting] = useState(false);
+  const { icon, text } = prompts[index];
+  const typed = !deleting && chars === text.length;
+  const longest = prompts.reduce((a, b) => (b.text.length > a.length ? b.text : a), '');
+
+  useEffect(() => {
+    if (inView && !reducedMotion()) setChars(0);
+  }, [inView]);
+
+  useEffect(() => {
+    if (!inView || reducedMotion()) return undefined;
+    let delay;
+    let step;
+    if (!deleting && chars < text.length) { delay = 35 + Math.random() * 55; step = () => setChars(chars + 1); }
+    else if (!deleting) { delay = 2400; step = () => setDeleting(true); }
+    else if (chars > 0) { delay = 14; step = () => setChars(chars - 1); }
+    else { delay = 320; step = () => { setDeleting(false); setIndex((index + 1) % prompts.length); }; }
+    const timer = setTimeout(step, delay);
+    return () => clearTimeout(timer);
+  }, [inView, chars, deleting, index, text, prompts.length]);
+
+  return (
+    <div className="glass-card glass-card--prompt" ref={ref}>
+      <span className="visually-hidden">{prompts.map((p) => p.text).join('. ')}</span>
+      <span className="glass-card__icon" key={icon} aria-hidden="true"><PlatformIcon id={icon} /></span>
+      <p className="glass-typer" aria-hidden="true">
+        <span className="glass-typer__ghost">{longest}</span>
+        <span>{text.slice(0, chars)}<span className="glass-typer__caret" /></span>
+      </p>
+      <span className={`glass-card__send ${typed ? 'is-ready' : ''}`} aria-hidden="true"><SendIcon /></span>
     </div>
   );
 }
 
-function GlassBars({ title, rows }) {
+function GlassBars({ title, rows, live = false, counter }) {
+  const [ref, inView] = useInView();
+  const base = rows.map((row) => row.value);
+  const zeros = base.map(() => 0);
+  const [data, setData] = useState({ values: zeros, prev: zeros });
+  const [count, setCount] = useState(counter?.start ?? 0);
+  const decimals = live ? 1 : 0;
+
+  useEffect(() => {
+    if (!inView) return undefined;
+    setData({ values: base, prev: base });
+    if (reducedMotion()) return undefined;
+    const spread = live ? 3 : 7;
+    const drift = setInterval(() => {
+      setData((current) => ({
+        prev: current.values,
+        values: base.map((v) => {
+          const next = v + (Math.random() * 2 - 1) * spread;
+          return Math.round(Math.min(96, Math.max(4, next)) * 10 ** decimals) / 10 ** decimals;
+        })
+      }));
+    }, 2800);
+    const tick = counter && setInterval(() => setCount((c) => c + 1 + Math.floor(Math.random() * 4)), 1100);
+    return () => { clearInterval(drift); if (tick) clearInterval(tick); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
+
   return (
-    <div className="glass-card glass-card--bars">
-      <p className="glass-card__title">{title}</p>
-      {rows.map((row) => (
-        <div className="glass-bar" key={row.label}>
-          <span className="glass-bar__label">
-            {row.icon && <span className="glass-bar__icon"><PlatformIcon id={row.icon} /></span>}
-            {row.label}
-          </span>
-          <span className="glass-bar__track"><span className="glass-bar__fill" style={{ width: `${row.value}%` }} /></span>
-          <span className="glass-bar__value">{row.value}%</span>
-        </div>
-      ))}
+    <div className={`glass-card glass-card--bars ${live ? 'glass-card--live' : ''}`.trim()} ref={ref}>
+      <div className="glass-card__head">
+        <p className="glass-card__title">{title}</p>
+        {live && <span className="glass-card__live"><span className="glass-card__live-dot" />Live</span>}
+        {counter && <span className="glass-card__counter"><strong><AnimatedNumber value={count} /></strong> {counter.label}</span>}
+      </div>
+      {rows.map((row, i) => {
+        const delta = data.values[i] - data.prev[i];
+        return (
+          <div className="glass-bar" key={row.label}>
+            <span className="glass-bar__label">
+              {row.icon && <span className="glass-bar__icon"><PlatformIcon id={row.icon} /></span>}
+              {row.label}
+            </span>
+            <span className="glass-bar__track"><span className="glass-bar__fill" style={{ width: `${data.values[i]}%` }} /></span>
+            <span className="glass-bar__value"><AnimatedNumber value={data.values[i]} decimals={decimals} />%</span>
+            {live && (
+              <span className={`glass-bar__delta ${delta >= 0 ? 'is-up' : 'is-down'}`} key={data.values[i]}>
+                {Math.abs(delta) >= 0.1 && `${delta > 0 ? '▲' : '▼'} ${Math.abs(delta).toFixed(1)}`}
+              </span>
+            )}
+          </div>
+        );
+      })}
       <p className="glass-card__hint">Illustrative concept</p>
     </div>
   );
 }
 
-function GlassAnswer({ text, source }) {
+function GlassAnswer({ answers }) {
+  const [ref, inView] = useInView();
+  const [active, setActive] = useState(0);
+  const running = inView && !reducedMotion();
+
+  useEffect(() => {
+    if (!running) return undefined;
+    const timer = setInterval(() => setActive((i) => (i + 1) % answers.length), 4200);
+    return () => clearInterval(timer);
+  }, [running, answers.length]);
+
   return (
-    <div className="glass-card glass-card--answer">
-      <p>{text}</p>
-      <span className="glass-card__source">{source}</span>
+    <div className="glass-card glass-card--answer" ref={ref}>
+      <div className={`glass-answer__tabs ${running ? 'is-running' : ''}`.trim()} aria-hidden="true">
+        {answers.map((answer, i) => (
+          <span className={`glass-answer__tab ${i === active ? 'is-active' : ''}`.trim()} key={answer.engine}>
+            <PlatformIcon id={answer.icon} />
+          </span>
+        ))}
+      </div>
+      <div className="glass-answer__stack">
+        {answers.map((answer, i) => (
+          <div className={`glass-answer ${i === active ? 'is-active' : ''}`.trim()} key={answer.engine} aria-hidden={i !== active}>
+            <p>
+              {answer.text.split('{brand}').map((part, j) => (
+                <span key={j}>{j > 0 && <span className="glass-answer__brand">Your brand</span>}{part}</span>
+              ))}
+            </p>
+            <span className="glass-card__source">Recommended by {answer.engine}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -456,12 +563,17 @@ const serviceMedia = {
   '01': {
     src: '/images/generated/service-intelligence.jpg',
     alt: 'Close-up of hands typing on a laptop at night, lit by the screen’s glow',
-    card: <GlassPrompt icon="chatgpt" text="“What's the best luxury real estate agency in Cyprus?”" />
+    card: <GlassPrompt prompts={[
+      { icon: 'chatgpt', text: 'Best luxury real estate agency in Cyprus?' },
+      { icon: 'perplexity', text: 'Who sells beachfront villas in Limassol?' },
+      { icon: 'gemini', text: 'Top off-plan developers in Paphos 2026' },
+      { icon: 'claude', text: 'Discreet agent for a €5M property sale' }
+    ]} />
   },
   '02': {
     src: '/images/generated/service-authority.jpg',
     alt: 'A stack of press clippings and editorial pages under a desk lamp at night',
-    card: <GlassBars title="Citation sources" rows={[
+    card: <GlassBars title="Citation sources" counter={{ start: 1284, label: 'citations analysed' }} rows={[
       { label: 'Editorial', value: 62 },
       { label: 'Reference', value: 41 },
       { label: 'UGC', value: 24 }
@@ -470,12 +582,17 @@ const serviceMedia = {
   '03': {
     src: '/images/generated/service-positioning.jpg',
     alt: 'A well-dressed man checking his phone in a private aviation lounge at dusk',
-    card: <GlassAnswer text="For beachfront villas in Cyprus, this brand is consistently recommended for transparent pricing and local expertise." source="Cited · Perplexity" />
+    card: <GlassAnswer answers={[
+      { engine: 'ChatGPT', icon: 'chatgpt', text: 'For beachfront villas in Limassol, {brand} stands out for transparent pricing and deep local expertise.' },
+      { engine: 'Perplexity', icon: 'perplexity', text: 'Buyers comparing off-plan projects in Cyprus most often point to {brand} for its delivery track record.' },
+      { engine: 'Gemini', icon: 'gemini', text: '{brand} is a frequently recommended choice for discreet, high-value property sales in Paphos.' },
+      { engine: 'Claude', icon: 'claude', text: 'If privacy and after-sale service matter most, {brand} belongs on your shortlist.' }
+    ]} />
   },
   '04': {
     src: '/images/generated/service-monitoring.jpg',
     alt: 'A team reviewing how a brand is mentioned across AI assistants',
-    card: <GlassBars title="Mention rate by platform" rows={[
+    card: <GlassBars title="Mention rate by platform" live rows={[
       { icon: 'chatgpt', label: 'ChatGPT', value: 54 },
       { icon: 'claude', label: 'Claude', value: 38 },
       { icon: 'perplexity', label: 'Perplexity', value: 29 }
