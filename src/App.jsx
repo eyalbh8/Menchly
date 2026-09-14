@@ -69,7 +69,7 @@ function ScrollProgress() {
 const REVEAL_SELECTOR = [
   '.section-header', '.market-stats li', '.industry-card', '.service-row',
   '.research-card', '.accordion', '.product-tabs', '.product-panel-container', '.case-strip',
-  '.contact-lead__layout > *', '.footer__cta .shell', '.page-hero__inner', '.page-card'
+  '.contact-lead__layout > *', '.footer__cta .shell', '.page-hero__inner', '.page-card', '.glass-card'
 ].join(',');
 
 function ScrollReveal() {

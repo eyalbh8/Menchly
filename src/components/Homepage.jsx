@@ -264,6 +264,12 @@ function MarketStats() {
             <span className="statement__word" style={{ '--i': i }} key={i}>{word} </span>
           ))}
         </p>
+        <ServicePhoto
+          src="/images/generated/market-ask-ai.jpg"
+          alt="A person asking an AI assistant for a recommendation at night"
+        >
+          <GlassPrompt icon="claude" text="“Which agency should handle a discreet off-market sale?”" />
+        </ServicePhoto>
       </div>
       <ul className="market-stats">
         {marketStats.map((stat) => (
@@ -323,14 +329,14 @@ function AITrafficPanel() {
 
   return (
     <Section id="ai-traffic-stats" tone="paper">
-      <SectionHeader
-        eyebrow="AI-driven visits"
-        title={<>Traffic that starts in <em>AI assistants.</em></>}
-        copy="Direct site visits originating from AI tools When a user asks ChatGPT, Gemini, or Perplexity a question and clicks through to a website, these analytics capture that journey - showing which models drive discovery and where those visitors are located"
-      />
       <div className="ai-traffic-layout">
-        <DataPanel 
-          title="AI traffic data" 
+        <SectionHeader
+          eyebrow="AI-driven visits"
+          title={<>Traffic that starts in <em>AI assistants.</em></>}
+          copy="Direct site visits originating from AI tools. When a user asks ChatGPT, Gemini, or Perplexity a question and clicks through to a website, these analytics capture that journey — showing which models drive discovery and where those visitors are located."
+        />
+        <DataPanel
+          title="AI traffic data"
           className="ai-traffic-panel"
         >
           <MetricGrid metrics={metrics} />
@@ -400,6 +406,83 @@ function ServiceIcon({ id }) {
   );
 }
 
+function GlassPrompt({ icon, text }) {
+  return (
+    <div className="glass-card glass-card--prompt">
+      <span className="glass-card__icon"><PlatformIcon id={icon} /></span>
+      <p>{text}</p>
+    </div>
+  );
+}
+
+function GlassBars({ title, rows }) {
+  return (
+    <div className="glass-card glass-card--bars">
+      <p className="glass-card__title">{title}</p>
+      {rows.map((row) => (
+        <div className="glass-bar" key={row.label}>
+          <span className="glass-bar__label">
+            {row.icon && <span className="glass-bar__icon"><PlatformIcon id={row.icon} /></span>}
+            {row.label}
+          </span>
+          <span className="glass-bar__track"><span className="glass-bar__fill" style={{ width: `${row.value}%` }} /></span>
+          <span className="glass-bar__value">{row.value}%</span>
+        </div>
+      ))}
+      <p className="glass-card__hint">Illustrative concept</p>
+    </div>
+  );
+}
+
+function GlassAnswer({ text, source }) {
+  return (
+    <div className="glass-card glass-card--answer">
+      <p>{text}</p>
+      <span className="glass-card__source">{source}</span>
+    </div>
+  );
+}
+
+function ServicePhoto({ src, alt, children }) {
+  return (
+    <div className="service-photo">
+      <img src={src} alt={alt} loading="lazy" />
+      {children}
+    </div>
+  );
+}
+
+const serviceMedia = {
+  '01': {
+    src: '/images/generated/service-intelligence.jpg',
+    alt: 'Close-up of hands typing on a laptop at night, lit by the screen’s glow',
+    card: <GlassPrompt icon="chatgpt" text="“What's the best luxury real estate agency in Cyprus?”" />
+  },
+  '02': {
+    src: '/images/generated/service-authority.jpg',
+    alt: 'A stack of press clippings and editorial pages under a desk lamp at night',
+    card: <GlassBars title="Citation sources" rows={[
+      { label: 'Editorial', value: 62 },
+      { label: 'Reference', value: 41 },
+      { label: 'UGC', value: 24 }
+    ]} />
+  },
+  '03': {
+    src: '/images/generated/service-positioning.jpg',
+    alt: 'A well-dressed man checking his phone in a private aviation lounge at dusk',
+    card: <GlassAnswer text="For beachfront villas in Cyprus, this brand is consistently recommended for transparent pricing and local expertise." source="Cited · Perplexity" />
+  },
+  '04': {
+    src: '/images/generated/service-monitoring.jpg',
+    alt: 'A team reviewing how a brand is mentioned across AI assistants',
+    card: <GlassBars title="Mention rate by platform" rows={[
+      { icon: 'chatgpt', label: 'ChatGPT', value: 54 },
+      { icon: 'claude', label: 'Claude', value: 38 },
+      { icon: 'perplexity', label: 'Perplexity', value: 29 }
+    ]} />
+  }
+};
+
 function Services() {
   return (
     <Section id="services" tone="blue">
@@ -409,16 +492,22 @@ function Services() {
         copy="We identify where to act, execute through custom infrastructure, then learn and compound from the results"
       />
       <div className="service-list">
-        {servicePillars.map((service) => (
-          <article className="service-row" key={service.n}>
-            <span className="service-row__badge">
-              <ServiceIcon id={service.icon} />
-              <span className="card-number">{service.n}</span>
-            </span>
-            <h3>{service.title}</h3>
-            <p>{service.text}</p>
-          </article>
-        ))}
+        {servicePillars.map((service, index) => {
+          const media = serviceMedia[service.n];
+          return (
+            <article className={`service-row ${index % 2 ? 'service-row--reverse' : ''}`.trim()} key={service.n}>
+              <div className="service-row__text">
+                <span className="service-row__badge">
+                  <ServiceIcon id={service.icon} />
+                  <span className="card-number">{service.n}</span>
+                </span>
+                <h3>{service.title}</h3>
+                <p>{service.text}</p>
+              </div>
+              {media && <ServicePhoto src={media.src} alt={media.alt}>{media.card}</ServicePhoto>}
+            </article>
+          );
+        })}
       </div>
       <div style={{ marginTop: '3rem', textAlign: 'center' }}>
         <InternalLink to="/services">Explore our services</InternalLink>

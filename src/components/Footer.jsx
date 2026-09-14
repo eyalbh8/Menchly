@@ -29,6 +29,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer__cta">
+        <img className="footer__cta-bg" src="/images/generated/cta-advisor.jpg" alt="" aria-hidden="true" loading="lazy" />
         <div className="hero__aurora" aria-hidden="true" />
         <div className="shell">
           <h2>

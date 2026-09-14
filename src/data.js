@@ -192,7 +192,7 @@ export const marketStats = [
 export const berkosCase = {
   client: 'Berkos Developer & Properties',
   sector: 'Luxury real estate · Cyprus',
-  headline: 'Brands that show up Results that speak.',
+  headline: 'Brands that show up. Results that speak.',
   copy: 'A live Menchly workspace tracking how AI engines describe, compare and cite a prime property brand across high-intent buyer questions.'
 };
 
