@@ -29,6 +29,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer__cta">
+        <div className="hero__aurora" aria-hidden="true" />
         <div className="shell">
           <h2>
             <span className="final-cta__line">See where</span>{' '}
@@ -65,6 +66,7 @@ export default function Footer() {
             <Link to="/terms">Terms</Link>
           </div>
         </div>
+        <p className="footer__wordmark" aria-hidden="true">Menchly</p>
       </div>
     </footer>
   );

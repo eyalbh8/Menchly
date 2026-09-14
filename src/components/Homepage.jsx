@@ -88,7 +88,7 @@ function PlatformIcon({ id }) {
 }
 
 function PlatformGrid() {
-  const loop = [...platforms, ...platforms];
+  const loop = [...platforms, ...platforms, ...platforms, ...platforms];
   return (
     <Section id="context" tone="paper">
       <div className="platform-marquee" aria-label="AI platforms considered in our work">
@@ -248,15 +248,22 @@ function ProductTheater() {
   );
 }
 
+const marketStatement = 'AI isn’t browsing. It’s choosing. The brands that show up in those answers win the consideration that never appears in traditional search reports.';
+
 function MarketStats() {
   return (
     <Section id="market" className="market-stats-section">
       <div className="market-stats__intro">
         <SectionHeader
+          align="center"
           eyebrow="A quiet decision"
           title={<>Which brand gets <em className="shine-text">mentioned.</em></>}
-          copy="AI isn’t browsing It’s choosing The brands that show up in those answers win the consideration that never appears in traditional search reports"
         />
+        <p className="statement">
+          {marketStatement.split(' ').map((word, i) => (
+            <span className="statement__word" style={{ '--i': i }} key={i}>{word} </span>
+          ))}
+        </p>
       </div>
       <ul className="market-stats">
         {marketStats.map((stat) => (

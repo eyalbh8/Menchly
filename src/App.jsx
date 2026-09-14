@@ -66,6 +66,42 @@ function ScrollProgress() {
   );
 }
 
+const REVEAL_SELECTOR = [
+  '.section-header', '.market-stats li', '.industry-card', '.service-row',
+  '.research-card', '.accordion', '.product-tabs', '.product-panel-container', '.case-strip',
+  '.contact-lead__layout > *', '.footer__cta .shell', '.page-hero__inner', '.page-card'
+].join(',');
+
+function ScrollReveal() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return undefined;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        el.addEventListener('transitionend', () => { el.style.transitionDelay = ''; }, { once: true });
+        el.classList.add('is-in');
+        observer.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+
+    document.querySelectorAll(REVEAL_SELECTOR).forEach((el) => {
+      if (el.classList.contains('is-in')) return;
+      if (!el.classList.contains('reveal')) {
+        const index = [...el.parentElement.children].indexOf(el);
+        el.style.transitionDelay = `${Math.min(index, 5) * 70}ms`;
+        el.classList.add('reveal');
+      }
+      observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  return null;
+}
+
 function RouteAnalytics() {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -83,6 +119,7 @@ export default function App() {
       <ScrollProgress />
       <RouteScrollManager />
       <RouteAnalytics />
+      <ScrollReveal />
       <SeoManager />
       <Nav />
       <main id="main-content" tabIndex="-1">
