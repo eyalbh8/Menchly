@@ -87,10 +87,36 @@ export function InternalLink({ to, children, className = '' }) {
   );
 }
 
-export function PageHero({ eyebrow, title, copy, children }) {
+export function Breadcrumbs({ items }) {
+  const trail = [{ name: 'Home', path: '/' }, ...items];
+  return (
+    <nav aria-label="Breadcrumb">
+      <ol className="breadcrumbs">
+        {trail.map((item, index) => (
+          <li key={item.path}>
+            {index === trail.length - 1
+              ? <span aria-current="page">{item.name}</span>
+              : <Link to={item.path}>{item.name}</Link>}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}
+
+export function RichText({ segments }) {
+  return segments.map((segment, index) => (
+    typeof segment === 'string'
+      ? <React.Fragment key={index}>{segment}</React.Fragment>
+      : <Link key={index} className="inline-link" to={segment.href}>{segment.text}</Link>
+  ));
+}
+
+export function PageHero({ eyebrow, title, copy, breadcrumbs, children }) {
   return (
     <section className="page-hero">
       <div className="shell">
+        {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
         {eyebrow && <p className="eyebrow">{eyebrow}</p>}
         <h1>{title}</h1>
         {copy && <p className="page-hero__copy">{copy}</p>}

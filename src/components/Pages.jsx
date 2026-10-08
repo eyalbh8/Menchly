@@ -2,9 +2,10 @@ import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
 import { industryCards, industryProfiles, methodologyStages, measurementDimensions, methodologyFaqs, methodologySources, serviceDetails } from '../pageContent.js';
 import { productImages, serviceFaqs } from '../data.js';
 import { getInsightArticle, insightArticles, EDITORIAL_ORGANIZATION, EXPERT_REVIEW_STATUS } from '../content/insights.js';
+import { getServiceOffering, serviceCards, serviceOfferings, servicePath, SERVICES_HUB_PATH } from '../content/services.js';
 import { calendarUrl } from '../cal.js';
 import BookMeeting from './BookMeeting.jsx';
-import { AssessmentLink, CtaBand, InternalLink, PageHero, ProductStage, ResearchGrid, Section, SectionHeader, FaqAccordion } from './UI.jsx';
+import { AssessmentLink, CtaBand, InternalLink, PageHero, ProductStage, ResearchGrid, RichText, Section, SectionHeader, FaqAccordion } from './UI.jsx';
 
 function slugify(text) {
   return text
@@ -47,19 +48,29 @@ export function ServicesPage() {
       >
         <AssessmentLink placement="services-hero">Discuss your recommendation priorities</AssessmentLink>
       </PageHero>
+      <Section id="catalogue">
+        <SectionHeader
+          eyebrow="What we do"
+          title={<>Seven services, <em>one connected programme.</em></>}
+          copy="Each service can stand alone, but they are designed to reinforce one another: research informs content, content earns authority, authority shapes reputation and AI answers, and better journeys turn that attention into enquiries"
+        />
+        <CardGrid items={serviceCards} className="page-card-grid--services" />
+      </Section>
       <Section tone="paper">
         <div className="split-intro">
           <SectionHeader eyebrow="A connected discipline" title={<>From signal to <em>compounding execution.</em></>} />
           <div className="prose">
             <p>We don’t offer cookie-cutter packages or self-serve solutions Data tells us where to act; custom infrastructure lets us execute faster, learn continuously, and compound results over time.</p>
-            <p>Our services begin with decision context We identify the audiences, questions and criteria closest to commercial intent, then build the infrastructure that helps assistants interpret the brand accurately.</p>
+            <p>Our services begin with decision context We identify the audiences, questions and criteria closest to commercial intent, then build the infrastructure that helps search engines, assistants and buyers interpret the brand accurately.</p>
+            <p>Whether the priority is <InternalLink to={servicePath('seo')}>SEO</InternalLink>, <InternalLink to={servicePath('aeo')}>answer engine optimisation</InternalLink> or <InternalLink to={servicePath('conversion-rate-optimization')}>conversion rate optimisation</InternalLink>, every engagement runs on the same four infrastructure pillars below.</p>
           </div>
         </div>
       </Section>
-      <Section>
+      <Section id="how-we-deliver">
+        <SectionHeader eyebrow="How we deliver" title={<>Four pillars behind <em>every service.</em></>} />
         <div className="service-detail-list">
           {serviceDetails.map((service) => (
-            <article className="service-detail" key={service.number}>
+            <article className="service-detail" id={`pillar-${service.slug}`} key={service.number}>
               <div>
                 <span className="card-number">→ {service.number}</span>
                 <h2>{service.title}</h2>
@@ -74,6 +85,15 @@ export function ServicesPage() {
               <div>
                 <p>{service.copy}</p>
                 <ul>{service.outputs.map((output) => <li key={output}>{output}</li>)}</ul>
+                <p className="service-detail__used-by">
+                  Used in:{' '}
+                  {serviceOfferings.filter((offering) => offering.pillars.includes(service.slug)).map((offering, index) => (
+                    <span key={offering.slug}>
+                      {index > 0 && ' · '}
+                      <Link className="inline-link" to={servicePath(offering.slug)}>{offering.navLabel}</Link>
+                    </span>
+                  ))}
+                </p>
               </div>
             </article>
           ))}
@@ -116,7 +136,7 @@ export function ServicesPage() {
         <div className="editorial-block">
           <SectionHeader eyebrow="Engagement design" title={<>Senior, selective and <em>built around your operating reality.</em></>} />
           <div className="prose prose--dark">
-            <p>Menchly can lead a defined strategic engagement or work as a specialist layer alongside brand, communications, SEO, content and reputation partners.</p>
+            <p>Menchly can run a full programme across several services, lead a single service, or work as a specialist layer alongside your existing brand, communications and media partners.</p>
             <p>Scope, access and approval controls are agreed at the outset. No responsible agency can guarantee an independent model recommendation; our role is to improve the clarity, credibility and authority on which those recommendations may depend.</p>
             <InternalLink to="/methodology">Review the methodology</InternalLink>
           </div>
@@ -124,28 +144,7 @@ export function ServicesPage() {
       </Section>
       <Section>
         <SectionHeader eyebrow="Frequently asked" title="Engagement questions" />
-        <div className="faq-list">
-          {serviceFaqs.map((faq) => (
-            <div key={faq.q} className="faq-item">
-              <h3>{faq.q}</h3>
-              <p>{faq.a}</p>
-              {faq.links && faq.links.length > 0 && (
-                <p>
-                  {faq.links.map((link, i) => (
-                    <span key={i}>
-                      {i > 0 && ' · '}
-                      {link.external ? (
-                        <a href={link.href} target="_blank" rel="noopener">{link.text}</a>
-                      ) : (
-                        <InternalLink to={link.href}>{link.text}</InternalLink>
-                      )}
-                    </span>
-                  ))}
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
+        <FaqList items={serviceFaqs} />
       </Section>
       <CtaBand />
     </>
@@ -241,6 +240,20 @@ export function IndustryPage() {
       </Section>
       <Section>
         <div className="next-links">
+          <div>
+            <p className="eyebrow">Services for this market</p>
+            <h2>Where we usually start in {industry.name.toLowerCase()}</h2>
+          </div>
+          <div>
+            {industry.services.map((slug) => (
+              <InternalLink key={slug} to={servicePath(slug)}>{getServiceOffering(slug).name}</InternalLink>
+            ))}
+            <InternalLink to={SERVICES_HUB_PATH}>All services</InternalLink>
+          </div>
+        </div>
+      </Section>
+      <Section tone="paper">
+        <div className="next-links">
           <div><p className="eyebrow">Continue exploring</p><h2>Related industry perspectives</h2></div>
           <div>
             {industryProfiles.filter((item) => item.slug !== industry.slug).slice(0, 3).map((item) => (
@@ -250,6 +263,146 @@ export function IndustryPage() {
         </div>
       </Section>
       <CtaBand title={`Establish your ${industry.name.toLowerCase()} recommendation baseline.`} />
+    </>
+  );
+}
+
+function FaqList({ items }) {
+  return (
+    <div className="faq-list">
+      {items.map((faq) => (
+        <div key={faq.q} className="faq-item">
+          <h3>{faq.q}</h3>
+          <p>{faq.a}</p>
+          {faq.links && faq.links.length > 0 && (
+            <p>
+              {faq.links.map((link, i) => (
+                <span key={link.href}>
+                  {i > 0 && ' · '}
+                  {link.external ? (
+                    <a href={link.href} target="_blank" rel="noopener">{link.text}</a>
+                  ) : (
+                    <InternalLink to={link.href}>{link.text}</InternalLink>
+                  )}
+                </span>
+              ))}
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function ServicePage() {
+  const { serviceSlug } = useParams();
+  const service = getServiceOffering(serviceSlug);
+  if (!service) return <NotFoundPage />;
+
+  const pillars = serviceDetails.filter((pillar) => service.pillars.includes(pillar.slug));
+  const industries = industryProfiles.filter((industry) => service.industries.includes(industry.slug));
+  const insights = insightArticles.filter((article) => service.insights.includes(article.slug));
+  const related = service.related.map((item) => ({ ...item, service: getServiceOffering(item.slug) }));
+  const shortName = service.navLabel === service.name ? service.name.toLowerCase() : service.navLabel;
+
+  return (
+    <>
+      <PageHero
+        breadcrumbs={[{ name: 'Services', path: SERVICES_HUB_PATH }, { name: service.name, path: servicePath(service.slug) }]}
+        eyebrow={service.eyebrow}
+        title={<>{service.heading.lead} <em>{service.heading.emphasis}</em></>}
+        copy={service.summary}
+      >
+        <AssessmentLink placement={`service-${service.slug}-hero`}>Discuss your priorities</AssessmentLink>
+      </PageHero>
+      <Section tone="paper">
+        <div className="split-intro">
+          <SectionHeader eyebrow="Why it matters" title={<>What {shortName} <em>is for.</em></>} />
+          <div className="prose">
+            {service.introduction.map((paragraph, index) => <p key={index}><RichText segments={paragraph} /></p>)}
+          </div>
+        </div>
+      </Section>
+      <Section>
+        <div className="detail-grid">
+          <DetailList title="Common challenges" items={service.challenges} />
+          <DetailList title="What we deliver" items={service.deliverables} />
+        </div>
+      </Section>
+      <Section tone="blue">
+        <SectionHeader eyebrow="How we work" title={<>A clear path from <em>diagnosis to results.</em></>} />
+        <ol className="method-grid method-grid--four">
+          {service.approach.map((step, index) => (
+            <li key={step.title}><span>{String(index + 1).padStart(2, '0')}</span><h3>{step.title}</h3><p>{step.copy}</p></li>
+          ))}
+        </ol>
+      </Section>
+      <Section tone="paper">
+        <div className="detail-grid">
+          <DetailList title="How progress is measured" items={service.measures} />
+          <div className="detail-narrative detail-narrative--paper">
+            <p className="eyebrow">Delivered through</p>
+            <h2>Built on our core infrastructure.</h2>
+            <p>Every service draws on the same connected infrastructure, so research, evidence and measurement compound across the programme rather than living in separate silos.</p>
+            <div className="pillar-links">
+              {pillars.map((pillar) => (
+                <InternalLink key={pillar.slug} to={`${SERVICES_HUB_PATH}#pillar-${pillar.slug}`}>{pillar.title}</InternalLink>
+              ))}
+              <InternalLink to="/methodology">The six-stage methodology</InternalLink>
+            </div>
+            <small>Measurement is directional evidence, not a guarantee of ranking, recommendation or commercial outcome.</small>
+          </div>
+        </div>
+      </Section>
+      <Section>
+        <div className="detail-grid">
+          <DetailList title="A good fit when" items={service.fit} />
+          <div className="detail-narrative">
+            <p className="eyebrow">Where this matters most</p>
+            <h2>Industries we apply this to.</h2>
+            <p>The approach adapts to the language, intermediaries and evidence of each market. These are the sectors where {shortName} most often shapes consideration.</p>
+            <div className="pillar-links">
+              {industries.map((industry) => (
+                <InternalLink key={industry.slug} to={`/industries/${industry.slug}`}>{industry.name}</InternalLink>
+              ))}
+              <InternalLink to="/industries">All industries</InternalLink>
+            </div>
+          </div>
+        </div>
+      </Section>
+      <Section tone="paper">
+        <SectionHeader eyebrow="Frequently asked" title={`${service.navLabel} questions`} />
+        <FaqList items={service.faqs} />
+      </Section>
+      <Section className="service-related">
+        <div className="next-links">
+          <div>
+            <p className="eyebrow">Continue exploring</p>
+            <h2>Related services</h2>
+            <p className="next-links__copy">Our services are designed to work together. These are the ones most closely connected to {service.name.toLowerCase()}.</p>
+          </div>
+          <div>
+            {related.map(({ slug, reason, service: relatedService }) => (
+              <div className="related-service" key={slug}>
+                <InternalLink to={servicePath(slug)}>{relatedService.name}</InternalLink>
+                <p>{reason}</p>
+              </div>
+            ))}
+            <InternalLink to={SERVICES_HUB_PATH}>All services</InternalLink>
+          </div>
+        </div>
+        {insights.length > 0 && (
+          <div className="next-links next-links--secondary">
+            <div><p className="eyebrow">Research</p><h2>Related perspectives</h2></div>
+            <div>
+              {insights.map((article) => (
+                <InternalLink key={article.slug} to={`/insights/${article.slug}`}>{article.title}</InternalLink>
+              ))}
+            </div>
+          </div>
+        )}
+      </Section>
+      <CtaBand title="Start with a clear view of where to act." placement={`service-${service.slug}`} />
     </>
   );
 }

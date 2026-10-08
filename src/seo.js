@@ -1,6 +1,7 @@
-import { faqs, serviceFaqs, servicePillars } from './data.js';
-import { industryProfiles, serviceDetails, methodologyStages, measurementDimensions, methodologyFaqs, methodologySources } from './pageContent.js';
+import { faqs, serviceFaqs } from './data.js';
+import { industryProfiles, methodologyStages, measurementDimensions, methodologyFaqs, methodologySources } from './pageContent.js';
 import { insightArticles } from './content/insights.js';
+import { serviceHeadingText, serviceOfferings, servicePath } from './content/services.js';
 
 export const SITE_NAME = 'Menchly';
 export const SITE_URL_FALLBACK = 'https://example.com';
@@ -17,7 +18,7 @@ const staticRoutes = [
   {
     path: '/services',
     title: 'AI Search Marketing Services  -  Menchly',
-    description: 'Explore Menchly’s custom AI Search marketing infrastructure: prompt intelligence, authority architecture, recommendation positioning and reputation monitoring.',
+    description: 'Explore Menchly’s services: CRO, brand reputation management, content creation, user acquisition, strategic PR placement, SEO and AEO - built on custom AI Search marketing infrastructure.',
     h1: 'Custom infrastructure for AI Search growth.',
     breadcrumbs: [{ name: 'Services', path: '/services' }],
     service: 'AI Search marketing infrastructure'
@@ -94,6 +95,19 @@ const industryRoutes = industryProfiles.map((industry) => ({
   service: `${industry.name} AI Search marketing infrastructure`
 }));
 
+const serviceRoutes = serviceOfferings.map((offering) => ({
+  path: servicePath(offering.slug),
+  title: offering.title,
+  description: offering.description,
+  h1: serviceHeadingText(offering),
+  breadcrumbs: [
+    { name: 'Services', path: '/services' },
+    { name: offering.name, path: servicePath(offering.slug) }
+  ],
+  service: offering.name,
+  offering
+}));
+
 const insightRoutes = insightArticles.map((article) => ({
   path: `/insights/${article.slug}`,
   title: `${article.title}  -  Menchly`,
@@ -107,7 +121,7 @@ const insightRoutes = insightArticles.map((article) => ({
   ]
 }));
 
-export const publicRoutes = [...staticRoutes, ...industryRoutes, ...insightRoutes];
+export const publicRoutes = [...staticRoutes, ...serviceRoutes, ...industryRoutes, ...insightRoutes];
 export const indexableRoutes = publicRoutes.filter((route) => !route.noindex);
 
 export function normalizePath(pathname = '/') {
@@ -159,7 +173,8 @@ const organizationSchema = (meta) => ({
     'Prompt and market intelligence',
     'Authority architecture',
     'Recommendation positioning',
-    'Reputation monitoring'
+    'Reputation monitoring',
+    ...serviceOfferings.map((offering) => offering.name)
   ],
   areaServed: {
     '@type': 'GeoShape',
@@ -205,16 +220,18 @@ const servicesPageSchema = (meta) => {
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'AI Search Marketing Services',
-      itemListElement: serviceDetails.map((pillar, index) => ({
+      itemListElement: serviceOfferings.map((offering, index) => ({
         '@type': 'Offer',
         position: index + 1,
         itemOffered: {
           '@type': 'Service',
-          name: pillar.title,
-          description: pillar.copy,
+          '@id': `${meta.origin}${servicePath(offering.slug)}#service`,
+          name: offering.name,
+          description: offering.summary,
+          url: `${meta.origin}${servicePath(offering.slug)}`,
           featureList: {
             '@type': 'ItemList',
-            itemListElement: pillar.outputs.map((output, i) => ({
+            itemListElement: offering.deliverables.map((output, i) => ({
               '@type': 'ListItem',
               position: i + 1,
               name: output
@@ -437,7 +454,27 @@ export function getStructuredData(pathname, explicitOrigin) {
     graph.push(methodologyService);
   }
   
-  if (meta.service && meta.path !== '/services' && meta.path !== '/methodology') graph.push(serviceSchema(meta));
+  if (meta.offering) {
+    graph.push(
+      {
+        '@type': 'Service',
+        '@id': `${meta.canonical}#service`,
+        name: meta.offering.name,
+        alternateName: meta.offering.navLabel !== meta.offering.name ? meta.offering.navLabel : undefined,
+        description: meta.description,
+        url: meta.canonical,
+        serviceType: meta.offering.name,
+        provider: { '@id': `${meta.origin}/#organization` },
+        areaServed: { '@type': 'GeoShape', name: 'Global' },
+        isRelatedTo: meta.offering.related.map(({ slug }) => ({ '@id': `${meta.origin}${servicePath(slug)}#service` })),
+        mainEntityOfPage: { '@id': `${meta.canonical}#webpage` }
+      },
+      webPageSchema(meta, []),
+      faqSchema(meta.offering.faqs)
+    );
+  }
+
+  if (meta.service && !meta.offering && meta.path !== '/services' && meta.path !== '/methodology') graph.push(serviceSchema(meta));
   if (meta.breadcrumbs?.length) graph.push(breadcrumbSchema(meta));
   if (meta.article) {
     graph.push(createArticleSchema({

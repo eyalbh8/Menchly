@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { getRouteMeta, indexableRoutes, publicRoutes, resolveSiteOrigin } from '../src/seo.js';
 import { insightArticles } from '../src/content/insights.js';
+import { serviceOfferings, servicePath } from '../src/content/services.js';
 import { faqs, serviceFaqs } from '../src/data.js';
 
 // Load .env file if it exists (Node 24.3.0+)
@@ -85,8 +86,25 @@ const wordCountFloors = {
   '/': 1000,
   '/services': 1000,
   '/about': 200,
-  '/methodology': 250
+  '/methodology': 250,
+  ...Object.fromEntries(serviceOfferings.map((offering) => [servicePath(offering.slug), 800]))
 };
+
+const routePaths = new Set(publicRoutes.map((route) => route.path));
+const htmlByPath = new Map();
+
+function parseSchema(html) {
+  const schemaMatch = html.match(/<script id="structured-data" type="application\/ld\+json">([\s\S]*?)<\/script>/i);
+  try {
+    return JSON.parse(schemaMatch?.[1] || '');
+  } catch {
+    return null;
+  }
+}
+
+function internalHrefs(html) {
+  return [...html.matchAll(/href="(\/(?!\/)[^"]*)"/g)].map((match) => match[1].replaceAll('&amp;', '&'));
+}
 
 for (const route of publicRoutes) {
   const file = outputFileForRoute(route.path);
@@ -97,6 +115,7 @@ for (const route of publicRoutes) {
     failures.push(`${route.path}: missing generated HTML`);
     continue;
   }
+  htmlByPath.set(route.path, html);
 
   const meta = getRouteMeta(route.path, siteOrigin);
   const h1 = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
@@ -214,7 +233,7 @@ for (const route of publicRoutes) {
     
     const servicesChecks = [
       [!!serviceNode, 'missing Service node with @id /services#service'],
-      [serviceNode?.hasOfferCatalog?.itemListElement?.length === 4, `Service OfferCatalog should have 4 offers, has ${serviceNode?.hasOfferCatalog?.itemListElement?.length || 0}`],
+      [serviceNode?.hasOfferCatalog?.itemListElement?.length === serviceOfferings.length, `Service OfferCatalog should have ${serviceOfferings.length} offers, has ${serviceNode?.hasOfferCatalog?.itemListElement?.length || 0}`],
       [!!faqPage, 'missing FAQPage schema'],
       [faqPage?.mainEntity?.length === serviceFaqs.length, `FAQ schema count (${faqPage?.mainEntity?.length || 0}) does not match serviceFaqs count (${serviceFaqs.length})`],
       [!!webPage, 'missing WebPage schema']
@@ -239,6 +258,27 @@ for (const route of publicRoutes) {
     });
   }
   
+  if (route.offering) {
+    const schema = parseSchema(html);
+    const graph = schema?.['@graph'] || [];
+    const serviceNode = graph.find((node) => node['@type'] === 'Service' && node['@id'] === `${meta.canonical}#service`);
+    const faqPage = graph.find((node) => node['@type'] === 'FAQPage');
+    const offeringChecks = [
+      [!!schema, 'service JSON-LD is not valid JSON'],
+      [!!serviceNode, 'missing Service node for this service page'],
+      [serviceNode?.isRelatedTo?.length === route.offering.related.length, 'Service isRelatedTo does not match related services'],
+      [graph.some((node) => node['@type'] === 'BreadcrumbList'), 'missing BreadcrumbList schema'],
+      [faqPage?.mainEntity?.length === route.offering.faqs.length, 'FAQ schema count does not match visible service FAQs']
+    ];
+    route.offering.faqs.forEach((faq, index) => {
+      offeringChecks.push([faqPage?.mainEntity?.[index]?.acceptedAnswer?.text === faq.a, `FAQ ${index + 1} schema text does not match visible text`]);
+      offeringChecks.push([textContent(main?.[1] || '').includes(faq.a), `FAQ ${index + 1} answer not found in rendered HTML`]);
+    });
+    offeringChecks.forEach(([passed, message]) => {
+      if (!passed) failures.push(`${route.path}: ${message}`);
+    });
+  }
+
   if (route.path === '/private-ai-visibility-assessment') {
     const formChecks = [
       [html.includes('<form class="assessment-form"'), 'assessment form HTML was not prerendered'],
@@ -301,6 +341,44 @@ if (!footer.includes('href="/insights"')) failures.push('footer: Insights must r
 if (!footer.includes('href="/about"')) failures.push('footer: About must remain accessible');
 for (const article of insightArticles) {
   if (!sitemap.includes(`<loc>${siteOrigin}/insights/${article.slug}</loc>`)) failures.push(`sitemap: missing insight article ${article.slug}`);
+}
+
+// Internal link integrity: every root-relative href must resolve to a prerendered route or a built file,
+// and any #fragment must exist on the target page.
+const checkedFiles = new Map();
+async function fileExists(path) {
+  if (!checkedFiles.has(path)) checkedFiles.set(path, await access(join(dist, path.slice(1))).then(() => true, () => false));
+  return checkedFiles.get(path);
+}
+for (const [sourcePath, html] of htmlByPath) {
+  for (const href of new Set(internalHrefs(html))) {
+    const url = new URL(href, `${siteOrigin}/`);
+    const targetPath = url.pathname === '/' ? '/' : url.pathname.replace(/\/+$/, '');
+    if (!routePaths.has(targetPath)) {
+      if (!(await fileExists(url.pathname))) failures.push(`${sourcePath}: broken internal link ${href}`);
+      continue;
+    }
+    const fragment = decodeURIComponent(url.hash.slice(1));
+    if (fragment && !htmlByPath.get(targetPath)?.includes(`id="${fragment}"`)) {
+      failures.push(`${sourcePath}: link ${href} points to a missing #${fragment} anchor`);
+    }
+  }
+}
+
+// Orphan check: each service page must be reachable from the hub, header, footer and its sibling services.
+const servicesHubMain = htmlByPath.get('/services')?.match(/<main[^>]*>([\s\S]*?)<\/main>/i)?.[1] || '';
+for (const offering of serviceOfferings) {
+  const path = servicePath(offering.slug);
+  const linkAttr = `href="${path}"`;
+  if (!servicesHubMain.includes(linkAttr)) failures.push(`${path}: not linked from the /services catalogue`);
+  if (!primaryNav.includes(linkAttr)) failures.push(`${path}: not linked from primary navigation`);
+  if (!footer.includes(linkAttr)) failures.push(`${path}: not linked from the footer`);
+  const siblingLinks = serviceOfferings.filter((other) => {
+    if (other.slug === offering.slug) return false;
+    const otherMain = htmlByPath.get(servicePath(other.slug))?.match(/<main[^>]*>([\s\S]*?)<\/main>/i)?.[1] || '';
+    return otherMain.includes(linkAttr);
+  }).length;
+  if (siblingLinks < 2) failures.push(`${path}: linked from only ${siblingLinks} sibling service page(s) (minimum 2)`);
 }
 
 if (failures.length) {

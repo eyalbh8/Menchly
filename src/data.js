@@ -1,10 +1,14 @@
+import { serviceNavItems } from './content/services.js';
+
 export const assessmentHref = '/private-ai-visibility-assessment';
 
 export const primaryNavItems = [
   { label: 'Insights', href: '/insights' },
-  { label: 'Services', href: '/services' },
+  { label: 'Services', href: '/services', children: serviceNavItems },
   { label: 'Methodology', href: '/methodology' }
 ];
+
+export const footerServiceItems = serviceNavItems;
 
 export const footerNavItems = [
   ...primaryNavItems,
@@ -208,7 +212,14 @@ export const productImages = {
 };
 
 export const faqs = [
-  { q: 'Is this SEO?', a: 'It is complementary, but distinct Search optimization focuses on discoverability in ranked results We build AI Search marketing infrastructure: data shows where to act, then we execute, learn and compound how assistants understand, describe and recommend a brand.' },
+  {
+    q: 'Is this SEO?',
+    a: 'SEO is one part of it. Search optimisation focuses on discoverability in ranked results, and we offer it as a service in its own right. Our wider work is AI Search marketing infrastructure: data shows where to act, then we execute across SEO, answer engine optimisation, content, PR and conversion - learning and compounding how search engines and assistants understand, describe and recommend a brand.',
+    links: [
+      { text: 'SEO services', href: '/services/seo', external: false },
+      { text: 'Answer engine optimisation', href: '/services/aeo', external: false }
+    ]
+  },
   { q: 'Can you guarantee a recommendation?', a: 'No credible agency can control or guarantee an independent model’s output We improve the authority, clarity and evidence environment that influences whether a brand is understood and considered.' },
   { q: 'Which AI assistants do you assess?', a: 'Engagements can include major assistants such as ChatGPT, Claude, Gemini, Perplexity and Copilot, selected according to audience relevance and market behavior.' },
   { q: 'How do you handle confidential information?', a: 'We agree access, review and approval boundaries before work begins Sensitive material is not published or used in external systems without explicit authorization.' },
@@ -222,7 +233,10 @@ export const faqs = [
   { 
     q: 'What is the difference between SEO, GEO and AEO?', 
     a: 'SEO (Search Engine Optimization) focuses on ranking in traditional search results GEO (Generative Engine Optimization) and AEO (Answer Engine Optimization) describe strategies for visibility in AI-generated answers and citations, where the assistant synthesizes information rather than listing ranked links All three disciplines overlap, but AI visibility requires structured authority signals, citation-quality content and a disciplined measurement framework that traditional keyword tactics do not address.',
-    links: []
+    links: [
+      { text: 'SEO services', href: '/services/seo', external: false },
+      { text: 'AEO services', href: '/services/aeo', external: false }
+    ]
   },
   { 
     q: 'How do AI assistants decide which brands to recommend?', 
@@ -248,18 +262,26 @@ export const faqs = [
 
 export const serviceFaqs = [
   {
-    q: 'What does an AI Search marketing engagement include?',
-    a: 'An engagement includes four integrated services: Prompt and market intelligence maps the high-intent questions that reveal genuine buyer consideration and decision criteria. Authority architecture assesses whether the open web provides a coherent, credible account of the brand\'s expertise and builds a roadmap connecting owned content, entities, executive authority and independent sources. Recommendation positioning translates positioning into defensible reasons for recommendation, making the circumstances in which the brand is an excellent fit specific, consistent and supported. Reputation monitoring reviews how selected assistants describe, compare and qualify the brand against an agreed prompt set, with reporting focused on material movement in presence, fit, accuracy and source quality.',
-    links: []
+    q: 'Which services does Menchly offer?',
+    a: 'Menchly offers seven services: user journey conversion rate optimisation (CRO), brand reputation management, content creation, user acquisition, strategic PR placement, search engine optimisation (SEO) and answer engine optimisation (AEO). Every service runs on the same four infrastructure pillars - prompt and market intelligence, authority architecture, recommendation positioning and reputation monitoring - so research, evidence and measurement compound across the programme.',
+    links: [
+      { text: 'CRO', href: '/services/conversion-rate-optimization', external: false },
+      { text: 'Brand reputation management', href: '/services/brand-reputation-management', external: false },
+      { text: 'Content creation', href: '/services/content-creation', external: false },
+      { text: 'User acquisition', href: '/services/user-acquisition', external: false },
+      { text: 'Strategic PR placement', href: '/services/strategic-pr-placement', external: false },
+      { text: 'SEO', href: '/services/seo', external: false },
+      { text: 'AEO', href: '/services/aeo', external: false }
+    ]
   },
   {
-    q: 'Can Menchly work alongside our existing SEO, PR and content agencies?',
-    a: 'Yes. Menchly can lead a defined strategic engagement or work as a specialist layer alongside brand, communications, SEO, content and reputation partners. Scope, access and approval controls are agreed at the outset, and coordination with existing teams is part of the activation phase.',
+    q: 'Can Menchly work alongside our existing agencies?',
+    a: 'Yes. Menchly can run a full programme across several services, take on a single service, or work as a specialist layer alongside existing brand, communications, media, SEO and content partners. Scope, access and approval controls are agreed at the outset, and coordination with existing teams is part of the activation phase.',
     links: []
   },
   {
     q: 'What deliverables does each service produce?',
-    a: 'Prompt and market intelligence delivers executive and stakeholder discovery, a high-intent prompt universe, buyer-stage and audience mapping, and a competitive recommendation review. Authority architecture delivers entity and source assessment, authority-gap prioritisation, owned-content briefing, and an earned-authority agenda. Recommendation positioning delivers best-fit recommendation territories, decision-criteria narratives, comparison and objection guidance, and cross-channel message alignment. Reputation monitoring delivers a model-response baseline, narrative and accuracy review, source-pattern monitoring, and executive recommendations.',
+    a: 'Deliverables depend on the service and are agreed at scoping. Typical examples include a high-intent prompt universe and model-response baseline for AEO, a technical audit and intent-led page map for SEO, a buyer question map and expert-led content for content creation, a source map and pitch plan for strategic PR placement, a reputation baseline and correction plan for brand reputation management, a channel plan for user acquisition, and a friction audit and experiment roadmap for CRO. Each service page lists its deliverables in full.',
     links: []
   },
   {

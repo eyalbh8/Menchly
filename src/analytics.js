@@ -6,9 +6,10 @@ const EVENTS = new Set([
   'submit_error',
   'calendar_handoff',
   'industry_view',
+  'service_view',
   'methodology_view'
 ]);
-const SAFE_KEYS = new Set(['placement', 'page', 'fieldCount', 'reason', 'industry']);
+const SAFE_KEYS = new Set(['placement', 'page', 'fieldCount', 'reason', 'industry', 'service']);
 let consentGranted = false;
 const pending = [];
 

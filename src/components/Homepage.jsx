@@ -9,6 +9,7 @@ import {
   aiTrafficData 
 } from '../data/workspaceData.js';
 import { insightArticles } from '../content/insights.js';
+import { serviceNavItems } from '../content/services.js';
 import BookMeeting from './BookMeeting.jsx';
 import { AssessmentLink, ProductStage, ResearchGrid, Section, SectionHeader, InternalLink, ArrowLink, FaqAccordion, AnimatedNumber, reducedMotion, useInView } from './UI.jsx';
 import { 
@@ -715,6 +716,14 @@ function Services() {
           );
         })}
       </div>
+      <nav className="service-links" aria-label="Services">
+        <p className="eyebrow">Services built on these pillars</p>
+        <ul>
+          {serviceNavItems.map((item) => (
+            <li key={item.href}><Link to={item.href}>{item.label}</Link></li>
+          ))}
+        </ul>
+      </nav>
       <div style={{ marginTop: '3rem', textAlign: 'center' }}>
         <InternalLink to="/services">Explore our services</InternalLink>
         {' · '}

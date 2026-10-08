@@ -2,6 +2,7 @@ export const industryProfiles = [
   {
     slug: 'yachting',
     name: 'Yachting',
+    services: ['aeo', 'strategic-pr-placement', 'content-creation'],
     eyebrow: 'Yachting intelligence',
     summary: 'Help serious owners, family offices and their advisers understand why your expertise belongs on a credible shortlist.',
     image: '/images/yachting.jpg',
@@ -27,6 +28,7 @@ export const industryProfiles = [
   {
     slug: 'private-aviation',
     name: 'Private aviation',
+    services: ['aeo', 'brand-reputation-management', 'seo'],
     eyebrow: 'Private aviation intelligence',
     summary: 'Build recommendation relevance around mission, operating context and the standards sophisticated aviation buyers use to choose.',
     image: '/images/private-aviation.jpg',
@@ -52,6 +54,7 @@ export const industryProfiles = [
   {
     slug: 'luxury-real-estate',
     name: 'Luxury real estate',
+    services: ['seo', 'conversion-rate-optimization', 'user-acquisition'],
     eyebrow: 'Prime property intelligence',
     summary: 'Earn informed consideration with buyers and advisers researching markets, developments and representation before disclosing intent.',
     image: '/images/luxury-real-estate.jpg',
@@ -77,6 +80,7 @@ export const industryProfiles = [
   {
     slug: 'jewellery-watches',
     name: 'Jewellery & watches',
+    services: ['brand-reputation-management', 'strategic-pr-placement', 'content-creation'],
     eyebrow: 'Jewellery and watch intelligence',
     summary: 'Make provenance, connoisseurship and service legible when collectors ask AI who merits trust and attention.',
     image: '/images/jewellery-watches.jpg',
@@ -102,6 +106,7 @@ export const industryProfiles = [
   {
     slug: 'luxury-hospitality',
     name: 'Luxury hospitality',
+    services: ['user-acquisition', 'conversion-rate-optimization', 'seo'],
     eyebrow: 'Luxury hospitality intelligence',
     summary: 'Become the relevant recommendation for a particular guest, occasion and expectation - not merely another highly rated property.',
     image: '/images/luxury-hospitality.jpg',
@@ -128,6 +133,7 @@ export const industryProfiles = [
 
 export const serviceDetails = [
   {
+    slug: 'prompt-intelligence',
     number: '01',
     title: 'Prompt and market intelligence',
     copy: 'We define the questions that reveal real consideration: who is asking, what they are trying to decide, which alternatives they compare and what evidence changes confidence. This creates a commercially useful prompt universe rather than a generic keyword list.',
@@ -136,6 +142,7 @@ export const serviceDetails = [
     imageAlt: 'Menchly Prompts view with topics, intent distribution and tracked prompts'
   },
   {
+    slug: 'authority-architecture',
     number: '02',
     title: 'Authority architecture',
     copy: 'We examine whether the open web provides a coherent, credible account of the brand’s expertise The roadmap connects owned content, entities, executive authority and independent sources so assistants have better evidence from which to form an answer.',
@@ -144,6 +151,7 @@ export const serviceDetails = [
     imageAlt: 'Menchly Citations view showing source types and domain usage'
   },
   {
+    slug: 'recommendation-positioning',
     number: '03',
     title: 'Recommendation positioning',
     copy: 'We translate positioning into defensible reasons for recommendation. The goal is not to claim universal superiority, but to make the circumstances in which the brand is an excellent fit specific, consistent and supported.',
@@ -152,6 +160,7 @@ export const serviceDetails = [
     imageAlt: 'Menchly Competitors view with share of voice and brand visibility trends'
   },
   {
+    slug: 'reputation-monitoring',
     number: '04',
     title: 'Reputation monitoring',
     copy: 'We review how selected assistants describe, compare and qualify the brand against an agreed prompt set. Reporting focuses on material movement in presence, fit, accuracy and source quality - not vanity mention counts.',

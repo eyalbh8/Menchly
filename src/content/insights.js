@@ -78,7 +78,8 @@ export const insightArticles = [
       { title: 'Guidelines for Human-AI Interaction', organization: 'Microsoft Research / CHI 2019', url: 'https://doi.org/10.1145/3290605.3300233' }
     ],
     related: [
-      { label: 'Prompt and market intelligence services', href: '/services' },
+      { label: 'Answer engine optimisation (AEO)', href: '/services/aeo' },
+      { label: 'Brand reputation management', href: '/services/brand-reputation-management' },
       { label: 'Menchly methodology', href: '/methodology' },
       { label: 'Private aviation decision context', href: '/industries/private-aviation' },
       { label: 'High-intent prompt intelligence', href: '/insights/high-intent-prompt-intelligence' }
@@ -155,7 +156,8 @@ export const insightArticles = [
     ],
     related: [
       { label: 'Recommendation gap research note', href: '/insights/recommendation-gap-known-vs-selected' },
-      { label: 'Prompt and market intelligence services', href: '/services' },
+      { label: 'Answer engine optimisation (AEO)', href: '/services/aeo' },
+      { label: 'Content creation for buyer questions', href: '/services/content-creation' },
       { label: 'Yachting decision context', href: '/industries/yachting' },
       { label: 'Luxury hospitality decision context', href: '/industries/luxury-hospitality' }
     ]
@@ -233,7 +235,8 @@ export const insightArticles = [
       { title: 'Protecting Personal Information: A Guide for Business', organization: 'US Federal Trade Commission', url: 'https://www.ftc.gov/business-guidance/resources/protecting-personal-information-guide-business' }
     ],
     related: [
-      { label: 'Authority architecture services', href: '/services' },
+      { label: 'Strategic PR placement', href: '/services/strategic-pr-placement' },
+      { label: 'Brand reputation management', href: '/services/brand-reputation-management' },
       { label: 'Menchly methodology', href: '/methodology' },
       { label: 'Jewellery and watches decision context', href: '/industries/jewellery-watches' },
       { label: 'Recommendation gap research note', href: '/insights/recommendation-gap-known-vs-selected' }

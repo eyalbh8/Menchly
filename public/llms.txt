@@ -5,7 +5,14 @@ Menchly builds custom AI Search marketing infrastructure for brands that want to
 ## Public pages
 
 - / — overview of Menchly's stated approach, service pillars, process, measurement framework, live workspace data from Berkos Developer & Properties (90-day period), and frequently asked questions
-- /services — prompt and market intelligence, authority architecture, recommendation positioning and reputation monitoring
+- /services — catalogue of seven services, plus the four infrastructure pillars behind them: prompt and market intelligence, authority architecture, recommendation positioning and reputation monitoring
+- /services/conversion-rate-optimization — CRO (user journey conversion rate optimisation): diagnosing where qualified visitors hesitate and improving the path to enquiry
+- /services/brand-reputation-management — monitoring and correcting how search, AI assistants and influential sources describe a brand
+- /services/content-creation — evidence-led content that answers real buyer questions for people, search engines and AI assistants
+- /services/user-acquisition — attracting qualified audiences across search, AI discovery, paid media and partnerships
+- /services/strategic-pr-placement — earning coverage in the publications and specialist sources that shape decisions and AI answers
+- /services/seo — search engine optimisation: technical foundations, intent-led content and earned authority
+- /services/aeo — answer engine optimisation: how AI assistants understand, describe and recommend a brand
 - /industries — current sector focus and links to sector-specific pages
 - /industries/yachting
 - /industries/private-aviation

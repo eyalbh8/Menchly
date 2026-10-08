@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { assessmentHref, footerIndustryItems, footerNavItems } from '../data.js';
+import { assessmentHref, footerIndustryItems, footerNavItems, footerServiceItems } from '../data.js';
 import { trackEvent } from '../analytics.js';
 import { AssessmentLink, BrandMark } from './UI.jsx';
 import ContactLead from './ContactLead.jsx';
@@ -51,6 +51,9 @@ export default function Footer() {
           </div>
           <FooterLinkGroup title="Explore">
             {footerNavItems.map((item) => <Link key={item.href} to={item.href}>{item.label}</Link>)}
+          </FooterLinkGroup>
+          <FooterLinkGroup title="Services">
+            {footerServiceItems.map((item) => <Link key={item.href} to={item.href}>{item.label}</Link>)}
           </FooterLinkGroup>
           <FooterLinkGroup title="Industries">
             {footerIndustryItems.map((item) => <Link key={item.href} to={item.href}>{item.label}</Link>)}

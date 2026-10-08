@@ -17,6 +17,7 @@ import {
   LegalPage,
   MethodologyPage,
   NotFoundPage,
+  ServicePage,
   ServicesPage,
   ThankYouPage
 } from './components/Pages.jsx';
@@ -108,6 +109,7 @@ function RouteAnalytics() {
     rememberAttribution(window.location, document.referrer);
     if (pathname === '/methodology') trackEvent('methodology_view', { page: pathname });
     if (pathname.startsWith('/industries/')) trackEvent('industry_view', { page: pathname, industry: pathname.split('/').pop() });
+    if (pathname.startsWith('/services/')) trackEvent('service_view', { page: pathname, service: pathname.split('/').pop() });
   }, [pathname]);
   return null;
 }
@@ -126,6 +128,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/services/:serviceSlug" element={<ServicePage />} />
           <Route path="/industries" element={<IndustriesPage />} />
           <Route path="/industries/:industrySlug" element={<IndustryPage />} />
           <Route path="/methodology" element={<MethodologyPage />} />
